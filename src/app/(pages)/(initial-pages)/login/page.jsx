@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'; 
 import { logoPurple } from "@/app/lib/utils/svg";
 import Form from "../components/form";
@@ -7,10 +7,41 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function LoginPage() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
+    };
+
+    const validateForm = () => {
+        let errors = {};
+        let isValid = true;
+
+        if (!email) {
+            errors.email = 'Email wajib diisi';
+            isValid = false;
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            errors.email = 'Email tidak valid';
+            isValid = false;
+        }
+
+        if (!password) {
+            errors.password = 'Password wajib diisi';
+            isValid = false;
+        }
+
+        setErrors(errors);
+        return isValid;
+    };
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            console.log('Form submitted successfully');
+        }
     };
 
     return (
@@ -34,16 +65,22 @@ export default function LoginPage() {
                     height={50}
                 />
                 <div className="w-full ">
-
                     <h1 className="text-black font-semibold text-2xl lg:text-[36px] mb-3">Masuk</h1>
                     <h3 className="text-[#8D8D8D] font-light text-base mb-12">Selamat Datang Kembali!</h3>
-
                     <div className="w-full flex flex-col gap-7 mb-5">
-                        <Form label="Email" />
+                        <Form 
+                            label="Email" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            error={errors.email}
+                        />
                         <div className="relative">
                             <Form
                                 label="Password"
                                 type={showPassword ? 'text' : 'password'}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                error={errors.password}
                             />
                             <button
                                 className="absolute top-12 text-3xl transform -translate-y-1/2 right-4 text-textPrimary focus:outline-none opacity-50"
@@ -53,14 +90,15 @@ export default function LoginPage() {
                                 {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
                             </button>
                         </div>
+                        {errors.general && <p className="error text-red-700">{errors.general}</p>}
                     </div>
                 </div>
 
                 <div className="w-full flex flex-col gap-5">
-                    <button className="w-full bg-primary py-4 rounded-2xl text-white font-medium text-sm lg:text-lg">Masuk</button>
+                    <button type='submit' className="w-full bg-primary py-4 rounded-2xl text-white font-medium text-sm lg:text-lg" onClick={handleLogin}>Masuk</button>
                     <div className="w-full flex gap-2 justify-center items-center">
                         <h3 className="text-textPrimary text-xs lg:text-[16px]">Tidak mempunyai akun?</h3>
-                        <Link href="/auth/register" className="text-primary font-semibold text-sm lg:text-[18px]">Daftar</Link>
+                        <Link href="/register" className="text-primary font-semibold text-sm lg:text-[18px]">Daftar</Link>
                     </div>
                 </div>
             </div>

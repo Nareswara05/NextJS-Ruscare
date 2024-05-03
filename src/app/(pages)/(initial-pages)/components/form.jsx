@@ -1,5 +1,5 @@
 
-function Form({label, value, onChange, placeholder, type}) {
+function Form({label, value, onChange, placeholder, type, error}) {
     return (
         <div className="flex flex-col w-full items-start">
             <h2 className="text-primaryText text-sm lg:text-base mb-2 text-textPrimary">{label}</h2>
@@ -10,7 +10,9 @@ function Form({label, value, onChange, placeholder, type}) {
                 placeholder={placeholder}
                 type={type}
             />
+            {error && <p className="error text-red-600">{error}</p>}
         </div>
+
     );
 }
 
