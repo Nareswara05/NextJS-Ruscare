@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 // import register from "@/app/lib/services/endpoint/auth/register";
-import { iconGoogle } from "@/app/lib/utils/svg";
+import { iconGoogle, logoPurple } from "@/app/lib/utils/svg";
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'; 
 import Image from "next/image";
 import Link from "next/link";
@@ -71,7 +71,9 @@ function FormLayout() {
     <div className=" w-full px-5 lg:px-16">
       <div className="w-full flex flex-col">
         <div className="w-full flex flex-col">
-          <div className="  mt-12 font-montserrat text-textPrimary ">
+        <Image src={logoPurple} width={115}
+              height={50} alt=" Logo" />
+          <div className="  mt-6 font-montserrat text-textPrimary ">
             <div className="font-semibold text-3xl">Daftar</div>
             <div className="mt-4">
               Mari kita mulai dengan mengisi data dibawah ini
@@ -157,7 +159,7 @@ function FormLayout() {
           </button>
           <h4 className="text-black text-xs sm:text-[16px] flex justify-center gap-3">
             Sudah mempunyai akun?{" "}
-            <Link href="/auth/login" className="text-primary  text-xs sm:text-[16px] font-semibold">
+            <Link href="/login" className="text-primary  text-xs sm:text-[16px] font-semibold">
               Masuk
             </Link>
           </h4>
