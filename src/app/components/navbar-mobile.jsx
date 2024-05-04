@@ -64,72 +64,43 @@ function NavbarMobile() {
             </div>
 
             <div className=' text-textPrimary text-lg justify-end flex'>
-                                <button className="flex items-center space-x-1 focus:outline-none" onClick={toggleDropdown}>
-                                    <FiLogIn />
-                                    <h1 className='font-medium'>Login</h1>
-                                    <TiArrowSortedDown />
-                                </button>
-                                {isDropdownOpen && (
-                                    <div className="absolute top-24 right-10 py-5 pl-5 bg-gray-100 shadow-lg rounded-md mt-2 w-[300px]">
-                                        <h1 className='text-primary text-[14px] font-bold'>Selamat Datang Di RusCare</h1>
-                                        <ul className="py-2 flex">
-                                            <li>
-                                                <Link href="/login">
-                                                    <h2 className="block px-8 py-2 font-medium text-[16px] text-white bg-primary rounded-l-full">Daftar</h2>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link href="/register">
-                                                    <h2 className="block px-8 py-2 font-medium text-[16px] text-white bg-[#C680FF] rounded-r-full">Masuk</h2>
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                )}
-                            </div>
+                <button className="flex items-center space-x-1 focus:outline-none" onClick={toggleDropdown}>
+                    <FiLogIn />
+                    <h1 className='font-medium'>Login</h1>
+                    <TiArrowSortedDown />
+                </button>
+                {isDropdownOpen && (
+                    <div className="absolute top-24 right-10 py-5 pl-5 bg-gray-100 shadow-lg rounded-md mt-2 w-[300px]">
+                        <h1 className='text-primary text-[14px] font-bold'>Selamat Datang Di RusCare</h1>
+                        <ul className="py-2 flex">
+                            <li>
+                                <Link href="/login">
+                                    <h2 className="block px-8 py-2 font-medium text-[16px] text-white bg-primary rounded-l-full">Daftar</h2>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/register">
+                                    <h2 className="block px-8 py-2 font-medium text-[16px] text-white bg-[#C680FF] rounded-r-full">Masuk</h2>
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                )}
+            </div>
 
             {isMobileMenuOpen && (
-                <div className="fixed top-0 left-0 w-screen h-screen bg-white">
-
-                    <div className="flex flex-col h-full w-full px-5 pt-4 relative justify-between">
-                        <div className="flex w-full justify-between">
-                            <div className="flex gap-7">
-                                <div className="flex gap-6">
-                                    <div className='text-primary text-4xl' onClick={toggleMobileMenu}>
-                                    <RxCross1 />
-                                    </div>
-                                    <Image
-                                        src={logoPurple}
-                                        alt="Logo"
-                                        width={120}
-                                        height={60}
-                                        className="object-contain"
-                                    />
-                                </div>
-                                <div className={`flex items-center gap-4  font-urbanist text-base text-primary  `}>
-
-
-                                </div>
-                            </div>
-
-
-                            
-
-                        </div>
-                        <ul className="flex flex-col text-[14px] font-bold  gap-9 text-textPrimary items-center">
+                <div className="absolute top-20 inset-x-8 bg-white px-12 py-12 rounded-xl">
+                    <ul className="flex flex-col text-[14px] font-bold gap-1 text-textPrimary">
                             {data.map((item) => (
-                                <li key={item.id}>
+                                <li key={item.id} className="hover:bg-primary hover:text-white p-4 rounded-2xl">
                                     <Link href={item.href}>
-                                        <h3 className="hover-underline text-2xl ">{item.menu}</h3>
+                                        <h3 className=" text-xl sm:text-2xl w-max">{item.menu}</h3>
                                     </Link>
                                 </li>
                             ))}
 
                         </ul>
-                        <div></div>
                     </div>
-                    4
-                </div>
             )}
         </div>
     )
