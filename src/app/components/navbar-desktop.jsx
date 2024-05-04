@@ -45,11 +45,11 @@ function NavbarDesktop() {
                     className="object-contain"
                     alt="logo ruscare"
                 />
-                <ul className="flex text-[16px] font-semibold gap-5 text-textPrimary">
+                <ul className="flex text-[16px] font-semibold gap-5 text-textPrimary items-center justify-center">
                     {data.map((item, index) => (
                         <li key={index}>
                             <Link href={item.href}>
-                                <h3 className="hover-underline">{item.menu}</h3>
+                                <h3 className="hover-underline w-max">{item.menu}</h3>
                             </Link>
                         </li>
                     ))}
