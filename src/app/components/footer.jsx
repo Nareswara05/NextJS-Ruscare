@@ -23,7 +23,7 @@ export default function Footer() {
             className="object-contain"
           />
         </div>
-        <h2 className="text-white opacity-50 text-center text-[16px]">Dengan adanya RusCare diharapkan dapat membantu menyelesaikan masalah peserta didik dan membantu dalam kegiatan pembelajaran</h2>
+        <h2 className="text-white opacity-50 text-center text-[16px] pt-5">Dengan adanya RusCare diharapkan dapat membantu menyelesaikan masalah peserta didik dan membantu dalam kegiatan pembelajaran</h2>
       </div>
       <ul className="flex flex-col lg:flex-row text-base font-normal  gap-3 text-white pt-12 items-center justify-center">
               {menu.map((item) => (

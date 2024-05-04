@@ -19,7 +19,7 @@ function NavbarDesktop() {
     const data = [
         {
             menu: "Tes Psikologi",
-            href: "/tes-psikologi"
+            href: "/psychological-test"
         },
         {
             menu: "Artikel",
