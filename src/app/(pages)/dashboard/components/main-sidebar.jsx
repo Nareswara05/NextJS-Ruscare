@@ -36,7 +36,7 @@ export default function MainSideBar() {
   return (
     <>
       <div
-      className={`lg:w-[30%] h-full bg-white flex flex-col border-r-2 ${
+      className={`lg:w-[30%] h-full  bg-white flex flex-col border-r-2  ${
         isSideBarOpen ? "flex" : "hidden"
       }`}
     >
