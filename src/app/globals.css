@@ -45,3 +45,35 @@ body {
   transition: width 0.3s ease-in-out; /* Ensure transition for closing */
 }
 
+
+/* styles.css */
+
+input[type="radio"]:checked {
+  background-color: #6b46c1; /* Purple color */
+  border-color: #6b46c1; /* Purple color */
+  outline: 2px solid #6b46c1; /* To ensure visibility on all browsers */
+  outline-offset: 2px; /* Optional: to add some spacing around the outline */
+}
+
+/* To ensure the border color is applied */
+input[type="radio"] {
+  appearance: none; /* Remove default styling */
+  border: 1px solid #d1d5db; /* Default border color */
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+}
+
+input[type="radio"]:checked::before {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #6b46c1; /* Purple color */
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
