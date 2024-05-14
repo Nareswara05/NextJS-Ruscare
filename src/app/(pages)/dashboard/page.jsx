@@ -1,9 +1,10 @@
 import React from 'react'
+import DashboardStats from './common-components/statistic-dashboard'
 
 const page = () => {
   return (
-    <div>
-        
+    <div className='p-16'>
+        <DashboardStats/>
     </div>
   )
 }
