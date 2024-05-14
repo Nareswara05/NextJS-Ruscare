@@ -41,10 +41,9 @@ export default function MainHeader() {
           {isSideBarOpen ? <MdArrowBackIosNew size={30} /> : <FiMenu size={30} />}
         </div>
 
-        <h2 className="font-semibold font-montserrat text-lg lg:text-2xl pl-16 text-textPrimary ">
+        <h2 className="font-bold font-montserrat text-lg lg:text-2xl pl-5 text-textPrimary ">
           {getPageTitle()}
         </h2>
-        <div className="w-1/4 h-px ml-4 border border-textPrimary rounded-xl"></div>
       </div>
       <div className="flex items-center gap-8">
         <MenuProfileDashboard />
