@@ -31,3 +31,17 @@ body {
     text-wrap: balance;
   }
 }
+.sidebar-transition {
+  transition: width 0.3s ease-in-out;
+}
+
+.sidebar-open {
+  width: 30%;
+}
+
+.sidebar-closed {
+  width: 0;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  transition: width 0.3s ease-in-out; /* Ensure transition for closing */
+}
+
