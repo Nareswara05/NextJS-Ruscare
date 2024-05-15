@@ -22,13 +22,13 @@ const RadioButtonService = () => {
 
     return (
         <div>
-            <h1 className='text-[18px] font-semibold pb-4 text-textPrimary'>Kategori</h1>
+            <h1 className='text-[18px] font-semibold pb-4 text-textPrimary'>Layanan</h1>
             <div className='flex flex-row gap-6'>
             {data.map((item, index) => (
                 <label key={index} className='block text-[16px] text-textPrimary mb-2'>
                     <input
                         type="radio"
-                        name="category"
+                        name="service"
                         value={item.service}
                         className='mr-2'
                     />
