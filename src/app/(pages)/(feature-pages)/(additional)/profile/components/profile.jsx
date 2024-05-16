@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { AvatarTes, bgProfil } from '@/app/lib/utils/image'
+import Link from 'next/link'
 
 const Profile = () => {
     return (
@@ -38,9 +39,11 @@ const Profile = () => {
                         <h1 className='font-bold text-[16px] text-textPrimary'>343432424</h1>
                     </div>
                 </div>
-                <button className='mt-9 font-semibold rounded-lg py-4 w-full bg-primary hover:bg-purple-700 text-white text-lg'>
-                    Edit Profil
-                </button>
+                <Link href="profile/edit-profile" className='w-full'>
+                    <button className='mt-9 font-semibold rounded-lg py-4 w-full bg-primary hover:bg-purple-700 text-white text-lg'>
+                        Edit Profil
+                    </button>
+                </Link>
             </div>
         </div>
     )
