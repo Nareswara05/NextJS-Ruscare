@@ -36,7 +36,7 @@ function NavbarDesktop() {
     ];
 
     return (
-        <nav className='w-screen bg-white px-20 py-[30px] flex items-center fixed'>
+        <nav className='w-screen bg-white px-20 py-[30px] flex items-center fixed shadow-sm z-50'>
             <div className='grid grid-cols-3 w-full items-center'>
                 <Image
                     src={logoPurple}

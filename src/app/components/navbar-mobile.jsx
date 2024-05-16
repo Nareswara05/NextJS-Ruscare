@@ -43,7 +43,7 @@ function NavbarMobile() {
     ];
 
     return (
-        <div className="w-screen flex justify-between fixed z-10 px-5 py-4 bg-white shadow-md ">
+        <div className="w-screen flex justify-between fixed px-5 py-4 bg-white shadow-md z-50">
             <div className="flex gap-6">
                 <button
                     onClick={toggleMobileMenu}
