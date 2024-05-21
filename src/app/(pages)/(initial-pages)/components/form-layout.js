@@ -7,6 +7,8 @@ import Link from "next/link";
 import { logoPurple } from "@/app/lib/utils/svg";
 import register from "@/app/lib/service/endpoint/auth/register";
 import AvailabilityEmail from "@/app/lib/service/endpoint/auth/availability-email";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 function FormLayout() {
   const [name, setName] = useState("");
@@ -18,6 +20,7 @@ function FormLayout() {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const router = useRouter()
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -69,6 +72,15 @@ function FormLayout() {
       setEmailError("");
       const response = await register({ name, email, password });
       console.log("Respons dari pendaftaran:", response);
+
+      Swal.fire({
+        title: "Pendaftaran Berhasil",
+        text: "Akun Anda telah berhasil dibuat. Silakan login untuk melanjutkan.",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        router.push("/login");
+      });
     } catch (error) {
       console.error("Terjadi kesalahan saat pendaftaran:", error);
     }
@@ -159,7 +171,7 @@ function FormLayout() {
           <button
             type="submit"
             onClick={handleRegister}
-            className="w-full py-3 flex items-center justify-center rounded-2xl bg-primary"
+            className="w-full py-3 flex items-center justify-center rounded-2xl bg-primary hover:bg-purple-700"
           >
             Buat Akun
           </button>
