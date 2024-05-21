@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-// import register from "@/app/lib/services/endpoint/auth/register";
-import { iconGoogle, logoPurple } from "@/app/lib/utils/svg";
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'; 
+import { useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Image from "next/image";
 import Link from "next/link";
+import { logoPurple } from "@/app/lib/utils/svg";
+import register from "@/app/lib/service/endpoint/auth/register";
+import AvailabilityEmail from "@/app/lib/service/endpoint/auth/availability-email";
 
 function FormLayout() {
   const [name, setName] = useState("");
@@ -45,113 +46,118 @@ function FormLayout() {
     }
 
     if (password.length < 8) {
-      setPasswordError("Password harus memiliki minimal 8 karakter !");
+      setPasswordError("Password harus memiliki minimal 8 karakter!");
       return;
     } else {
       setPasswordError("");
     }
 
     if (password !== confirmPassword) {
-      setConfirmPasswordError(
-        "Konfirmasi password tidak cocok dengan password"
-      );
+      setConfirmPasswordError("Konfirmasi password tidak cocok dengan password");
       return;
     } else {
       setConfirmPasswordError("");
     }
 
     try {
+      const available = await AvailabilityEmail(email);
+      if (!available) {
+        setEmailError("Email sudah terdaftar!");
+        return;
+      }
+
+      setEmailError("");
       const response = await register({ name, email, password });
       console.log("Respons dari pendaftaran:", response);
     } catch (error) {
       console.error("Terjadi kesalahan saat pendaftaran:", error);
     }
   };
+
   return (
-    <div className=" w-full px-5 lg:px-16">
+    <div className="w-full px-5 lg:px-16">
       <div className="w-full flex flex-col">
-        <div className="w-full flex flex-col">
-        <Image src={logoPurple} width={115}
-              height={50} alt=" Logo" />
-          <div className="  mt-6 font-montserrat text-textPrimary ">
-            <div className="font-semibold text-3xl">Daftar</div>
-            <div className="mt-4">
-              Mari kita mulai dengan mengisi data dibawah ini
-            </div>
+
+        <Image src={logoPurple} width={115} height={50} alt="Logo" />
+        <div className="mt-6 font-montserrat text-textPrimary">
+          <div className="font-semibold text-3xl">Daftar</div>
+          <div className="mt-4">
+            Mari kita mulai dengan mengisi data di bawah ini
           </div>
-          <div className="flex flex-col font-montserrat w-full  mt-16">
-            <h2 className="text-[#252525] text-sm mb-2">Nama</h2>
+        </div>
+        <div className="flex flex-col font-montserrat w-full mt-16">
+          <h2 className="text-[#252525] text-sm mb-2">Nama</h2>
+          <input
+            className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col font-montserrat w-full mt-10">
+          <h2 className="text-[#252525] text-sm mb-2">Email</h2>
+          <input
+            className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
+            type="text"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setEmailError("");
+            }}
+          />
+          {emailError && <div className="text-red-500">{emailError}</div>}
+        </div>
+        <div className="flex flex-col font-montserrat w-full mt-10">
+          <h2 className="text-[#252525] text-sm mb-2">Password</h2>
+          <div className="flex flex-row font-montserrat w-full relative">
             <input
               className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
+            <div
+              className="flex mb-2 items-end cursor-pointer text-textPrimary absolute right-8"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? (
+                <AiOutlineEye size={20} />
+              ) : (
+                <AiOutlineEyeInvisible size={20} />
+              )}
+            </div>
           </div>
-          <div className="flex flex-col font-montserrat w-full  mt-10">
-            <h2 className="text-[#252525] text-sm mb-2">Email</h2>
+          {passwordError && (
+            <div className="text-red-500">{passwordError}</div>
+          )}
+        </div>
+        <div className="flex flex-col font-montserrat w-full mt-10">
+          <h2 className="text-[#252525] text-sm mb-2">Confirm Password</h2>
+          <div className="flex flex-row font-montserrat w-full relative">
             <input
               className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            {emailError && <div className="text-red-500">{emailError}</div>}
-          </div>
-          <div className="flex flex-col font-montserrat w-full  mt-10">
-            <h2 className="text-[#252525] text-sm mb-2">Password</h2>
-            <div className="flex flex-row font-montserrat w-full relative ">
-              <input
-                className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-
-              <div
-                className=" flex mb-2  items-end cursor-pointer text-textPrimary absolute right-8"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? (
-                  <AiOutlineEye size={20} />
-                ) : (
-                  <AiOutlineEyeInvisible size={20} />
-                )}
-              </div>
+            <div
+              className="flex mb-2 items-end cursor-pointer text-textPrimary absolute right-8"
+              onClick={toggleConfirmPasswordVisibility}
+            >
+              {showConfirmPassword ? (
+                <AiOutlineEye size={20} />
+              ) : (
+                <AiOutlineEyeInvisible size={20} />
+              )}
             </div>
-
-            {passwordError && (
-              <div className="text-red-500">{passwordError}</div>
-            )}
           </div>
-          <div className="flex flex-col font-montserrat w-full  mt-10">
-            <h2 className="text-[#252525] text-sm mb-2">Confirm Password</h2>
-            <div className="flex flex-row font-montserrat w-full relative ">
-              <input
-                className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
-                type={showConfirmPassword ? "text" : "password"}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-
-              <div
-                className=" flex mb-2  items-end cursor-pointer text-textPrimary absolute right-8"
-                onClick={toggleConfirmPasswordVisibility}
-              >
-                {showConfirmPassword ? (
-                  <AiOutlineEye size={20} />
-                ) : (
-                  <AiOutlineEyeInvisible size={20} />
-                )}
-              </div>
-            </div>
-            {confirmPasswordError && (
-              <div className="text-red-500">{confirmPasswordError}</div>
-            )}
-          </div>
+          {confirmPasswordError && (
+            <div className="text-red-500">{confirmPasswordError}</div>
+          )}
         </div>
         <div className="w-full flex flex-col mt-10 font-montserrat text-sm sm:text-xl gap-6">
           <button
+            type="submit"
             onClick={handleRegister}
             className="w-full py-3 flex items-center justify-center rounded-2xl bg-primary"
           >
@@ -159,7 +165,10 @@ function FormLayout() {
           </button>
           <h4 className="text-black text-xs sm:text-[16px] flex justify-center gap-3">
             Sudah mempunyai akun?{" "}
-            <Link href="/login" className="text-primary  text-xs sm:text-[16px] font-semibold">
+            <Link
+              href="/login"
+              className="text-primary text-xs sm:text-[16px] font-semibold"
+            >
               Masuk
             </Link>
           </h4>
