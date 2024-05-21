@@ -5,6 +5,7 @@ import { AvatarTes } from '@/app/lib/utils/image'
 import { IoIosArrowDown } from "react-icons/io";
 import { IoMailOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
+import Link from 'next/link';
 
 const MenuProfileDashboard = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,7 +29,7 @@ const MenuProfileDashboard = () => {
                 <div className='absolute top-20 right-0 bg-white py-[20px] w-[226px] shadow-lg px-[10px] rounded-xl'>
                     <ul>
                         <li className='flex text-textPrimary gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
-                            <Link>
+                            <Link href="/profile" className='flex gap-3'>
                                 <div className='text-xl'>
                                     <GoPerson />
                                 </div>
