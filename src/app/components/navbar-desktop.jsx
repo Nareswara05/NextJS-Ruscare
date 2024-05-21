@@ -65,12 +65,12 @@ function NavbarDesktop() {
                             <h1 className='text-primary text-[14px] font-bold'>Selamat Datang Di RusCare</h1>
                             <ul className="py-2 flex">
                                 <li>
-                                    <Link href="/login">
+                                    <Link href="/register">
                                         <h2 className="block px-8 py-2 font-medium text-[16px] text-white bg-primary rounded-l-full">Daftar</h2>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/register">
+                                    <Link href="/login">
                                         <h2 className="block px-8 py-2 font-medium text-[16px] text-white bg-[#C680FF] rounded-r-full">Masuk</h2>
                                     </Link>
                                 </li>

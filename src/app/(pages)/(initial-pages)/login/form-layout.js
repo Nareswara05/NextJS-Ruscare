@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { logoPurple } from "@/app/lib/utils/svg";
 import login from "@/app/lib/service/endpoint/auth/login";
+import { useRouter } from "next/navigation";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -13,6 +14,8 @@ function LoginForm() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -36,6 +39,8 @@ function LoginForm() {
       setEmailError("");
     }
 
+    setIsLoading(true); // Set loading to true
+
     try {
       const response = await login({ email, password });
 
@@ -52,12 +57,17 @@ function LoginForm() {
         }
       } else {
         console.log("Respons dari login:", response);
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 100); // Tambahkan penundaan sebelum menuju dashboard
       }
     } catch (error) {
       console.error("Terjadi kesalahan saat login:", error);
       setEmailError("Terjadi kesalahan pada server, silakan coba lagi.");
       setPasswordError("");
     }
+
+    setIsLoading(false); // Set loading to false setelah selesai
   };
 
   return (
@@ -107,9 +117,13 @@ function LoginForm() {
           <button
             type="submit"
             onClick={handleLogin}
-            className="w-full py-3 flex items-center justify-center rounded-2xl bg-primary"
+            className="w-full py-3 flex items-center justify-center rounded-2xl hover:bg-purple-700 bg-primary relative"
+            disabled={isLoading} // Disable button while loading
           >
-            Masuk
+            {isLoading ? (
+              <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white"></div>
+            ) : null}
+            {!isLoading && "Masuk"}
           </button>
           <h4 className="text-black text-xs sm:text-[16px] flex justify-center gap-3">
             Belum mempunyai akun?{" "}

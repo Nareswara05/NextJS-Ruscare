@@ -7,7 +7,7 @@ export default async function register({ name, email, password }) {
         password: password,
        
     }
-    );
+    );  
 
     return res.data;
   } catch (error) {
