@@ -39,7 +39,7 @@ function LoginForm() {
       setEmailError("");
     }
 
-    setIsLoading(true); // Set loading to true
+    setIsLoading(true);
 
     try {
       const response = await login({ email, password });
@@ -57,9 +57,12 @@ function LoginForm() {
         }
       } else {
         console.log("Respons dari login:", response);
+        
+        localStorage.setItem("authToken", response.token);
+        
         setTimeout(() => {
           router.push("/dashboard");
-        }, 100); // Tambahkan penundaan sebelum menuju dashboard
+        }, 100);
       }
     } catch (error) {
       console.error("Terjadi kesalahan saat login:", error);
@@ -67,7 +70,7 @@ function LoginForm() {
       setPasswordError("");
     }
 
-    setIsLoading(false); // Set loading to false setelah selesai
+    setIsLoading(false);
   };
 
   return (
@@ -118,7 +121,7 @@ function LoginForm() {
             type="submit"
             onClick={handleLogin}
             className="w-full py-3 flex items-center justify-center rounded-2xl hover:bg-purple-700 bg-primary relative"
-            disabled={isLoading} // Disable button while loading
+            disabled={isLoading}
           >
             {isLoading ? (
               <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white"></div>
