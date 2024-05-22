@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import instanceAxios from "../../instance/instance";
 
 export default async function login({ email, password }) {
@@ -7,7 +8,7 @@ export default async function login({ email, password }) {
     if (response.status !== 200) {
       throw new Error(`API call failed with status: ${response.status}`);
     }
-
+    Cookies.set('token', response.data.token);
     return response.data;
   } catch (error) {
     if (error.response) {
