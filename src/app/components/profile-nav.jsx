@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { RxDashboard } from 'react-icons/rx';
 import { CiMail, CiLogout } from "react-icons/ci";
 import { AvatarTes } from '../lib/utils/image';
@@ -7,7 +7,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { GoPerson } from 'react-icons/go';
 import logout from '../lib/service/endpoint/auth/logout';
-
+import swal from 'sweetalert';  
+import Swal from 'sweetalert2';
 
 const ProfileMenuNav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,6 +27,21 @@ const ProfileMenuNav = () => {
         }
     };
 
+    const confirmLogout = () => {
+        Swal.fire({
+            title: 'Apakah kamu yakin?',
+            text: "Setelah keluar, Anda harus masuk lagi untuk mengakses akun Anda.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Iya, Keluar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleLogout();
+            }
+        });
+    };
 
     return (
         <div className='relative'>
@@ -65,7 +81,7 @@ const ProfileMenuNav = () => {
                                 Mailbox
                             </Link>
                         </li>
-                        <li onClick={handleLogout} className='flex  gap-3 w-full text-red-600 hover:bg-gray-100 p-[10px] rounded-lg'>
+                        <li onClick={confirmLogout} className='flex  gap-3 w-full text-red-600 hover:bg-gray-100 p-[10px] rounded-lg'>
                             <div className='flex gap-3'>
                                 <div className='text-xl'>
                                     <CiLogout />
@@ -78,7 +94,6 @@ const ProfileMenuNav = () => {
             )}
         </div>
     );
-
 }
 
-export default ProfileMenuNav
+export default ProfileMenuNav;
