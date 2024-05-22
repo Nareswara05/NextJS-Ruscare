@@ -6,6 +6,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GoPerson } from 'react-icons/go';
+import logout from '../lib/service/endpoint/auth/logout';
 
 
 const ProfileMenuNav = () => {
@@ -14,6 +15,17 @@ const ProfileMenuNav = () => {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            localStorage.removeItem('token'); 
+            window.location.href = '/'; 
+        } catch (error) {
+            console.error('Gagal logout:', error);
+        }
+    };
+
 
     return (
         <div className='relative'>
@@ -53,13 +65,13 @@ const ProfileMenuNav = () => {
                                 Mailbox
                             </Link>
                         </li>
-                        <li className='flex  gap-3 w-full text-red-600 hover:bg-gray-100 p-[10px] rounded-lg'>
-                            <Link href="/dashboard" className='flex gap-3'>
+                        <li onClick={handleLogout} className='flex  gap-3 w-full text-red-600 hover:bg-gray-100 p-[10px] rounded-lg'>
+                            <div className='flex gap-3'>
                                 <div className='text-xl'>
                                     <CiLogout />
                                 </div>
                                 Logout
-                            </Link>
+                            </div>
                         </li>
                     </ul>
                 </div>
