@@ -8,9 +8,9 @@ export default async function DetailMainArticle({articleData}) {
 
     return (
         <div className='flex flex-col gap-12'>
-            <h1 className='font-montserrat text-textPri mary text-4xl tracking-wide w-full font-bold '>{articleData.title}</h1>
+            <h1 className='font-montserrat text-textPrimary text-4xl tracking-wide w-full font-bold '>{articleData.title}</h1>
             <hr className='w-full border-2' />
-            <p className='font-montserrat'>{articleData.content}</p>
+            <p className='font-montserrat text-textPrimary'>{articleData.desc}</p>
         </div>
     );
 }
