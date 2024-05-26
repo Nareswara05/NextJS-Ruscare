@@ -4,6 +4,8 @@ import instagram from '../assets/svg/instagram.svg'
 import facebook from '../assets/svg/facebook.svg'
 import twitter from '../assets/svg/twitter.svg'
 import starYellow from '../assets/svg/starYellow.svg'
+import linkedin from '../assets/svg/linkedin.svg'
+
 
 
 export{
@@ -13,5 +15,6 @@ export{
     twitter,
     facebook,
     starYellow,
+    linkedin
 }
  
