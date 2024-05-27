@@ -5,6 +5,7 @@ import facebook from '../assets/svg/facebook.svg'
 import twitter from '../assets/svg/twitter.svg'
 import starYellow from '../assets/svg/starYellow.svg'
 import linkedin from '../assets/svg/linkedin.svg'
+import waveSelfcare from '../assets/svg/waveSelfcare.svg'
 
 
 
@@ -15,6 +16,7 @@ export{
     twitter,
     facebook,
     starYellow,
-    linkedin
+    linkedin,
+    waveSelfcare
 }
  
