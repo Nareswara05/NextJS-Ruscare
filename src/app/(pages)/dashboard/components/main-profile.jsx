@@ -6,12 +6,39 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoMailOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
 import Link from 'next/link';
+import Logout from '@/app/lib/service/endpoint/auth/logout';
+import Swal from 'sweetalert2';
 
 const MenuProfileDashboard = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+    const handleLogout = async () => {
+        try {
+            await Logout();
+            localStorage.removeItem('token'); 
+            window.location.href = '/'; 
+        } catch (error) {
+            console.error('Gagal logout:', error);
+        }
+    };
+
+    const confirmLogout = () => {
+        Swal.fire({
+            title: 'Apakah kamu yakin?',
+            text: "Setelah keluar, Anda harus masuk lagi untuk mengakses akun Anda.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Iya, Keluar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleLogout();
+            }
+        });
     };
 
     return (
@@ -28,25 +55,29 @@ const MenuProfileDashboard = () => {
             {isMenuOpen && (
                 <div className='absolute top-20 right-0 bg-white py-[20px] w-[226px] shadow-lg px-[10px] rounded-xl'>
                     <ul>
-                        <li className='flex text-textPrimary gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
-                            <Link href="/profile" className='flex gap-3'>
+                    <li className= 'cursor-pointer flex text-textPrimary gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
+                            <Link href="/profile" className='flex gap-3 items-center'>
                                 <div className='text-xl'>
                                     <GoPerson />
                                 </div>
-                                Profil
+                                Profil Saya
                             </Link>
                         </li>
-                        <li className='flex text-textPrimary gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
-                            <div className='text-xl'>
-                                <IoMailOutline />
-                            </div>
-                            Mailbox
+                        <li className='cursor-pointer flex text-textPrimary gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
+                            <Link href="/dashboard" className='flex gap-3 items-center'>
+                                <div className='text-xl'>
+                                    <IoMailOutline  />
+                                </div>
+                                Mailbox
+                            </Link>
                         </li>
-                        <li className='flex text-red-600 gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
-                            <div className='text-xl'>
-                                <IoIosLogOut />
+                        <li onClick={confirmLogout} className=' cursor-pointer flex  gap-3 w-full text-red-600 hover:bg-gray-100 p-[10px] rounded-lg'>
+                            <div className='flex gap-3 items-center'>
+                                <div className='text-xl'>
+                                    <IoIosLogOut />
+                                </div>
+                                Logout
                             </div>
-                            Logout
                         </li>
                     </ul>
                 </div>
