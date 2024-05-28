@@ -6,6 +6,9 @@ import twitter from '../assets/svg/twitter.svg'
 import starYellow from '../assets/svg/starYellow.svg'
 import linkedin from '../assets/svg/linkedin.svg'
 import waveSelfcare from '../assets/svg/waveSelfcare.svg'
+import dotsYellow from '../assets/svg/dots-yellow.svg'
+import warningIcon from '../assets/svg/warning-icon.svg'
+import decorationTes from '../assets/svg/decoration-tes.svg'
 
 
 
@@ -17,6 +20,9 @@ export{
     facebook,
     starYellow,
     linkedin,
-    waveSelfcare
+    waveSelfcare,
+    dotsYellow,
+    warningIcon,
+    decorationTes
 }
  
