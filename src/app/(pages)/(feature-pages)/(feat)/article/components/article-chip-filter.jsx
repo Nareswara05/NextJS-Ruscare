@@ -43,8 +43,7 @@ const ChipCategoryArticle = () => {
   };
 
 
-
-  return (
+    return (
     <div>
       <div className="flex flex-wrap gap-3">
         {articleCategory.map((article, index) => (
