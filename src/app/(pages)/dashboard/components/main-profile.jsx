@@ -64,7 +64,7 @@ const MenuProfileDashboard = () => {
                             </Link>
                         </li>
                         <li className='cursor-pointer flex text-textPrimary gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
-                            <Link href="/dashboard" className='flex gap-3 items-center'>
+                            <Link href="/mailbox" className='flex gap-3 items-center'>
                                 <div className='text-xl'>
                                     <IoMailOutline  />
                                 </div>
