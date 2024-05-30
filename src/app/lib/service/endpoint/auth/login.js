@@ -14,6 +14,10 @@ export default async function login({ email, password }) {
       localStorage.setItem('token', token); 
     }
 
+    if (response.data && response.data.user) {
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+    }
+
     return response.data;
   } catch (error) {
     if (error.response) {
