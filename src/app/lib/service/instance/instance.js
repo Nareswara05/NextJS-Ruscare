@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: 'https://api.ruscarestudent.com/api',
     headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${typeof window !== 'undefined' ? localStorage.getItem('token') : ''}`,
         'Accept': 'application/json'
-    }
+    },
 });
 
 export default instance;
