@@ -15,6 +15,7 @@
     "@headlessui/react": "^2.0.3",
     "axios": "^1.6.8",
     "cors": "^2.8.5",
+    "edge-csrf": "^2.0.0-rc7",
     "font-awesome": "^4.7.0",
     "fontawesome": "^5.6.3",
     "fortawesome": "^0.0.1-security",

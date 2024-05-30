@@ -45,11 +45,8 @@ function LoginForm() {
       const response = await login({ email, password });
 
       if (response.status === 422) {
-        if (response.message === "Email not registered") {
-          setEmailError("Email belum terdaftar!");
-          setPasswordError("");
-        } else if (response.message === "Invalid credential") {
-          setPasswordError("Password salah!");
+        if (response.message === "Invalid credential") {
+          setPasswordError("Terjadi kesalahan pada saat login.");
           setEmailError("");
         } else {
           setEmailError("Terjadi kesalahan, silakan coba lagi.");
@@ -101,7 +98,10 @@ function LoginForm() {
               className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
               type={showPassword ? "text" : "password"}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setPasswordError("");
+              }}
             />
             <div
               className="flex mb-2 items-end cursor-pointer text-textPrimary absolute right-8"

@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { logoPurple } from "@/app/lib/utils/svg";
 import register from "@/app/lib/service/endpoint/auth/register";
-import AvailabilityEmail from "@/app/lib/service/endpoint/auth/availability-email";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
@@ -18,10 +17,11 @@ function FormLayout() {
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [serverError, setServerError] = useState(""); // State untuk menyimpan pesan kesalahan dari server
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const router = useRouter()
-
+  const router = useRouter();
+  
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -63,13 +63,6 @@ function FormLayout() {
     }
 
     try {
-      const available = await AvailabilityEmail(email);
-      if (!available) {
-        setEmailError("Email sudah terdaftar!");
-        return;
-      }
-
-      setEmailError("");
       const response = await register({ name, email, password });
       console.log("Respons dari pendaftaran:", response);
 
@@ -83,13 +76,21 @@ function FormLayout() {
       });
     } catch (error) {
       console.error("Terjadi kesalahan saat pendaftaran:", error);
+      if (error.response && error.response.data && error.response.data.message) {
+        if (error.response.data.message === "email has already been taken") {
+          setServerError("Email sudah terdaftar");
+        } else {
+          setServerError(error.response.data.message);
+        }
+      } else {
+        setServerError("Terjadi kesalahan saat pendaftaran");
+      }
     }
   };
 
   return (
     <div className="w-full px-5 lg:px-16">
       <div className="w-full flex flex-col">
-
         <Image src={logoPurple} width={115} height={50} alt="Logo" />
         <div className="mt-6 font-montserrat text-textPrimary">
           <div className="font-semibold text-3xl">Daftar</div>
@@ -97,6 +98,7 @@ function FormLayout() {
             Mari kita mulai dengan mengisi data di bawah ini
           </div>
         </div>
+        <input type="hidden" name="_csrf" value={null} />
         <div className="flex flex-col font-montserrat w-full mt-16">
           <h2 className="text-[#252525] text-sm mb-2">Nama</h2>
           <input
@@ -115,9 +117,11 @@ function FormLayout() {
             onChange={(e) => {
               setEmail(e.target.value);
               setEmailError("");
+              setServerError(""); 
             }}
           />
           {emailError && <div className="text-red-500">{emailError}</div>}
+          {serverError && <div className="text-red-500">{serverError}</div>}
         </div>
         <div className="flex flex-col font-montserrat w-full mt-10">
           <h2 className="text-[#252525] text-sm mb-2">Password</h2>
@@ -139,9 +143,7 @@ function FormLayout() {
               )}
             </div>
           </div>
-          {passwordError && (
-            <div className="text-red-500">{passwordError}</div>
-          )}
+          {passwordError && <div className="text-red-500">{passwordError}</div>}
         </div>
         <div className="flex flex-col font-montserrat w-full mt-10">
           <h2 className="text-[#252525] text-sm mb-2">Confirm Password</h2>
