@@ -7,7 +7,7 @@ export default function MailDetailPopup({ data, onClose }) {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-            <div className="bg-white p-5 rounded-lg w-[450px] shadow-lg relative">
+            <div className="bg-white p-5 rounded-lg w-[650px] shadow-lg relative">
                 <div className='flex w-full justify-end'>
                     <h1 className='font-normal text-[#77787A] text-[14px]'>{data.date}</h1>
                 </div>
