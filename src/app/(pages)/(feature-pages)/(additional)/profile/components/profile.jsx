@@ -51,8 +51,8 @@ const Profile = () => {
           alt="Background"
         />
       </div>
-      <div className='absolute items-center top-44 pb-8 px-[75px] justify-center flex flex-col w-[500px] bg-white shadow-custom rounded-xl'>
-        <div className='relative -top-16'>
+      <div className='absolute items-center top-44 pb-8 px-[75px] max-w-[500px]  justify-center flex flex-col w-[500px] bg-white shadow-custom rounded-xl'>
+        <div className='relative -top-16 flex flex-col items-center justify-center'>
           <Image
             src={AvatarTes}
             className="w-[145px] border-white border-8 object-cover h-full rounded-full"
