@@ -1,8 +1,11 @@
 import React from 'react'
+import HeroLanding from './components/hero-landing'
 
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <HeroLanding/>
+    </div>
   )
 }
 
