@@ -1,7 +1,7 @@
 "use client";
 
-import changeEmail from '@/app/lib/service/endpoint/auth/change-email';
-import getUser from '@/app/lib/service/endpoint/auth/get-user';
+import changeEmail from '@/app/lib/service/endpoint/user/change-email';
+import getUser from '@/app/lib/service/endpoint/user/get-user';
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import ButtonSubmit from './button-submit';

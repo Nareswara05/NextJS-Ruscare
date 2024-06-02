@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import changePassword from '@/app/lib/service/endpoint/auth/change-password';
-import getUser from '@/app/lib/service/endpoint/auth/get-user';
+import getUser from '@/app/lib/service/endpoint/user/get-user';
+import changePassword from '@/app/lib/service/endpoint/user/change-password';
 import ButtonSubmit from './button-submit';
 import EditForm from './edit-form';
 

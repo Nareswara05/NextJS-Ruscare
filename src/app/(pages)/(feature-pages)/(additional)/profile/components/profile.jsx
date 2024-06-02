@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { AvatarTes, bgProfil } from '@/app/lib/utils/image';
 import Link from 'next/link';
-import getUser from '@/app/lib/service/endpoint/auth/get-user';
+import getUser from '@/app/lib/service/endpoint/user/get-user';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
