@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import EditForm from './edit-form';
 import ChangeProfilePicture from './change-profile-picture';
 import ButtonSubmit from './button-submit';
-import editUsername from '@/app/lib/service/endpoint/auth/edit-username';
 import Swal from 'sweetalert2';
+import editUsername from '@/app/lib/service/endpoint/user/edit-username';
 
 const EditProfile = () => {
   const [username, setUsername] = useState("");
