@@ -148,3 +148,9 @@ input[type="radio"]:checked::before {
   border-width: 0 0.15em 0.15em 0;
   transform: rotate(45deg);
  }
+
+ /* styles.css */
+.hover-fill-white {
+    fill: white;
+    opacity: 0.4;
+}
