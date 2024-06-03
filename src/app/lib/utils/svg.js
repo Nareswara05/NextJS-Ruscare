@@ -9,6 +9,8 @@ import waveSelfcare from '../assets/svg/waveSelfcare.svg'
 import dotsYellow from '../assets/svg/dots-yellow.svg'
 import warningIcon from '../assets/svg/warning-icon.svg'
 import decorationTes from '../assets/svg/decoration-tes.svg'
+import dotsPurple from '../assets/svg/dots-purple.svg'
+import logoNotext from '../assets/svg/logo-notext.svg'
 
 
 
@@ -23,6 +25,8 @@ export{
     waveSelfcare,
     dotsYellow,
     warningIcon,
-    decorationTes
+    decorationTes,
+    dotsPurple,
+    logoNotext
 }
  
