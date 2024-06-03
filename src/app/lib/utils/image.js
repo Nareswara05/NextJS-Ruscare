@@ -5,6 +5,7 @@ import mentalhealth from '../assets/image/mentalhealth.png'
 import meditation from '../assets/image/meditation.png'
 import mentor from '../assets/image/mentorimg.png'
 import student from '../assets/image/studentimg.png'
+import about from '../assets/image/aboutimg.png'
 
 
 export {
@@ -14,5 +15,6 @@ export {
     mentalhealth,
     meditation,
     mentor,
-    student
+    student,
+    about
 }

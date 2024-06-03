@@ -57,9 +57,11 @@ const HeroLanding = () => {
                 <div className='w-full flex justify-between'>
                 <Image
                 src={dotsPurple}
+                width={300}
                 />
                 <Image
                 src={dotsPurple}
+                width={300}
                 />
                 </div>
             </div>
