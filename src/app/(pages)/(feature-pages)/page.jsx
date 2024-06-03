@@ -3,7 +3,7 @@ import HeroLanding from './components/hero-landing'
 
 const page = () => {
   return (
-    <div>
+    <div className='overflow-x-hidden bg-white'>
       <HeroLanding/>
     </div>
   )
