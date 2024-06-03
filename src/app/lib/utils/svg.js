@@ -12,6 +12,7 @@ import decorationTes from '../assets/svg/decoration-tes.svg'
 import dotsPurple from '../assets/svg/dots-purple.svg'
 import logoNotext from '../assets/svg/logo-notext.svg'
 import dotsPurplesmall from '../assets/svg/dots-purplesmall.svg'
+import halfcircle from '../assets/svg/halfcircle.svg'
 
 
 
@@ -29,6 +30,7 @@ export{
     decorationTes,
     dotsPurple,
     logoNotext,
-    dotsPurplesmall
+    dotsPurplesmall,
+    halfcircle
 }
  
