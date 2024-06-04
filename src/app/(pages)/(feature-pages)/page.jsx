@@ -6,7 +6,7 @@ import ServiceLanding from './components/service-landing'
 
 const page = () => {
   return (
-    <div className='overflow-x-hidden bg-white flex flex-col gap-16'>
+    <div className='overflow-x-hidden bg-white flex flex-col gap-24'>
       <HeroLanding/>
       <AboutLanding/>
       <ServiceLanding/>
