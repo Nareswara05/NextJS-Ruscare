@@ -1,5 +1,6 @@
 import React from 'react'
 import AboutLanding from './components/about-landing'
+import CategoryLanding from './components/category-landing'
 import HeroLanding from './components/hero-landing'
 import ServiceLanding from './components/service-landing'
 
@@ -9,6 +10,7 @@ const page = () => {
       <HeroLanding/>
       <AboutLanding/>
       <ServiceLanding/>
+      <CategoryLanding/>
     </div>
   )
 }
