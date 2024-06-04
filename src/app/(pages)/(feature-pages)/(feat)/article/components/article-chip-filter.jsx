@@ -49,8 +49,8 @@ const ChipCategoryArticle = () => {
         {articleCategory.map((article, index) => (
           <div
             key={index}
-            className={`px-4 py-2 border font-montserrat text-base rounded-full text-textPrimary border-textPrimary ${
-              index === selectedChip ? "bg-gray-200" : "border-gray-300"
+            className={`px-4 py-2 border font-montserrat text-base rounded-full hover:bg-primary hover:text-white text-textPrimary  cursor-pointer ${
+              index === selectedChip ? "bg-primary text-white" : "border-gray-300"
             }`}
             onClick={() => handleChipClick(index)}
           >
