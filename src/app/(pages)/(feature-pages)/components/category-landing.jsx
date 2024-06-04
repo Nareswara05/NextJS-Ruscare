@@ -30,7 +30,7 @@ export default async function CategoryLanding() {
             iconColor: '#68D585',
             bgColor: '#68D585'
         },
-        'Konseling Social': {
+        'Konseling Sosial': {
             Icon: FaEarthAmericas,
             iconColor: '#F4C918',
             bgColor: '#F4C918'
