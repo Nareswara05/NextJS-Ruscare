@@ -65,7 +65,7 @@ const HeroLanding = () => {
                 />
                 </div>
             </div>
-            <div className='w-full px-[200px] absolute bottom-40 left-0 flex flex-col items-center '>
+            <div className='w-full px-[200px] absolute bottom-20 left-0 flex flex-col items-center '>
 
                 <HeroDecoration />
                 <HeroCard/>
