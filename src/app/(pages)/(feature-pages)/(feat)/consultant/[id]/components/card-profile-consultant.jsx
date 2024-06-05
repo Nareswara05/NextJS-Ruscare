@@ -4,6 +4,24 @@ import Link from 'next/link'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
 
 export default async function CardProfileConsultant({ dataConsultant }) {
+
+    let major = "";
+
+    if (dataConsultant.grade_id === 1) {
+        major = "PPLG";
+    } else if (dataConsultant.grade_id === 2) {
+        major = "Animasi 3D";
+    } else if (dataConsultant.grade_id === 3) {
+        major = "Animasi 2D";
+    } else if (dataConsultant.grade_id === 4) {
+        major = "Desain Grafis";
+    } else if (dataConsultant.grade_id === 5) {
+        major = "Teknik Grafika";
+    }
+
+
+
+
     return (
         <div className=' flex flex-col justify-center items-center w-[300px]'>
             <div>
@@ -20,44 +38,44 @@ export default async function CardProfileConsultant({ dataConsultant }) {
             <div className='flex flex-col gap-3 w-full pt-6'>
                 <div className='flex justify-between'>
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Jurusan</h1>
-                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.major}</h1>
+                    <h1 className='font-bold text-[16px] text-textPrimary'>{major}</h1>
                 </div>
                 <div className='flex justify-between'>
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Tanggal Lahir</h1>
-                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.birtdate}</h1>
+                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.birth_date}</h1>
                 </div>
                 <div className='flex justify-between'>
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Pengalaman</h1>
-                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.experience}</h1>
+                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.experience} Tahun</h1>
                 </div>
                 <div className='flex justify-between'>
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Pendidikan Terakhir</h1>
-                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.lastEducation}</h1>
+                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.last_education}</h1>
                 </div>
                 <div className='flex justify-between'>
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Umur</h1>
-                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.umur}</h1>
+                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.age} Tahun</h1>
                 </div>
                 <div className='flex justify-between'>
-                    <h1 className='font-semibold text-[16px] text-textPrimary'>Umur</h1>
+                    <h1 className='font-semibold text-[16px] text-textPrimary'>Sosmed</h1>
                     <div className='flex'>
                         <div className='flex gap-1'>
-                            <Link href={dataConsultant.instagram} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaInstagram />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href={dataConsultant.facebook} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaFacebook />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href={dataConsultant.twitter} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaTwitter />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href={dataConsultant.linkedin} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaLinkedin />
                             </Link>
                         </div>
