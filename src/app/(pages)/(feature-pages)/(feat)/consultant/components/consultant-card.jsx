@@ -70,11 +70,11 @@ const ConsultantCard = ({ consultant }) => {
                     </h2>
                 </div>
             </div>
-            <Link href={`/consultant/${consultant.id}`}>
-                <h1 className='flex text-primary font-semibold text-lg items-center gap-2 pt-8'>
-                    <span>Detail Profil</span>
+            <Link className='flex group text-primary font-semibold text-lg items-center gap-2 pt-8' href={`/consultant/${consultant.id}`}>
+                <span>Detail Profil</span>
+                <div className='transform transition-transform duration-300 group-hover:translate-x-2'>
                     <IoIosArrowForward />
-                </h1>
+                </div>
             </Link>
         </div>
     );
