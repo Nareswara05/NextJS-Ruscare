@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { formatDate } from '@/app/lib/utils/formatDate'
 
 export default async function CardProfileConsultant({ dataConsultant }) {
 
@@ -19,12 +20,21 @@ export default async function CardProfileConsultant({ dataConsultant }) {
         major = "Teknik Grafika";
     }
 
+    let LastEdu = "";
+    if (dataConsultant.last_education === "S1") {
+        LastEdu = "(Sarjana)";
+    } else if (dataConsultant.last_education === "S2") {
+        LastEdu = "(Magister)";
+    } else if (dataConsultant.last_education === "S3") {
+        LastEdu = "(Doktor)";
+    }
+
 
 
 
     return (
         <div className=' flex flex-col justify-center items-center w-[300px]'>
-            <div>
+            <div className='flex flex-col items-center justify-center gap-3'>
                 <Image
                     src={dataConsultant.avatar}
                     className="w-[150px] rounded-full bg-black"
@@ -42,7 +52,7 @@ export default async function CardProfileConsultant({ dataConsultant }) {
                 </div>
                 <div className='flex justify-between'>
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Tanggal Lahir</h1>
-                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.birth_date}</h1>
+                    <h1 className='font-bold text-[16px] text-textPrimary'>{formatDate(dataConsultant.birth_date)}</h1>
                 </div>
                 <div className='flex justify-between'>
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Pengalaman</h1>
@@ -50,7 +60,7 @@ export default async function CardProfileConsultant({ dataConsultant }) {
                 </div>
                 <div className='flex justify-between'>
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Pendidikan Terakhir</h1>
-                    <h1 className='font-bold text-[16px] text-textPrimary'>{dataConsultant.last_education}</h1>
+                    <h1 className='font-bold text-[16px] text-textPrimary'>{LastEdu} {dataConsultant.last_education}</h1>
                 </div>
                 <div className='flex justify-between'>
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Umur</h1>

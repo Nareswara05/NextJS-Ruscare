@@ -14,6 +14,7 @@ export default async function ConsultantDetail({ params }) {
         return <div>Consultant not found</div>;
     }
 
+
     return (
         <div className='flex gap-16 items-start py-32 bg-white justify-center'>
            <CardProfileConsultant dataConsultant={consultant}/>
