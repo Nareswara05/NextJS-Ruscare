@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RxDashboard } from 'react-icons/rx';
 import { CiMail, CiLogout } from "react-icons/ci";
 import { AvatarTes } from '../lib/utils/image';
@@ -7,11 +7,37 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { GoPerson } from 'react-icons/go';
 import logout from '../lib/service/endpoint/auth/logout';
-import swal from 'sweetalert';  
+import swal from 'sweetalert';
 import Swal from 'sweetalert2';
+import getUser from '../lib/service/endpoint/user/get-user';
 
 const ProfileMenuNav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const data = await getUser();
+                setUserData(data);
+            } catch (error) {
+                console.error("Failed to fetch user data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+      }
+    
+      if (!userData) {
+        return <div>Error loading user data</div>;
+      }
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -20,13 +46,14 @@ const ProfileMenuNav = () => {
     const handleLogout = async () => {
         try {
             await logout();
-            localStorage.removeItem('token'); 
-            window.location.href = '/'; 
+            localStorage.removeItem('token');
+            window.location.href = '/';
         } catch (error) {
             console.error('Gagal logout:', error);
         }
     };
 
+    
     const confirmLogout = () => {
         Swal.fire({
             title: 'Apakah kamu yakin?',
@@ -46,11 +73,12 @@ const ProfileMenuNav = () => {
     return (
         <div className='relative'>
             <div className='flex gap-1 items-center cursor-pointer' onClick={toggleMenu}>
-                <Image
+                {/* <Image
                     src={AvatarTes}
                     width={100}
                     className='w-[44px] rounded-full'
-                />
+                /> */}
+                <button className='text-textPrimary font-medium text-md'>Hai, {userData.name}</button>
                 <IoIosArrowDown className={`text-gray-400 text-2xl transition duration-200 ease-in-out ${isMenuOpen ? 'rotate-180' : ''}`} />
             </div>
 
@@ -65,7 +93,7 @@ const ProfileMenuNav = () => {
                                 Dashboard
                             </Link>
                         </li>
-                        <li className= 'cursor-pointer flex text-textPrimary gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
+                        <li className='cursor-pointer flex text-textPrimary gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
                             <Link href="/profile" className='flex gap-3 items-center'>
                                 <div className='text-xl'>
                                     <GoPerson />
@@ -76,7 +104,7 @@ const ProfileMenuNav = () => {
                         <li className='cursor-pointer flex text-textPrimary gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
                             <Link href="/mailbox" className='flex gap-3 items-center'>
                                 <div className='text-xl'>
-                                    <CiMail  />
+                                    <CiMail />
                                 </div>
                                 Mailbox
                             </Link>
