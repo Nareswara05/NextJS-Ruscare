@@ -1,60 +1,59 @@
 "use client"
 
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import React from "react";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
+import listCategoryArticle from "@/app/lib/service/endpoint/api/list-category-article";
 
 const ChipCategoryArticle = () => {
-  const articleCategory = [
-    { title: "Kesehatan Mental" },
-    { title: "Teknik Terapi" },
-    { title: "Psikologi Anak" },
-    { title: "Psikologi Klinis" },
-    { title: "Strategi Konseling" },
-    { title: "Kesejahteraan Emosional" },
-    { title: "Terapi Perilaku" },
-    { title: "Manajemen Stres" },
-    { title: "Psikologi Kognitif" },
-    { title: "Terapi Keluarga" },
-    { title: "Gangguan Psikologis" },
-    { title: "Pengembangan Diri" },
-    { title: "Mindfulness" },
-    { title: "Trauma dan PTSD" },
-    { title: "Terapi Kelompok" }
-];
+  const [selectedChip, setSelectedChip] = useState(null);
+  const [selectedChipIndex, setSelectedChipIndex] = useState("");
+  const [categories, setCategories] = useState([]);
+  const router = useRouter();
 
-  const [selectedChip, setSelectedChip] = useState(null)
-  const [selectedChipIndex, setSelectedChipIndex] = useState("")
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoryData = await listCategoryArticle();
+        setCategories(categoryData);
+      } catch (error) {
+        console.error("Failed to fetch categories", error);
+      }
+    };
 
-  const router = useRouter()
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     if (selectedChipIndex) {
-      router.push(`/article?category=${selectedChipIndex}`, {scroll: false})
+      router.push(`/article?category=${selectedChipIndex}`, { scroll: false });
     } else {
-      router.push(`/article`)
+      router.push(`/article`);
     }
-  }, [selectedChip, router]);
-
+  }, [selectedChipIndex, router]);
 
   const handleChipClick = (index) => {
-    setSelectedChip(index === selectedChip ? null : index);
-    setSelectedChipIndex(articleCategory[index].title);
+    if (index === selectedChip) {
+      setSelectedChip(null);
+      setSelectedChipIndex("");
+    } else {
+      setSelectedChip(index);
+      setSelectedChipIndex(categories[index].title);
+    }
   };
 
-
-    return (
+  return (
     <div>
       <div className="flex flex-wrap gap-3">
-        {articleCategory.map((article, index) => (
+        {categories.map((category, index) => (
           <div
             key={index}
-            className={`px-4 py-2 border font-montserrat text-base rounded-full hover:bg-primary hover:text-white text-textPrimary  cursor-pointer ${
+            className={`px-4 py-2 border font-montserrat text-base rounded-full hover:bg-primary hover:text-white text-textPrimary cursor-pointer ${
               index === selectedChip ? "bg-primary text-white" : "border-gray-300"
             }`}
             onClick={() => handleChipClick(index)}
           >
-            {article.title}
+            {category.title}
           </div>
         ))}
       </div>

@@ -10,7 +10,7 @@ export default async function DetailMainArticle({articleData}) {
         <div className='flex flex-col gap-12'>
             <h1 className='font-montserrat text-textPrimary text-4xl tracking-wide w-full font-bold '>{articleData.title}</h1>
             <hr className='w-full border-2' />
-            <p className='font-montserrat text-textPrimary'>{articleData.desc}</p>
+            <p className='font-montserrat text-textPrimary'>{articleData.article_content}</p>
         </div>
     );
 }
