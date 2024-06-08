@@ -1,17 +1,16 @@
 "use client"
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { articleImg } from '@/app/lib/utils/image';
 
+export default function ArticleCards({ data, categories }) {
+    const getCategoryName = (id) => {
+        const category = categories.find(category => category.id === id);
+        return category ? category.category_name : "Unknown Category";
+    };
 
-
-
-export default function ArticleCards({data}) {
-   
-
-  return (
+    return (
         <Link
           href={{
             pathname: `/article/${data.id}`,
@@ -21,7 +20,7 @@ export default function ArticleCards({data}) {
             <div className='flex flex-col gap-6 w-[610px]'>
               <div className='flex flex-row gap-2 items-center'>
                 <h1 className='font-regular font-montserrat bg-primary px-[12px] py-[9px] text-white rounded-md'>
-                  {data.category_id}
+                  {getCategoryName(data.category_id)}
                 </h1>
                 <h2 className='font-montserrat'>{data.created_at}</h2>
               </div>
@@ -41,5 +40,5 @@ export default function ArticleCards({data}) {
             />
           </div>
         </Link>
-  );
+    );
 }
