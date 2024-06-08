@@ -6,54 +6,43 @@ import { useRouter } from "next/navigation";
 import listCategoryArticle from "@/app/lib/service/endpoint/api/list-category-article";
 
 const ChipCategoryArticle = () => {
+  const [articleCategory, setArticleCategory] = useState([]);
   const [selectedChip, setSelectedChip] = useState(null);
-  const [selectedChipIndex, setSelectedChipIndex] = useState("");
-  const [categories, setCategories] = useState([]);
+
   const router = useRouter();
 
   useEffect(() => {
     const fetchCategories = async () => {
-      try {
-        const categoryData = await listCategoryArticle();
-        setCategories(categoryData);
-      } catch (error) {
-        console.error("Failed to fetch categories", error);
-      }
+      const categories = await listCategoryArticle();
+      setArticleCategory(categories);
     };
 
     fetchCategories();
   }, []);
 
-  useEffect(() => {
-    if (selectedChipIndex) {
-      router.push(`/article?category=${selectedChipIndex}`, { scroll: false });
-    } else {
-      router.push(`/article`);
-    }
-  }, [selectedChipIndex, router]);
-
   const handleChipClick = (index) => {
-    if (index === selectedChip) {
+    const category = articleCategory[index];
+    if (selectedChip === index) {
       setSelectedChip(null);
-      setSelectedChipIndex("");
+      router.push(`/article`);
     } else {
       setSelectedChip(index);
-      setSelectedChipIndex(categories[index].title);
+      router.push(`/article?category=${category.id}`);
     }
   };
 
+  
   return (
     <div>
       <div className="flex flex-wrap gap-3">
-        {categories.map((category, index) => (
+        {articleCategory.map((article, index) => (
           <div
-            key={index}
-            className={`px-4 py-2 border font-montserrat text-base rounded-full hover:bg-primary hover:text-white text-textPrimary cursor-pointer ${
-              index === selectedChip ? "bg-primary text-white" : "border-gray-300"
-            }`}
+            key={article.id}
+            className={`px-4 py-2 border font-montserrat text-base rounded-full hover:bg-primary hover:text-white text-textPrimary cursor-pointer ${index === selectedChip ? "bg-primary text-white" : "border-gray-300"
+              }`}
             onClick={() => handleChipClick(index)}
           >
-            {category.title}
+            {article.category_name}
           </div>
         ))}
       </div>
