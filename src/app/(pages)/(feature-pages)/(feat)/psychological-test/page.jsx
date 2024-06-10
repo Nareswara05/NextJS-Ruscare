@@ -80,7 +80,7 @@ const TesPsikologiPage = () => {
   
 
   return (
-    <div className='bg-white w-full flex flex-col items-center justify-center pt-20'>
+    <div className='bg-white w-full flex flex-col items-center justify-center'>
       <PsychologicalHeader />
       <div className='flex flex-col gap-4 py-16'>
         <h1 className='font-bold text-textPrimary text-[28px]'>Tes Terpopuler</h1>
