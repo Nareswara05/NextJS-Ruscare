@@ -4,10 +4,10 @@ import { waveSelfcare } from '@/app/lib/utils/svg'
 
 const HeaderSelfcare = () => {
     return (
-        <div className='w-screen h-[344px] bg-primary flex justify-center items-center relative'>
+        <div className='w-screen h-[444px] bg-primary flex justify-center items-center relative'>
             <Image
                 src={waveSelfcare}
-                className='w-full absolute'
+                className='w-full absolute bottom-0'
             />
             <div className='w-fit flex flex-col relative'>
                 <h1 className='font-bold text-[48px] text-center'>Sudahkah Kamu

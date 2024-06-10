@@ -17,7 +17,7 @@ const HeroLanding = () => {
                         <div className='w-28 h-28 bg-[#8800F4] rotate-45 opacity-20 absolute -top-12 rounded-lg'></div>
                         <div className='w-28 h-28 bg-[#8800F4] rotate-45 opacity-20 rounded-lg'></div>
                     </div>
-                    <div className='flex flex-col  pt-44 w-full'>
+                    <div className='flex flex-col  pt-28 w-full'>
                         <div className='flex w-full justify-start'>
                             <Image
                                 src={starYellow}
@@ -65,7 +65,7 @@ const HeroLanding = () => {
                 />
                 </div>
             </div>
-            <div className='w-full px-[200px] absolute bottom-20 left-0 flex flex-col items-center '>
+            <div className='w-full px-[200px] absolute bottom-32 left-0 flex flex-col items-center '>
 
                 <HeroDecoration />
                 <HeroCard/>
