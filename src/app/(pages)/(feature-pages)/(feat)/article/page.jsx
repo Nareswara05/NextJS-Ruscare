@@ -34,24 +34,26 @@ const ArticlePage = () => {
     }, [category]);
 
     return (
-        <div className="bg-white px-16 overflow-x-hidden w-screen">
-            <div className="w-[970px]">
-                <h1 className="font-montserrat font-bold text-4xl text-textPrimary items-end">
-                    Artikel
-                </h1>
-                <hr className="w-full border mt-6" />
-            </div>
-            <div className="my-[59px] flex justify-between gap-12">
-                <div className='flex flex-col gap-10'>
-                    {loading ? (
-                        <div className='w-[970px]'>Loading...</div>
-                    ) : articles.length === 0 ? (
-                        <div className="text-xl text-gray-500 w-[970px] h-screen text-center">Article tidak ditemukan</div>
-                    ) : (
-                        articles.map((item, index) => (
-                            <ArticleCards data={item} categories={categories} key={index} />
-                        ))
-                    )}
+        <div className="bg-white px-16 overflow-x-hidden w-full">
+            <div className="my-[59px] flex justify-between gap-12 pt-24">
+                <div>
+                    <div className="w-[970px]">
+                        <h1 className="font-montserrat font-bold text-4xl text-textPrimary items-end">
+                            Artikel
+                        </h1>
+                        <hr className="w-full border mt-6" />
+                    </div>
+                    <div className='flex flex-col gap-10 pt-8'>
+                        {loading ? (
+                            <div className='w-[970px]'>Loading...</div>
+                        ) : articles.length === 0 ? (
+                            <div className="text-xl text-gray-500 w-[970px] h-screen text-center">Article tidak ditemukan</div>
+                        ) : (
+                            articles.map((item, index) => (
+                                <ArticleCards data={item} categories={categories} key={index} />
+                            ))
+                        )}
+                    </div>
                 </div>
                 <div className="flex flex-col gap-6">
                     <SearchArticle />
