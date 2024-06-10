@@ -78,7 +78,7 @@ const ProfileMenuNav = () => {
                     width={100}
                     className='w-[44px] rounded-full'
                 /> */}
-                <button className='text-textPrimary font-medium text-md'>Hai, {userData.name}</button>
+                <button className='capitalize font-medium text-md'>Hai, {userData.name}</button>
                 <IoIosArrowDown className={`text-gray-400 text-2xl transition duration-200 ease-in-out ${isMenuOpen ? 'rotate-180' : ''}`} />
             </div>
 
