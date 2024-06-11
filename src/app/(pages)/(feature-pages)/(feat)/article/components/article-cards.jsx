@@ -1,10 +1,18 @@
-"use client"
+"use client";
 
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+const formatDate = (dateString) => {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat('id-ID', options).format(date);
+};
+
 export default function ArticleCards({ data, categories }) {
+
+  
     const getCategoryName = (id) => {
         const category = categories.find(category => category.id === id);
         return category ? category.category_name : "Unknown Category";
@@ -22,7 +30,7 @@ export default function ArticleCards({ data, categories }) {
                 <h1 className='font-regular font-montserrat bg-primary px-[12px] py-[9px] text-white rounded-md'>
                   {getCategoryName(data.category_id)}
                 </h1>
-                <h2 className='font-montserrat'>{data.created_at}</h2>
+                <h2 className='font-montserrat text-textPrimary'>{formatDate(data.created_at)}</h2>
               </div>
               <div>
                 <div className='flex flex-col gap-3'>
