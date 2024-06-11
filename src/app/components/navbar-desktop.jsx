@@ -62,13 +62,15 @@ function NavbarDesktop() {
       <div ref={markerRef}></div>
       <nav className={`w-screen px-20 py-[30px] flex items-center fixed z-50 transition-colors duration-300 ${isScrolled ? 'bg-white shadow-sm text-black' : 'bg-transparent text-white'}`}>
         <div className='grid grid-cols-3 w-full items-center'>
-          <Image
-            src={isScrolled ? logoPurple : logowhite}
-            width={120}
-            height={60}
-            className="object-contain"
-            alt="logo ruscare"
-          />
+          <Link href="/">
+            <Image
+              src={isScrolled ? logoPurple : logowhite}
+              width={120}
+              height={60}
+              className="object-contain"
+              alt="logo ruscare"
+            />
+          </Link>
           <ul className="flex text-[16px] font-semibold gap-5 items-center justify-center">
             {data.map((item, index) => (
               <li key={index}>
