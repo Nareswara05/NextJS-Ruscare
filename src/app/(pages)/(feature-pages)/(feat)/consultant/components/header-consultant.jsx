@@ -5,7 +5,7 @@ import DecorationConsultant from './decoratoion-consultant'
 
 const HeaderConsultant = () => {
   return (
-    <div className='w-screen h-[344px] bg-primary flex justify-center items-center relative'>
+    <div className='w-screen h-[380px] bg-primary flex justify-center items-center relative'>
         <div className='w-fit flex flex-col relative'>
             <Image
             src={starYellow}

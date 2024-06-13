@@ -8,7 +8,7 @@ export default async function ConsultantPage()  {
 
   
   return (
-    <div className='bg-white py-24 overflow-x-hidden'>
+    <div className='bg-white pb-24 overflow-x-hidden'>
       <HeaderConsultant/>
       <div className='flex flex-wrap justify-center gap-10 pt-8'>
         {consultants.map((consultant) => (
