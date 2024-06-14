@@ -59,7 +59,7 @@ function LoginForm() {
         
         setTimeout(() => {
           router.push("/dashboard");
-        }, 100);
+        });
       }
     } catch (error) {
       console.error("Terjadi kesalahan saat login:", error);
