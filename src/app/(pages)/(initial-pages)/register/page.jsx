@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { logoPurple } from "@/app/lib/utils/svg";
 import FormLayout from "../components/form-layout";
 
 export default function RegisterPage() {

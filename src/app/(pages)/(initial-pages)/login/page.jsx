@@ -1,10 +1,5 @@
-"use client"
-import React, { useState } from 'react';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'; 
 import { logoPurple } from "@/app/lib/utils/svg";
-import Form from "../components/form";
 import Image from "next/image";
-import Link from "next/link";
 import LoginForm from './form-layout';
 
 export default function LoginPage() {
