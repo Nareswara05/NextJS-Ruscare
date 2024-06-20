@@ -15,11 +15,12 @@ const ArticlePage = () => {
     const [loading, setLoading] = useState(true);
     const searchParams = useSearchParams();
     const category = searchParams.get('category');
+    const search = searchParams.get('search');
 
     useEffect(() => {
         const fetchArticles = async () => {
             setLoading(true);
-            const fetchedArticles = await listArticle(category);
+            const fetchedArticles = await listArticle(category, search);
             setArticles(fetchedArticles);
             setLoading(false);
         };
@@ -31,7 +32,7 @@ const ArticlePage = () => {
 
         fetchArticles();
         fetchCategories();
-    }, [category]);
+    }, [category, search]);
 
     return (
         <div className="bg-white px-16 overflow-x-hidden w-full">
