@@ -71,15 +71,15 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full px-5 lg:px-16">
+    <div className="w-full px-5 lg:px-12">
       <div className="w-full flex flex-col">
         <Image src={logoPurple} width={115} height={50} alt="Logo" />
         <div className="mt-6 font-montserrat text-textPrimary">
-          <div className="font-semibold text-3xl">Masuk</div>
-          <div className="mt-4">Masukkan email dan password Anda untuk masuk</div>
+          <div className="font-semibold text-3xl">Masuk sebagai siswa</div>
+          <div className="mt-4">Masukkan NIS dan password Anda untuk masuk</div>
         </div>
         <div className="flex flex-col font-montserrat w-full mt-16">
-          <h2 className="text-[#252525] text-sm mb-2">Email</h2>
+          <h2 className="text-[#252525] text-sm mb-2">NIS / Email</h2>
           <input
             className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
             type="text"
