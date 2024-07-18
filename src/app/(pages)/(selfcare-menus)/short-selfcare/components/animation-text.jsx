@@ -23,7 +23,7 @@ const AnimationText = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % textData.length);
-        }, 5000); // Change text every 1000ms (1 second)
+        }, 5000); 
 
         return () => clearInterval(interval); // Cleanup on component unmount
     }, [textData.length]);
