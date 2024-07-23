@@ -5,12 +5,6 @@ import Link from 'next/link'
 export default function PsychologicalTesDetail({ data }) {
     return (
         <div className="flex flex-col items-center justify-center gap-8">
-            <Image
-                src={data.image}
-                width={400}
-                height={400}
-                className='object-cover'
-            />
             <div>
                 <h1 className='font-bold text-[36px] text-textPrimary'>{data.title}</h1>
                 <h1 className='font-normal text-[16px] text-textPrimary'>{data.desc_full}</h1>

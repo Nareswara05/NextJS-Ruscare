@@ -19,7 +19,7 @@ export default function CardPsychological({ data }) {
                     <h1 className='text-[12px] text-textPrimary font-normal '>{data.desc}</h1>
                 </div>
             </div>
-            <Link className='w-full' href={`/psychological-test/${data.id}`}>
+            <Link className='w-full' href={`/psychological-test/${data.slug}`}>
                 <button className='w-full py-4 bg-secondary hover:bg-yellow-500 text-[16px] font-semibold text-white rounded-2xl    '>
                     Ikuti Tes
                 </button>
