@@ -25,7 +25,7 @@ const AnimationText = () => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % textData.length);
         }, 5000); 
 
-        return () => clearInterval(interval); // Cleanup on component unmount
+        return () => clearInterval(interval); 
     }, [textData.length]);
 
     return (
