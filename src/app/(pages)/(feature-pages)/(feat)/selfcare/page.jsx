@@ -10,6 +10,7 @@ const SelfcarePage = () => {
       image: AvatarTes,
       title: 'Teknik Relaksasi',
       desc: 'Pelajari berbagai teknik untuk membantu Anda rileks dan mengurangi stres.',
+      link : '/selfcare/short-selfcare'
     },
     {
       id: 2,
