@@ -13,7 +13,7 @@ const PsychologicalHeader = () => {
                     <h1 className='font-bold text-[48px]'>Pertumbuhan Pribadi Dimulai Di Sini</h1>
                     <h1 className='text-[16px] font-normal'>Temukan Jalan Anda Menuju Kesejahteraan Emosional yang Berkelanjutan dan Keseimbangan Hidup yang Memuaskan, Dimulai dengan Langkah Pertama Menuju Pemahaman Diri dan Pengelolaan Emosi yang Sehat.</h1>
                 </div>
-                <div className='text-secondary font-bold flex items-center'>
+                <div className='text-secondary gap-2 font-bold flex items-center'>
                     Coba Sekarang
                     <FaArrowRightLong />
                 </div>
