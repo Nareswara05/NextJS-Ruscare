@@ -8,7 +8,7 @@ function CardCategory({ name, desc, Icon, iconColor, bgColor }) {
             </div>
             <div className='flex flex-col gap-2'>
                 <h1 className='text-textPrimary text-[24px] font-bold'>{name}</h1>
-                <h1 className='opacity-65 font-normal text-textPrimary text-[14px]'>{desc}</h1>
+                <h1 className='opacity-65 font-normal text-textPrimary text-[14px] text-justify'>{desc}</h1>
             </div>
         </div>
     );
