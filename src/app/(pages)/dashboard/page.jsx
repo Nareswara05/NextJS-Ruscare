@@ -4,7 +4,7 @@ import TableConsultation from './common-components/table-consultation'
 
 const page = () => {
   return (
-    <div className='p-16'>
+    <div className='p-16 overflow-scroll'>
         <DashboardStats/>
         <TableConsultation/>
     </div>

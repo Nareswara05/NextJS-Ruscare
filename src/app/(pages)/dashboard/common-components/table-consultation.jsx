@@ -2,7 +2,7 @@
 import { PiClockCountdownLight } from "react-icons/pi";
 import { BsCalendar2Week } from "react-icons/bs";
 import { VscLocation } from "react-icons/vsc";
-
+import Link from "next/link";
 import React, { useState } from 'react';
 
 const TableConsultation = () => {
@@ -66,7 +66,10 @@ const TableConsultation = () => {
 
     return (
         <div className="pt-12">
-            <h1 className="font-semibold text-2xl text-textPrimary mb-4">Konsultasi yang akan datang</h1>
+            <div className="flex justify-between">
+                <h1 className="font-semibold text-2xl text-textPrimary mb-4">Konsultasi yang akan datang</h1>
+                <Link href="/dashboard/history" className="text-primary underline">Lihat Selengkapnya</Link>
+            </div>
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white">
                     <thead>

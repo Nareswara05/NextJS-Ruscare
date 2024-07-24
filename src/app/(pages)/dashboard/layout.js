@@ -9,7 +9,7 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 export default function DashboardLayout({ children }) {
   return (
     <main className={montserrat.className}>
-      <div className="w-full h-screen flex flex-row ">
+      <div className="w-full h-screen fixed flex flex-row ">
         <SidebarProvider>
           <MainSideBar />
           <div className="w-full relative flex flex-col">
