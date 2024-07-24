@@ -10,7 +10,7 @@ export default function PsychologicalTesDetail({ data }) {
                 <h1 className='font-normal text-[16px] text-textPrimary'>{data.desc_full}</h1>
             </div>
             <div className='w-full items-start'>
-                <Link href={`psychological-tes/${data.id}/${data.id}`}>
+                <Link href={`/psychological-test/detail/${data.slug}/question`}>
                     <button className='bg-secondary py-4 px-20 text-[16px] font-semibold text-white rounded-xl'>
                         Ikuti Tes
                     </button>
@@ -19,4 +19,3 @@ export default function PsychologicalTesDetail({ data }) {
         </div>
     )
 }
-

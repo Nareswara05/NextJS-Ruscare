@@ -8,6 +8,8 @@ import student from '../assets/image/studentimg.png'
 import about from '../assets/image/aboutimg.png'
 import students from '../assets/image/student.png'
 import teacher from '../assets/image/teacher.png'
+import mentalPoblems from '../assets/image/mentalProblems.png'
+import goodmental from '../assets/image/goodmental.png'
 
 
 export {
@@ -20,5 +22,7 @@ export {
     student,
     about,
     students,
-    teacher
+    teacher,
+    mentalPoblems,
+    goodmental
 }
