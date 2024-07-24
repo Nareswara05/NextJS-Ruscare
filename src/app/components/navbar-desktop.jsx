@@ -1,8 +1,9 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation'; // Import the usePathname hook
 import { logoPurple, logowhite } from '../lib/utils/svg';
 import NavAuth from './nav-auth';
 import ProfileMenuNav from './profile-nav';
@@ -11,6 +12,7 @@ function NavbarDesktop() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const markerRef = useRef(null);
+  const pathname = usePathname(); // Get the current pathname
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -57,14 +59,21 @@ function NavbarDesktop() {
     },
   ];
 
+  const specialRoutes = [
+    /^\/article/, 
+    /^\/psychological-test\/detail/,
+  ];
+
+  const isSpecialRoute = specialRoutes.some(route => route.test(pathname));
+
   return (
     <>
       <div ref={markerRef}></div>
-      <nav className={`w-screen px-20 py-[30px] flex items-center fixed z-50 transition-colors duration-300 ${isScrolled ? 'bg-white shadow-sm text-black' : 'bg-transparent text-white'}`}>
+      <nav className={`w-screen px-20 py-[30px] flex items-center fixed z-50 transition-colors duration-300 ${isScrolled || isSpecialRoute ? 'bg-white shadow-sm text-black' : 'bg-transparent text-white'}`}>
         <div className='grid grid-cols-3 w-full items-center'>
           <Link href="/">
             <Image
-              src={isScrolled ? logoPurple : logowhite}
+              src={isScrolled || isSpecialRoute ? logoPurple : logowhite}
               width={120}
               height={60}
               className="object-contain"
@@ -87,6 +96,6 @@ function NavbarDesktop() {
       </nav>
     </>
   );
-};
+}
 
 export default NavbarDesktop;
