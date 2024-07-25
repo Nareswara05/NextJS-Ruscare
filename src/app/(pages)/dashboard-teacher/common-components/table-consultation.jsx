@@ -43,6 +43,140 @@ const TableConsultation = () => {
             mentor: "Bu Devyta",
             detail: "Detail tentang Konseling Individual"
         },
+            {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+        {
+            name: "Usep",
+            jurusan: "Animasi",
+            service: "Konseling Individual",
+            category: "Pribadi",
+            date: "12 April 2024",
+            time: "14.00",
+            location: "Lab PPLG",
+            mentor: "Bu Devyta",
+            detail: "Detail tentang Konseling Individual"
+        },
+
+
 
     ];
 
