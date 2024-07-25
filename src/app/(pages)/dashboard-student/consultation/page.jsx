@@ -6,7 +6,7 @@ import RadioButtonService from './components/radio-button-service'
 
 const ConsultationPage = () => {
   return (
-    <div className='px-12 pt-8 bg-white'>
+    <div className='px-12 py-8 bg-white'>
       <h1 className='text-[28px] font-bold text-textPrimary '>Pengajuan Konsultasi</h1>
       <div className='flex flex-col gap-6'>
         <InputName />
