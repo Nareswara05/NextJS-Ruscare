@@ -17,9 +17,9 @@
                 <div className='flex flex-col justify-between  '>
                     <div className='flex flex-col gap-2'>
                         <h1 className='font-semibold text-[20px] text-textPrimary'>{data.title}</h1>
-                        <h3 className='text-base font-[12px] text-textPrimary'>{data.desc}</h3>
+                        <h3 className='text-base font-[12px] text-textPrimary'>{data.description}</h3>
                     </div>
-                    <Link href={`/selfcare/${data.id}`} className='flex gap-1 items-center text-primary'>
+                    <Link href={data.slug} className='flex gap-1 items-center text-primary'>
                         <h1 className='font-semibold'>Coba Sekarang</h1>
                         <IoIosArrowForward />
                     </Link>

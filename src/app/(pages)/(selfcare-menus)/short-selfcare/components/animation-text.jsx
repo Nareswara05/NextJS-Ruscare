@@ -11,7 +11,7 @@ const AnimationText = () => {
         const fetchShortSelfcare = async () => {
             try {
                 const response = await shortSelfcare();
-                setTextData(response.data); // Assuming 'response.data' contains the array of text data
+                setTextData(response.data); 
             } catch (error) {
                 console.error("Error fetching short selfcare data:", error);
             }
