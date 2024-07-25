@@ -17,26 +17,12 @@ export default function MainSideBar() {
     setIsSideBarOpen(!isSideBarOpen);
   };
 
-  const data =[
-    {
-      menu : "Dashboard",
-      pathname : "/"
-    },
-    {
-      menu : "Konsultasi",
-      pathname :"dashboard/konsultasi"
-    },
-    {
-      menu : "Konsultasi",
-      pathname :"dashboard/konsultasi"
-    },
-    
-  ]
+  
 
   return (
     <>
       <div
-      className={`lg:w-[30%] h-full  bg-white flex flex-col border-r-2  ${
+      className={`lg:w-[30%] sticky top-0 h-screen  bg-white flex flex-col border-r-2  ${
         isSideBarOpen ? "flex" : "hidden"
       }`}
     >
@@ -62,7 +48,7 @@ export default function MainSideBar() {
             <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
               <RxDashboard className="mr-4" size={25} />
               <Link
-                href="/dashboard"
+                href="/dashboard-student"
                 className="text-base font-normal"
               >
                 Dashboard
@@ -72,7 +58,7 @@ export default function MainSideBar() {
             <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
               <RiServiceLine  className="mr-4" size={25} />
               <Link
-                href="/dashboard/consultation"
+                href="/dashboard-student/consultation"
                 className="text-base font-normal"
               >
                 Konsultasi
@@ -80,8 +66,8 @@ export default function MainSideBar() {
             </li>
             <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
               <VscHistory className="mr-4" size={25} />
-              <Link href="/dashboard/history" className="text-base font-normal">
-                History
+              <Link href="/dashboard-student/history" className="text-base font-normal">
+                Riwayat
               </Link>
             </li>
             
