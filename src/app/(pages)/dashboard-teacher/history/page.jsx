@@ -3,7 +3,7 @@ import TableHistory from './components/table-history'
 
 const HistoryPage = () => {
   return (
-    <div className='px-12 py-5 bg-white'>
+    <div className='px-12 py-2 bg-white '>
       <TableHistory/>
     </div>
   )
