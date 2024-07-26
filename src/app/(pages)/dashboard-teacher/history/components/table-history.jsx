@@ -40,15 +40,15 @@ const TableHistory = () => {
     const getStatusStyles = (status) => {
         switch (status) {
             case 'akanDatang':
-                return 'bg-[#F4C918] text-[#F4C918] bg-opacity-30 font-medium';
+                return 'bg-[#F4C918] text-center text-[#F4C918] bg-opacity-30 font-medium';
             case 'ditolak':
-                return 'bg-[#FF3797] text-[#FF3797] bg-opacity-30 font-medium';
+                return 'bg-[#FF3797] text-center text-[#FF3797] bg-opacity-30 font-medium';
             case 'diterima':
-                return 'bg-[#3AAC75] text-[#3AAC75] bg-opacity-30 font-medium';
+                return 'bg-[#3AAC75] text-center text-[#3AAC75] bg-opacity-30 font-medium';
             case 'pending':
-                return 'bg-[#8280FF] text-[#8280FF] bg-opacity-30 font-medium';
+                return 'bg-[#8280FF] text-center text-[#8280FF] bg-opacity-30 font-medium';
             case 'reschedule':
-                return 'bg-[#9F41EA] text-[#9F41EA] bg-opacity-30 font-medium';
+                return 'bg-[#9F41EA] text-center text-[#9F41EA] bg-opacity-30 font-medium';
             default:
                 return '';
         }
@@ -80,14 +80,14 @@ const TableHistory = () => {
 
     return (
         <div>
-            <div className="flex gap-4 mb-4">
-                <input
+            <input
                     type="text"
                     placeholder="Cari Nama"
                     value={searchName}
                     onChange={(e) => setSearchName(e.target.value)}
-                    className="border p-2 rounded w-full text-textPrimary"
+                    className="border p-2 my-3 rounded w-full text-textPrimary"
                 />
+            <div className="flex gap-4 mb-4">
                 <select
                     value={filterService}
                     onChange={(e) => setFilterService(e.target.value)}
