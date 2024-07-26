@@ -14,7 +14,7 @@ export default function DashboardLayout({ children }) {
           <MainSideBar />
           <div className="w-full relative flex flex-col ">
             <MainHeader />
-            <main className="w-full  bg-white ">{children}</main>
+            <main className="w-full min-h-screen  bg-white ">{children}</main>
           </div>
         </SidebarProvider>
       </div>
