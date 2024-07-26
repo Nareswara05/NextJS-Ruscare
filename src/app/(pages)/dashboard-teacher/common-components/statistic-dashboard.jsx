@@ -7,6 +7,9 @@ import { RxCross2 } from 'react-icons/rx';
 import TableConsultation from './table-consultation';
 import data from './data';
 import { AiOutlineClockCircle } from 'react-icons/ai';
+import { IoCalendarClearOutline } from 'react-icons/io5';
+import { TbCalendarClock } from "react-icons/tb";
+
 
 const getCountByStatus = (status) => {
   return data.filter(item => item.status === status).length;
@@ -15,7 +18,7 @@ const getCountByStatus = (status) => {
 const statsData = [
   {
     id: 1,
-    title: 'Yang ingin berkonsultasi',
+    title: 'Pending',
     count: getCountByStatus('pending'),
     color: '#8280FF',
     icon: <HiOutlineUserGroup />,
@@ -44,6 +47,14 @@ const statsData = [
     color: '#FF3797',
     icon: <RxCross2 />,
     status: 'ditolak',
+  },
+  {
+    id: 5,
+    title: 'Jadwal Ulang',
+    count: getCountByStatus('reschedule'),
+    color: '#9F41EA',
+    icon: <TbCalendarClock />,
+    status: 'reschedule',
   },
 ];
 
