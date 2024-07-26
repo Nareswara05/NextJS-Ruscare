@@ -21,7 +21,7 @@ const data = [
       location: "Ruang 101",
       mentor: "Pak Budi",
       detail: "Detail tentang Konseling Kelompok",
-      status: "ditolak"
+      status: "pending"
     },
     {
       name: "Budi",

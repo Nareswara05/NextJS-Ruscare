@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { PiClockCountdownLight } from "react-icons/pi";
 import { BsCalendar2Week } from "react-icons/bs";
 import { VscLocation } from "react-icons/vsc";
+import { IoMdCheckmark, IoMdMail, IoMdEye } from 'react-icons/io';
+import { RxCross2 } from 'react-icons/rx';
 import Link from "next/link";
 import data from './data';  
 
@@ -18,7 +20,7 @@ const TableConsultation = ({ status, title }) => {
     { title: "Kategori" },
     { title: "Tanggal" },
     { title: "Waktu" },
-    { title: "" },
+    { title: "Aksi" },
   ];
 
   const openModal = (item) => {
@@ -55,13 +57,28 @@ const TableConsultation = ({ status, title }) => {
                 <td className="py-4 px-4">{item.category}</td>
                 <td className="py-4 px-4">{item.date}</td>
                 <td className="py-4 px-4">{item.time}</td>
-                <td className="py-4 px-4">
+                <td className="py-4 px-4 flex gap-2">
                   <button
-                    className="text-blue-500 hover:underline"
+                    className="text-blue-500 hover:text-blue-700"
                     onClick={() => openModal(item)}
                   >
-                    Detail
+                    <IoMdEye size={24} />
                   </button>
+                  {status === 'pending' && (
+                    <>
+                      <button className="text-green-500 hover:text-green-700">
+                        <IoMdCheckmark size={24} />
+                      </button>
+                      <button className="text-red-500 hover:text-red-700">
+                        <RxCross2 size={24} />
+                      </button>
+                    </>
+                  )}
+                  {(status === 'pending' || status === 'diterima' || status === 'akanDatang') && (
+                    <button className="text-blue-500 hover:text-blue-700">
+                      <IoMdMail size={24} />
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
@@ -71,7 +88,7 @@ const TableConsultation = ({ status, title }) => {
 
       {isModalOpen && selectedData && (
         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black bg-opacity-50 text-textPrimary">
-          <div className="bg-white p-8 rounded-lg w-96">
+          <div className="bg-white p-8 rounded-lg w-fit">
             <h2 className="text-2xl font-semibold mb-4">Detail Konsultasi</h2>
             <div className="flex flex-row gap-6 items-center ">
               <div className="flex gap-2 text-textPrimary">
@@ -89,7 +106,7 @@ const TableConsultation = ({ status, title }) => {
               </div>
               <hr className="border-textPrimary border-1 w-4 rotate-90" />
               <div className="flex gap-2 text-textPrimary">
-                <div className="text-2xl">
+                <div className="text-3xl">
                   <VscLocation />
                 </div>
                 <h2 className="font-semibold text-[16px] ">{selectedData.location}</h2>
@@ -103,7 +120,7 @@ const TableConsultation = ({ status, title }) => {
               <p><strong>Mentor : </strong> {selectedData.mentor}</p>
             </div>
             <button
-              className="mt-8 w-full py-2 font-bold bg-primary text-white rounded-lg hover:bg-purple-600"
+              className="mt-8 w-full py-4 font-bold bg-primary text-white rounded-lg hover:bg-purple-600"
               onClick={closeModal}
             >
               Tutup
