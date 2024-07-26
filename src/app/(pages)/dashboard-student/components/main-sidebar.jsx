@@ -22,7 +22,7 @@ export default function MainSideBar() {
   return (
     <>
       <div
-      className={`lg:w-[30%] sticky top-0 h-screen  bg-white flex flex-col border-r-2  ${
+      className={`lg:w-[30%] sticky top-0 h-screen bg-white flex flex-col border-r-2  ${
         isSideBarOpen ? "flex" : "hidden"
       }`}
     >
