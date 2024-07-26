@@ -6,6 +6,7 @@ import { useSidebar } from "./SidebarContext";
 import { logoPurple } from "@/app/lib/utils/svg";
 import { RiServiceLine } from "react-icons/ri";
 import { VscHistory } from "react-icons/vsc";
+import { PiStudent } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
 
 
@@ -56,12 +57,12 @@ export default function MainSideBar() {
             </li>
 
             <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
-              <RiServiceLine  className="mr-4" size={25} />
+              <PiStudent  className="mr-4" size={25} />
               <Link
-                href="/dashboard-teacher/consultation"
+                href="/dashboard-teacher/student-list"
                 className="text-base font-normal"
               >
-                Konsultasi
+                List Murid
               </Link>
             </li>
             <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
