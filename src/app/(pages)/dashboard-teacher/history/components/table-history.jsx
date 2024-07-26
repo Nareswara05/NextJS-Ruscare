@@ -1,118 +1,136 @@
-"use client"
-import { useState } from 'react';
+"use client";
+import { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import React from 'react';
+import data from '../../common-components/data';
+import listService from '@/app/lib/service/endpoint/api/list-service';
+import listCategory from '@/app/lib/service/endpoint/api/list-category';
+
 
 const TableHistory = () => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [searchName, setSearchName] = useState('');
+    const [filterCategory, setFilterCategory] = useState('');
+    const [filterStatus, setFilterStatus] = useState('');
+    const [filterDate, setFilterDate] = useState('');
+    const [filterService, setFilterService] = useState('');
+    const [services, setServices] = useState([]);
+    const [categories, setCategories] = useState([]);
     const pageSize = 8;
 
-    const lisData = [
-        {
-            service: "Bimbingan Kelompok",
-            status: "Akan Datang",
-            category: "Pribadi",
-            mentor: "Dr. Andi Wijaya",
-            dateTime: "2024-05-14 09:00"
-        },
-        {
-            service: "Layanan Klasikan",
-            status: "Selesai",
-            category: "Belajar",
-            mentor: "Bu Siti Rahmawati",
-            dateTime: "2024-05-10 10:00"
-        },
-        {
-            service: "Konseling Individual",
-            status: "Dibatalkan",
-            category: "Karir",
-            mentor: "Pak Budi Santoso",
-            dateTime: "2024-05-09 14:00"
-        },
-        {
-            service: "Konseling Kelompok",
-            status: "Akan Datang",
-            category: "Sosial",
-            mentor: "Dr. Rina Hartono",
-            dateTime: "2024-05-18 16:00"
-        },
-        {
-            service: "Layanan Konsultasi",
-            status: "Selesai",
-            category: "Pribadi",
-            mentor: "Bu Nurul Fajri",
-            dateTime: "2024-05-12 11:00"
-        },
-        {
-            service: "Bimbingan Kelompok",
-            status: "Akan Datang",
-            category: "Sosial",
-            mentor: "Dr. Yusuf Hidayat",
-            dateTime: "2024-05-20 13:00"
-        },
-        {
-            service: "Layanan Klasikan",
-            status: "Selesai",
-            category: "Karir",
-            mentor: "Pak Rahmat Hidayat",
-            dateTime: "2024-05-08 09:30"
-        },
-        {
-            service: "Konseling Individual",
-            status: "Akan Datang",
-            category: "Pribadi",
-            mentor: "Bu Anita Sari",
-            dateTime: "2024-05-21 15:00"
-        },
-        {
-            service: "Konseling Kelompok",
-            status: "Dibatalkan",
-            category: "Belajar",
-            mentor: "Pak Agus Prasetyo",
-            dateTime: "2024-05-05 10:00"
-        },
-        {
-            service: "Layanan Konsultasi",
-            status: "Akan Datang",
-            category: "Karir",
-            mentor: "Bu Dian Lestari",
-            dateTime: "2024-05-22 14:30"
-        }
-    ];
+    useEffect(() => {
+        const fetchServicesAndCategories = async () => {
+            const servicesData = await listService();
+            const categoriesData = await listCategory();
+            setServices(servicesData);
+            setCategories(categoriesData);
+        };
+
+        fetchServicesAndCategories();
+    }, []);
 
     const tableHead = [
+        { menu: 'Nama' },
         { menu: 'Layanan' },
         { menu: 'Kategori' },
-        { menu: 'Mentor' },
         { menu: 'Status' },
-        { menu: 'Tanggal dan Waktu' },
+        { menu: 'Tanggal' },
     ];
 
     const getStatusStyles = (status) => {
         switch (status) {
-            case 'Akan Datang':
-                return 'bg-blue-100 text-blue-800 font-medium';
-            case 'Selesai':
-                return 'bg-green-100 text-green-800 font-medium';
-            case 'Dibatalkan':
-                return 'bg-red-100 text-red-800 font-medium';
+            case 'akanDatang':
+                return 'bg-[#F4C918] text-[#F4C918] bg-opacity-30 font-medium';
+            case 'ditolak':
+                return 'bg-[#FF3797] text-[#FF3797] bg-opacity-30 font-medium';
+            case 'diterima':
+                return 'bg-[#3AAC75] text-[#3AAC75] bg-opacity-30 font-medium';
+            case 'pending':
+                return 'bg-[#8280FF] text-[#8280FF] bg-opacity-30 font-medium';
+            case 'reschedule':
+                return 'bg-[#9F41EA] text-[#9F41EA] bg-opacity-30 font-medium';
             default:
                 return '';
         }
     };
 
-    const getPaginatedData = (data) => { // Replace 'data' with your actual data array
+    const getFilteredData = () => {
+        return data.filter((item) => {
+            return (
+                item.name.toLowerCase().includes(searchName.toLowerCase()) &&
+                (filterCategory === '' || item.category === filterCategory) &&
+                (filterStatus === '' || item.status === filterStatus) &&
+                (filterDate === '' || item.date === filterDate) &&
+                (filterService === '' || item.service === filterService)
+            );
+        });
+    };
+
+    const getPaginatedData = (filteredData) => {
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
-        return data.slice(startIndex, endIndex);
+        return filteredData.slice(startIndex, endIndex);
     };
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
     };
 
+    const filteredData = getFilteredData();
+
     return (
         <div>
+            <div className="flex gap-4 mb-4">
+                <input
+                    type="text"
+                    placeholder="Cari Nama"
+                    value={searchName}
+                    onChange={(e) => setSearchName(e.target.value)}
+                    className="border p-2 rounded w-full text-textPrimary"
+                />
+                <select
+                    value={filterService}
+                    onChange={(e) => setFilterService(e.target.value)}
+                    className="border p-2 rounded w-full text-textPrimary"
+                >
+                    <option value="">Semua Layanan</option>
+                    {services.map((service) => (
+                        <option key={service.id} value={service.name} >
+                            {service.name}
+                        </option>
+                    ))}
+                </select>
+                <select
+                    value={filterCategory}
+                    onChange={(e) => setFilterCategory(e.target.value)}
+                    className="border p-2 rounded w-full text-textPrimary"
+                >
+                    <option value="">Semua Kategori</option>
+                    {categories.map((category) => (
+                        <option key={category.id} value={category.name}>
+                            {category.name}
+                        </option>
+                    ))}
+                </select>
+                <select
+                    value={filterStatus}
+                    onChange={(e) => setFilterStatus(e.target.value)}
+                    className="border p-2 rounded w-full text-textPrimary"
+                >
+                    <option value="">Semua Status</option>
+                    <option value="akanDatang">Akan Datang</option>
+                    <option value="ditolak">Ditolak</option>
+                    <option value="diterima">Diterima</option>
+                    <option value="pending">Pending</option>
+                    <option value="reschedule">Reschedule</option>
+                </select>
+                <input
+                    type="date"
+                    value={filterDate}
+                    onChange={(e) => setFilterDate(e.target.value)}
+                    className="border p-2 rounded w-full text-textPrimary"
+                />
+            </div>
             <table className="min-w-full bg-white">
                 <thead>
                     <tr>
@@ -127,13 +145,13 @@ const TableHistory = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {getPaginatedData(lisData).map((item, index) => (
+                    {getPaginatedData(filteredData).map((item, index) => (
                         <tr key={index} className="border-b border-gray-200 text-sm text-textPrimary">
+                            <td className="py-4 px-4">{item.name}</td>
                             <td className="py-4 px-4">{item.service}</td>
                             <td className="py-4 px-4">{item.category}</td>
-                            <td className="py-4 px-4">{item.mentor}</td>
                             <td className={`px-4 py-4 font-semibold ${getStatusStyles(item.status)}`}>{item.status}</td>
-                            <td className="py-4 px-4">{item.dateTime}</td>
+                            <td className="py-4 px-4">{item.date}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -147,18 +165,17 @@ const TableHistory = () => {
                     <FaChevronLeft />
                 </button>
                 <span className="text-gray-700 py-2 px-4">
-                    Halaman {currentPage} dari {Math.ceil(lisData.length / pageSize)}
+                    Halaman {currentPage} dari {Math.ceil(filteredData.length / pageSize)}
                 </span>
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === Math.ceil(lisData.length / pageSize)}
+                    disabled={currentPage === Math.ceil(filteredData.length / pageSize)}
                     className="bg-primary hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-r"
                 >
                     <FaChevronRight />
                 </button>
-
             </div>
-        </div >
+        </div>
     );
 };
 
