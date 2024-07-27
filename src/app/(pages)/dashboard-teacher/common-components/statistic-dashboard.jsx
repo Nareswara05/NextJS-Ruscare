@@ -18,7 +18,7 @@ const getCountByStatus = (status) => {
 const statsData = [
   {
     id: 1,
-    title: 'Pending',
+    title: 'Menunggu Konfirmasi',
     count: getCountByStatus('pending'),
     color: '#8280FF',
     icon: <HiOutlineUserGroup />,
@@ -26,11 +26,11 @@ const statsData = [
   },
   {
     id: 2,
-    title: 'Telah Diterima',
-    count: getCountByStatus('diterima'),
+    title: 'Telah Selesai',
+    count: getCountByStatus('selesai'),
     color: '#3AAC75',
     icon: <IoMdCheckmark />,
-    status: 'diterima',
+    status: 'selesai',
   },
   {
     id: 3,
