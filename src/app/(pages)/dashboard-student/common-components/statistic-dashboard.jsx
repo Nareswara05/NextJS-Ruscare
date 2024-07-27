@@ -5,9 +5,9 @@ import { HiOutlineUserGroup } from "react-icons/hi2";
 import { IoMdCheckmark } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import TableConsultation from './table-consultation';
-import data from './data';
+import data from '../../dashboard-teacher/common-components/data';
 import { AiOutlineClockCircle } from 'react-icons/ai';
-import { IoCalendarClearOutline } from 'react-icons/io5';
+import { IoCalendarClearOutline, IoCheckmarkDone } from 'react-icons/io5';
 import { TbCalendarClock } from "react-icons/tb";
 import { MdEvent, MdHourglassEmpty } from 'react-icons/md';
 import { RiCalendarScheduleLine, RiServiceLine } from 'react-icons/ri';
@@ -30,26 +30,26 @@ const statsData = [
   {
     id: 2,
     title: 'Telah Selesai',
-    count: getCountByStatus('selesai'),
+    count: getCountByStatus('done'),
     color: '#3AAC75',
-    icon: <IoMdCheckmark />,
-    status: 'selesai',
+    icon: <IoCheckmarkDone />,
+    status: 'done',
   },
   {
     id: 3,
     title: 'Akan Datang',
-    count: getCountByStatus('akanDatang'),
+    count: getCountByStatus('upcoming'),
     color: '#F4C918',
     icon: <AiOutlineClockCircle />,
-    status: 'akanDatang',
+    status: 'upcoming',
   },
   {
     id: 4,
     title: 'Telah Ditolak',
-    count: getCountByStatus('ditolak'),
+    count: getCountByStatus('rejected'),
     color: '#FF3797',
     icon: <RxCross2 />,
-    status: 'ditolak',
+    status: 'rejected',
   },
   {
     id: 5,
@@ -73,8 +73,8 @@ const DashboardStats = () => {
       <div className='flex justify-between items-center'>
         <h1 className='text-[24px] text-textPrimary font-bold'>Statistik Konsultasi</h1>
         <Link href="dashboard-student/consultation">
-          <button className="flex gap-2 bg-primary py-3 px-4 rounded-lg items-center justify-center hover:bg-purple-600">
-            <RiServiceLine size={30} />
+          <button className=" text-lg font-medium flex gap-2 bg-primary py-3 px-4 rounded-lg items-center justify-center hover:bg-purple-600">
+            <RiServiceLine />
             Konsultasi baru
           </button>
         </Link>
@@ -83,7 +83,7 @@ const DashboardStats = () => {
         {statsData.map((stat) => (
           <div
             key={stat.id}
-            className={`flex w-full justify-between p-4 bg-white shadow-custom rounded-lg cursor-pointer ${selectedStat?.id === stat.id ? 'ring-2 ring-primary' : ''}`}
+            className={`flex w-full justify-between hover:scale-110 transition-transform duration-400 p-4 bg-white shadow-custom rounded-lg cursor-pointer ${selectedStat?.id === stat.id ? 'ring-2 ring-primary' : ''}`}
             onClick={() => handleChipClick(stat)}
           >
             <div className='flex flex-col gap-4'>

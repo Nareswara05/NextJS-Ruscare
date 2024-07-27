@@ -39,11 +39,11 @@ const TableHistory = () => {
 
     const getStatusStyles = (status) => {
         switch (status) {
-            case 'akanDatang':
+            case 'upcoming':
                 return 'bg-[#F4C918] text-center text-[#F4C918] bg-opacity-30 font-medium';
-            case 'ditolak':
+            case 'rejected':
                 return 'bg-[#FF3797] text-center text-[#FF3797] bg-opacity-30 font-medium';
-            case 'diterima':
+            case 'done':
                 return 'bg-[#3AAC75] text-center text-[#3AAC75] bg-opacity-30 font-medium';
             case 'pending':
                 return 'bg-[#8280FF] text-center text-[#8280FF] bg-opacity-30 font-medium';

@@ -8,6 +8,7 @@ import { IoIosLogOut } from "react-icons/io";
 import Link from 'next/link';
 import Logout from '@/app/lib/service/endpoint/auth/logout';
 import Swal from 'sweetalert2';
+import { CiLogout } from 'react-icons/ci';
 
 const MenuProfileDashboard = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,7 +75,7 @@ const MenuProfileDashboard = () => {
                         <li onClick={confirmLogout} className=' cursor-pointer flex  gap-3 w-full text-red-600 hover:bg-gray-100 p-[10px] rounded-lg'>
                             <div className='flex gap-3 items-center'>
                                 <div className='text-xl'>
-                                    <IoIosLogOut />
+                                    <CiLogout />
                                 </div>
                                 Logout
                             </div>
