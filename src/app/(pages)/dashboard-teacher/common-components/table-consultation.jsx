@@ -59,24 +59,24 @@ const TableConsultation = ({ status, title }) => {
                                 <td className="py-4 px-4">{item.date}</td>
                                 <td className="py-4 px-4">{item.time}</td>
                                 <td className="py-4 px-4 flex gap-2">
-                                    <button
-                                        className="text-secondary hover:text-yellow-500"
+                                <button
+                                        className="text-secondary hover:text-yellow-500 bg-yellow-500 bg-opacity-20 hover:bg-yellow-700 hover:bg-opacity-20 p-2 rounded-lg"
                                         onClick={() => openModal(item)}
                                     >
                                         <IoMdEye size={24} />
                                     </button>
                                     {status === 'pending' && (
                                         <>
-                                            <button className="text-green-500 hover:text-green-700">
+                                            <button className="text-green-500 bg-green-500 bg-opacity-20 rounded-lg p-2 hover:bg-green-700 hover:bg-opacity-20 hover:text-green-700">
                                                 <IoMdCheckmark size={24} />
                                             </button>
-                                            <button className="text-red-500 hover:text-red-700">
-                                                <RxCross2 size={24} />
-                                            </button>
+                                            <button className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg">
+                                            <RxCross2 size={24} />
+                                        </button>
                                         </>
                                     )}
                                     {(status === 'pending' || status === 'diterima' || status === 'akanDatang' || status==='reschedule') && (
-                                        <button className="text-blue-500 hover:text-blue-700">
+                                        <button className="text-blue-500 p-2 bg-blue-500 bg-opacity-20 rounded-lg hover:bg-blue-700 hover:bg-opacity-20 hover:text-blue-700">
                                             <IoMdMail size={24} />
                                         </button>
                                     )}
