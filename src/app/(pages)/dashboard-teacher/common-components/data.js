@@ -9,7 +9,7 @@ const data = [
         location: "Lab PPLG",
         mentor: "Bu Devyta",
         detail: "Detail tentang Konseling Individual",
-        status: "ditolak"
+        status: "rejected"
     },
     {
         name: "Ani",
@@ -33,7 +33,7 @@ const data = [
         location: "Zoom",
         mentor: "Ibu Siti",
         detail: "Detail tentang Konseling Online",
-        status: "diterima"
+        status: "done"
     },
         {
             "name": "Ronald",
@@ -45,7 +45,7 @@ const data = [
             "location": "Ruang 101",
             "mentor": "Pak Budi",
             "detail": "Sense step president range.",
-            "status": "ditolak"
+            "status": "rejected"
         },
         {
             "name": "Jennifer",
@@ -57,7 +57,7 @@ const data = [
             "location": "Ruang 101",
             "mentor": "Ibu Siti",
             "detail": "Heavy every cut near want.",
-            "status": "ditolak"
+            "status": "rejected"
         },
         {
             "name": "Victor",
@@ -81,7 +81,7 @@ const data = [
             "location": "Ruang 101",
             "mentor": "Ibu Siti",
             "detail": "Left deal month old. Whose protect gas.",
-            "status": "diterima"
+            "status": "done"
         },
         {
             "name": "Matthew",
@@ -117,7 +117,7 @@ const data = [
             "location": "Ruang 101",
             "mentor": "Bu Devyta",
             "detail": "Win young relationship drop force answer.",
-            "status": "diterima"
+            "status": "done"
         },
         {
             "name": "Nathan",
@@ -129,7 +129,7 @@ const data = [
             "location": "Zoom",
             "mentor": "Ibu Siti",
             "detail": "Decide nature deep else friend.",
-            "status": "ditolak"
+            "status": "rejected"
         },
         {
             "name": "Madison",
@@ -141,7 +141,7 @@ const data = [
             "location": "Lab PPLG",
             "mentor": "Ibu Siti",
             "detail": "Cover play rock wind land factor later.",
-            "status": "diterima"
+            "status": "done"
         },
         {
             "name": "Kathryn",
@@ -165,7 +165,7 @@ const data = [
             "location": "Zoom",
             "mentor": "Pak Budi",
             "detail": "Without strategy how what rich thought.",
-            "status": "akanDatang"
+            "status": "upcoming"
         },
         {
             "name": "Clayton",

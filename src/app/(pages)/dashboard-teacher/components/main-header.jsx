@@ -20,11 +20,11 @@ export default function MainHeader() {
   const pathname = usePathname();
   const getPageTitle = () => {
     switch (pathname) {
-      case "/dashboard-student":
+      case "/dashboard-teacher":
         return "Dashboard";
-      case "/dashboard-student/consultation":
-        return "Pengajuan Konsultasi";
-      case "/dashboard-student/history":
+      case "/dashboard-teacher/student-list":
+        return "List Siswa";
+      case "/dashboard-teacher/history":
         return "Riwayat Konsultasi";
       default:
         return "";

@@ -8,7 +8,7 @@ import { IoMdCheckmark, IoMdMail, IoMdEye } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import Link from "next/link";
 import { HiCalendarDays } from "react-icons/hi2";
-import data from './data';
+import data from '../../dashboard-teacher/common-components/data';
 
 const TableConsultation = ({ status, title }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,11 +62,12 @@ const TableConsultation = ({ status, title }) => {
                                     <button
                                         className="text-secondary hover:text-yellow-500 bg-yellow-500 bg-opacity-20 hover:bg-yellow-700 hover:bg-opacity-20 p-2 rounded-lg"
                                         onClick={() => openModal(item)}
+                                        title="View Detail"
                                     >
                                         <IoMdEye size={24} />
                                     </button>
                                     {(status === 'pending' || status === 'diterima' || status === 'akanDatang' || status==='reschedule') && (
-                                        <button className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg">
+                                        <button title='Cancel' className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg">
                                             <RxCross2 size={24} />
                                         </button>
                                     )}
