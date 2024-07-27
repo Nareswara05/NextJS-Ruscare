@@ -1,191 +1,27 @@
 "use client"
+
+import React, { useState } from 'react';
 import { PiClockCountdownLight } from "react-icons/pi";
 import { BsCalendar2Week } from "react-icons/bs";
 import { VscLocation } from "react-icons/vsc";
+import { IoMdCheckmark, IoMdMail, IoMdEye } from 'react-icons/io';
+import { RxCross2 } from 'react-icons/rx';
 import Link from "next/link";
-import React, { useState } from 'react';
+import { HiCalendarDays } from "react-icons/hi2";
+import data from './data';
 
-const TableConsultation = () => {
+const TableConsultation = ({ status, title }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
 
-    const data = [
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-            {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-        {
-            name: "Usep",
-            jurusan: "Animasi",
-            service: "Konseling Individual",
-            category: "Pribadi",
-            date: "12 April 2024",
-            time: "14.00",
-            location: "Lab PPLG",
-            mentor: "Bu Devyta",
-            detail: "Detail tentang Konseling Individual"
-        },
-
-
-
-    ];
+    const filteredData = data.filter(item => item.status === status);
 
     const tableHead = [
         { title: "Layanan" },
         { title: "Kategori" },
         { title: "Tanggal" },
         { title: "Waktu" },
-        { title: "" },
+        { title: "Aksi" },
     ];
 
     const openModal = (item) => {
@@ -201,7 +37,7 @@ const TableConsultation = () => {
     return (
         <div className="pt-12">
             <div className="flex justify-between">
-                <h1 className="font-semibold text-2xl text-textPrimary mb-4">Konsultasi yang akan datang</h1>
+                <h1 className="font-semibold text-2xl text-textPrimary mb-4">{title}</h1>
                 <Link href="/dashboard/history" className="text-primary underline">Lihat Selengkapnya</Link>
             </div>
             <div className="overflow-x-auto">
@@ -216,19 +52,24 @@ const TableConsultation = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((item, index) => (
+                        {filteredData.map((item, index) => (
                             <tr key={index} className="border-b border-gray-200 text-textPrimary">
                                 <td className="py-4 px-4">{item.service}</td>
                                 <td className="py-4 px-4">{item.category}</td>
                                 <td className="py-4 px-4">{item.date}</td>
                                 <td className="py-4 px-4">{item.time}</td>
-                                <td className="py-4 px-4">
+                                <td className="py-4 px-4 flex gap-2">
                                     <button
-                                        className="text-blue-500 hover:underline"
+                                        className="text-secondary hover:text-yellow-500 bg-yellow-500 bg-opacity-20 hover:bg-yellow-700 hover:bg-opacity-20 p-2 rounded-lg"
                                         onClick={() => openModal(item)}
                                     >
-                                        Detail
+                                        <IoMdEye size={24} />
                                     </button>
+                                    {(status === 'pending' || status === 'diterima' || status === 'akanDatang' || status==='reschedule') && (
+                                        <button className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg">
+                                            <RxCross2 size={24} />
+                                        </button>
+                                    )}
                                 </td>
                             </tr>
                         ))}
@@ -238,7 +79,7 @@ const TableConsultation = () => {
 
             {isModalOpen && selectedData && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black bg-opacity-50 text-textPrimary">
-                    <div className="bg-white p-[50px] rounded-lg w-fit">
+                    <div className="bg-white p-8 rounded-lg w-fit">
                         <h2 className="text-2xl font-semibold mb-4">Detail Konsultasi</h2>
                         <div className="flex flex-row gap-6 items-center ">
                             <div className="flex gap-2 text-textPrimary">
@@ -247,16 +88,16 @@ const TableConsultation = () => {
                                 </div>
                                 <h2 className="font-semibold text-[16px] ">{selectedData.time}</h2>
                             </div>
-                            <hr className="border-textPrimary border-1 w-4 rotate-90 h-" />
+                            <hr className="border-textPrimary border-1 w-4 rotate-90" />
                             <div className="flex gap-2 text-textPrimary">
                                 <div className="text-2xl">
                                     <BsCalendar2Week />
                                 </div>
                                 <h2 className="font-semibold text-[16px] ">{selectedData.date}</h2>
                             </div>
-                            <hr className="border-textPrimary border-1 w-4 rotate-90 h-" />
+                            <hr className="border-textPrimary border-1 w-4 rotate-90" />
                             <div className="flex gap-2 text-textPrimary">
-                                <div className="text-2xl">
+                                <div className="text-3xl">
                                     <VscLocation />
                                 </div>
                                 <h2 className="font-semibold text-[16px] ">{selectedData.location}</h2>
@@ -270,17 +111,16 @@ const TableConsultation = () => {
                             <p><strong>Mentor : </strong> {selectedData.mentor}</p>
                         </div>
                         <button
-                            className="mt-8 w-full py-4 font-bold bg-primary text-white rounded-xl hover:bg-purple-600"
+                            className="mt-8 w-full py-4 font-bold bg-primary text-white rounded-lg hover:bg-purple-600"
                             onClick={closeModal}
                         >
                             Tutup
                         </button>
                     </div>
-                    <div className="w-16 rounded-full bg-primary absolute right-0 bottom-9"></div>
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default TableConsultation;

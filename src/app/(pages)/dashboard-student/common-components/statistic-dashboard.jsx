@@ -1,44 +1,104 @@
-import React from 'react'
-import { BsCalendar2Week } from "react-icons/bs";
-import { PiClockCountdownLight } from "react-icons/pi";
-import { GiCheckMark } from "react-icons/gi";
+"use client"
 
+import React, { useState } from 'react';
+import { HiOutlineUserGroup } from "react-icons/hi2";
+import { IoMdCheckmark } from 'react-icons/io';
+import { RxCross2 } from 'react-icons/rx';
+import TableConsultation from './table-consultation';
+import data from './data';
+import { AiOutlineClockCircle } from 'react-icons/ai';
+import { IoCalendarClearOutline } from 'react-icons/io5';
+import { TbCalendarClock } from "react-icons/tb";
+import { MdEvent, MdHourglassEmpty } from 'react-icons/md';
+import { RiCalendarScheduleLine, RiServiceLine } from 'react-icons/ri';
+import Link from 'next/link';
+
+
+const getCountByStatus = (status) => {
+  return data.filter(item => item.status === status).length;
+};
+
+const statsData = [
+  {
+    id: 1,
+    title: 'Menunggu Konfirmasi',
+    count: getCountByStatus('pending'),
+    color: '#8280FF',
+    icon: <MdHourglassEmpty />,
+    status: 'pending',
+  },
+  {
+    id: 2,
+    title: 'Telah Selesai',
+    count: getCountByStatus('selesai'),
+    color: '#3AAC75',
+    icon: <IoMdCheckmark />,
+    status: 'selesai',
+  },
+  {
+    id: 3,
+    title: 'Akan Datang',
+    count: getCountByStatus('akanDatang'),
+    color: '#F4C918',
+    icon: <AiOutlineClockCircle />,
+    status: 'akanDatang',
+  },
+  {
+    id: 4,
+    title: 'Telah Ditolak',
+    count: getCountByStatus('ditolak'),
+    color: '#FF3797',
+    icon: <RxCross2 />,
+    status: 'ditolak',
+  },
+  {
+    id: 5,
+    title: 'Jadwal Ulang',
+    count: getCountByStatus('reschedule'),
+    color: '#9F41EA',
+    icon: <RiCalendarScheduleLine />,
+    status: 'reschedule',
+  },
+];
 
 const DashboardStats = () => {
-  return (
-    <div className=''>
-        <h1 className='text-[24px] text-textPrimary font-semibold'>Statistik Konsultasi</h1>
-        <div className='flex flex-row gap-3 pt-8'>
-            <div className=' flex w-full justify-between p-4 bg-white shadow-custom rounded-lg'>
-                <div className='flex flex-col gap-4'>
-                    <h2 className='text-[16px] text-[#202224] font-semibold'>Yang Akan Datang</h2>
-                    <h1 className='text-textPrimary text-[28px] font-bold'>3</h1>
-                </div>
-                <div className='p-4 text-[#8280FF] bg-[#8280FF] bg-opacity-20 text-xl h-fit rounded-2xl '>
-                    <BsCalendar2Week />
-                </div>
-            </div>
-            <div className=' flex w-full justify-between p-4 bg-white shadow-custom rounded-lg'>
-                <div className='flex flex-col gap-4'>
-                    <h2 className='text-[16px] text-[#202224] font-semibold'>Sedang Berlangsung</h2>
-                    <h1 className='text-textPrimary text-[28px] font-bold'>3</h1>
-                </div>
-                <div className='p-4 text-[#FF3797] bg-[#FF3797] bg-opacity-20 text-xl h-fit rounded-2xl '>
-                    <PiClockCountdownLight />
-                </div>
-            </div>
-            <div className=' flex w-full justify-between p-4 bg-white shadow-custom rounded-lg'>
-                <div className='flex flex-col gap-4'>
-                    <h2 className='text-[16px] text-[#202224] font-semibold'>Telah Selesai</h2>
-                    <h1 className='text-textPrimary text-[28px] font-bold'>3</h1>
-                </div>
-                <div className='p-4 text-[#3AAC75] bg-[#3AAC75] bg-opacity-20 text-xl h-fit rounded-2xl '>
-                    <GiCheckMark />
-                </div>
-            </div>
-        </div>
-    </div>
-  )
-}
+  const [selectedStat, setSelectedStat] = useState(statsData[0]);
 
-export default DashboardStats
+  const handleChipClick = (stat) => {
+    setSelectedStat(stat);
+  };
+
+  return (
+    <div>
+      <div className='flex justify-between items-center'>
+        <h1 className='text-[24px] text-textPrimary font-bold'>Statistik Konsultasi</h1>
+        <Link href="dashboard-student/consultation">
+          <button className="flex gap-2 bg-primary py-3 px-4 rounded-lg items-center justify-center hover:bg-purple-600">
+            <RiServiceLine size={30} />
+            Konsultasi baru
+          </button>
+        </Link>
+      </div>
+      <div className='flex flex-row gap-3 pt-8'>
+        {statsData.map((stat) => (
+          <div
+            key={stat.id}
+            className={`flex w-full justify-between p-4 bg-white shadow-custom rounded-lg cursor-pointer ${selectedStat?.id === stat.id ? 'ring-2 ring-primary' : ''}`}
+            onClick={() => handleChipClick(stat)}
+          >
+            <div className='flex flex-col gap-4'>
+              <h2 className='text-[16px] text-textPrimary font-semibold'>{stat.title}</h2>
+              <h1 className='text-textPrimary text-[32px] font-bold'>{stat.count}</h1>
+            </div>
+            <div className={`p-4 text-3xl h-fit rounded-2xl`} style={{ color: stat.color, backgroundColor: `${stat.color}33` }}>
+              {stat.icon}
+            </div>
+          </div>
+        ))}
+      </div>
+      {selectedStat && <TableConsultation status={selectedStat.status} title={selectedStat.title} />}
+    </div>
+  );
+};
+
+export default DashboardStats;

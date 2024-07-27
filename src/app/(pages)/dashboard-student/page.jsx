@@ -6,7 +6,6 @@ const page = () => {
   return (
     <div className='bg-white px-16 py-8 overflow-y-hidden'>
         <DashboardStats/>
-        <TableConsultation/>
     </div>
   )
 }
