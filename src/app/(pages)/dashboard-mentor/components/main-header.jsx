@@ -26,6 +26,8 @@ export default function MainHeader() {
         return "List Siswa";
       case "/dashboard-mentor/history":
         return "Riwayat Konsultasi";
+        case "/dashboard-mentor/profile":
+        return "Profil Saya";
       default:
         return "";
     }
