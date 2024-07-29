@@ -8,7 +8,7 @@ import { IoMdCheckmark, IoMdMail, IoMdEye } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import Link from "next/link";
 import { HiCalendarDays } from "react-icons/hi2";
-import data from '../../dashboard-teacher/common-components/data';
+import data from '../../dashboard-mentor/common-components/data';
 
 const TableConsultation = ({ status, title }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);

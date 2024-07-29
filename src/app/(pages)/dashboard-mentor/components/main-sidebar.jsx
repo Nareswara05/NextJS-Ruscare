@@ -8,6 +8,8 @@ import { RiServiceLine } from "react-icons/ri";
 import { VscHistory } from "react-icons/vsc";
 import { PiStudent } from "react-icons/pi";
 import { RxDashboard } from "react-icons/rx";
+import { FaUser } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
 
 
 
@@ -49,7 +51,7 @@ export default function MainSideBar() {
             <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
               <RxDashboard className="mr-4" size={25} />
               <Link
-                href="/dashboard-teacher"
+                href="/dashboard-mentor"
                 className="text-base font-normal"
               >
                 Dashboard
@@ -59,7 +61,7 @@ export default function MainSideBar() {
             <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
               <PiStudent  className="mr-4" size={25} />
               <Link
-                href="/dashboard-teacher/student-list"
+                href="/dashboard-mentor/student-list"
                 className="text-base font-normal"
               >
                 List Murid
@@ -67,11 +69,16 @@ export default function MainSideBar() {
             </li>
             <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
               <VscHistory className="mr-4" size={25} />
-              <Link href="/dashboard-teacher/history" className="text-base font-normal">
+              <Link href="/dashboard-mentor/history" className="text-base font-normal">
                 Riwayat
               </Link>
             </li>
-            
+            <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
+              <FiUser className="mr-4" size={25} />
+              <Link href="/dashboard-mentor/profile" className="text-base font-normal">
+                Profil Saya
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { HiOutlineUserGroup } from "react-icons/hi2";
 import { IoMdCheckmark } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import TableConsultation from './table-consultation';
-import data from '../../dashboard-teacher/common-components/data';
+import data from '../../dashboard-mentor/common-components/data';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { IoCalendarClearOutline, IoCheckmarkDone } from 'react-icons/io5';
 import { TbCalendarClock } from "react-icons/tb";
