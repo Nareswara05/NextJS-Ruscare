@@ -12,7 +12,7 @@ const EditInformationSkill = () => {
     ]
 
     return (
-        <div className='max-w-full mx-auto p-6'>
+        <div className='w-full mx-auto '>
             <div className='border-2 border-gray-200 rounded-xl p-6'>
                 <div className='flex flex-col gap-6'>
                     {title.map((item) => (
