@@ -1,6 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import Image from 'next/image'
+import { AvatarTes } from '@/app/lib/utils/image'
+import { FiEdit } from 'react-icons/fi'
 const DetailInformationMentor = () => {
     const title = [
         {
@@ -38,11 +41,21 @@ const DetailInformationMentor = () => {
     ]
     return (
         <div className='border-2 border-gray-200 rounded-xl p-6'>
+            <div className='flex justify-between pb-4'>
+                <Image
+                    src={AvatarTes}
+                    className="rounded-full w-32 object-cover"
+                />
+                <button className='bg-white py-3 px-4 border-2 flex h-fit items-center gap-2 font-medium text-primary border-primary rounded-lg hover:bg-primary hover:text-white'>
+                    <FiEdit />
+                    Edit Profil
+                </button>
+            </div>
             <h1 className='font-bold text-[22px] text-textPrimary pb-6'>Detail Informasi Saya</h1>
             <div className='flex gap-6'>
                 <div className='flex flex-col gap-2'>
                     {title.map((item) => (
-                    <h1 className='text-textPrimary font-semibold ' >{item.title} </h1>
+                        <h1 className='text-textPrimary font-semibold ' >{item.title} </h1>
                     ))}
                 </div>
                 <div className='flex flex-col gap-2'>
