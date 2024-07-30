@@ -14,7 +14,7 @@ const EditInformationSocialMedia = () => {
     ]
 
     return (
-        <div className='max-w-full mx-auto p-6'>
+        <div className='w-full mx-auto '>
             <div className='border-2 border-gray-200 rounded-xl p-6'>
                 <h1 className='font-bold text-2xl text-textPrimary pb-6'>Edit Sosial Media Saya</h1>
                 <div className='flex flex-col gap-6'>
