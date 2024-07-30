@@ -14,7 +14,6 @@ const EditInformationMentor = () => {
         { id: 5, title: "Asal Universitas" },
         { id: 6, title: "Pendidikan Terakhir" },
         { id: 7, title: "Umur" },
-        { id: 8, title: "Sosial Media" }
     ]
 
     return (
