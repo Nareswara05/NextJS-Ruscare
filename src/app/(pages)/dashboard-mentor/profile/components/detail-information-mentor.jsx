@@ -46,10 +46,12 @@ const DetailInformationMentor = () => {
                     src={AvatarTes}
                     className="rounded-full w-32 object-cover"
                 />
-                <button className='bg-white py-3 px-4 border-2 flex h-fit items-center gap-2 font-medium text-primary border-primary rounded-lg hover:bg-primary hover:text-white'>
-                    <FiEdit />
-                    Edit Profil
-                </button>
+                <Link href="profile/edit-profile">
+                    <button className='bg-white py-3 px-4 border-2 flex h-fit items-center gap-2 font-medium text-primary border-primary rounded-lg hover:bg-primary hover:text-white'>
+                        <FiEdit />
+                        Edit Profil
+                    </button>
+                </Link>
             </div>
             <h1 className='font-bold text-[22px] text-textPrimary pb-6'>Detail Informasi Saya</h1>
             <div className='flex gap-6'>
