@@ -1,8 +1,8 @@
 import instance from "../../instance/instance";
 
-export default async function loginStudent({ nis ,email, password }) {
+export default async function loginStudent({ nis_or_email, password }) {
     try {
-        const response = await instance.post('student/login-student', { email, password });
+        const response = await instance.post('student/login-student', { nis_or_email, password });
     
         if (response.status !== 200) {
         throw new Error(`API call failed with status: ${response.status}`);

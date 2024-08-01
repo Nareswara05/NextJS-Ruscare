@@ -68,11 +68,11 @@ const Profile = () => {
           </div>
           <div className='flex justify-between'>
             <h1 className='font-semibold text-[16px] text-textPrimary'>Tanggal Lahir</h1>
-            <h1 className='font-bold text-[16px] text-textPrimary'>{userData.birthDate}</h1>
+            <h1 className='font-bold text-[16px] text-textPrimary'>{userData.birth_date}</h1>
           </div>
           <div className='flex justify-between'>
             <h1 className='font-semibold text-[16px] text-textPrimary'>Jurusan</h1>
-            <h1 className='font-bold text-[16px] text-textPrimary'>{userData.major}</h1>
+            <h1 className='font-bold text-[16px] text-textPrimary'>{userData.grade_id}</h1>
           </div>
           <div className='flex justify-between'>
             <h1 className='font-semibold text-[16px] text-textPrimary'>NIS</h1>
