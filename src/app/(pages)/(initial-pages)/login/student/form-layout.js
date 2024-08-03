@@ -8,7 +8,7 @@ import { logoPurple } from "@/app/lib/utils/svg";
 import { useRouter } from "next/navigation";
 import loginStudent from "@/app/lib/service/endpoint/auth/login-student";
 
-function LoginForm() {
+function LoginStudent() {
   const [nis_or_email, setNis_or_email] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -147,4 +147,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default LoginStudent;
