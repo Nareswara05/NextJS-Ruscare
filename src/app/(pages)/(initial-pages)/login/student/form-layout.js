@@ -5,14 +5,14 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Image from "next/image";
 import Link from "next/link";
 import { logoPurple } from "@/app/lib/utils/svg";
-import login from "@/app/lib/service/endpoint/auth/login";
 import { useRouter } from "next/navigation";
+import loginStudent from "@/app/lib/service/endpoint/auth/login-student";
 
-function LoginForm() {
-  const [email, setEmail] = useState("");
+function LoginStudent() {
+  const [nis_or_email, setNis_or_email] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [nisOrEmailError, setNisOrEmailError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -21,35 +21,43 @@ function LoginForm() {
     setShowPassword(!showPassword);
   };
 
-  const isEmailValid = (email) => {
+  const validateNisOrEmail = (value) => {
+    const nisPattern = /^\d+$/;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
+
+    if (nisPattern.test(value) || emailPattern.test(value)) {
+      setNisOrEmailError("");
+      return true;
+    } else {
+      setNisOrEmailError("Masukkan NIS yang valid atau email yang benar.");
+      return false;
+    }
   };
 
   const handleLogin = async () => {
-    if (!email || !password) {
-      alert("Semua input harus diisi!");
+    if (!nis_or_email || !password) {
+      if (!nis_or_email) {
+        setNisOrEmailError("NIS atau Email harus diisi.");
+      }
+      if (!password) {
+        setPasswordError("Password harus diisi.");
+      }
       return;
     }
 
-    if (!isEmailValid(email)) {
-      setEmailError("Format email tidak valid!");
+    if (!validateNisOrEmail(nis_or_email)) {
       return;
-    } else {
-      setEmailError("");
     }
 
     setIsLoading(true);
 
     try {
-      const response = await login({ email, password });
+      const response = await loginStudent({ nis_or_email, password });
 
       if (response.status === 422) {
-        if (response.message === "Invalid credential") {
+        if (response.message === "NIS / email atau Password salah") {
           setPasswordError("Terjadi kesalahan pada saat login.");
-          setEmailError("");
         } else {
-          setEmailError("Terjadi kesalahan, silakan coba lagi.");
           setPasswordError("");
         }
       } else {
@@ -58,13 +66,12 @@ function LoginForm() {
         localStorage.setItem("authToken", response.token);
         
         setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/dashboard-student");
         });
       }
     } catch (error) {
       console.error("Terjadi kesalahan saat login:", error);
-      setEmailError("Terjadi kesalahan pada server, silakan coba lagi.");
-      setPasswordError("");
+      setPasswordError(error.response?.data?.message || "Terjadi kesalahan pada saat login.");
     }
 
     setIsLoading(false);
@@ -83,13 +90,10 @@ function LoginForm() {
           <input
             className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
             type="text"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              setEmailError("");
-            }}
+            value={nis_or_email}
+            onChange={(e) => setNis_or_email(e.target.value)}
           />
-          {emailError && <div className="text-red-500">{emailError}</div>}
+          {nisOrEmailError && <div className="text-red-500">{nisOrEmailError}</div>}
         </div>
         <div className="flex flex-col font-montserrat w-full mt-10">
           <h2 className="text-[#252525] text-sm mb-2">Password</h2>
@@ -143,4 +147,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default LoginStudent;

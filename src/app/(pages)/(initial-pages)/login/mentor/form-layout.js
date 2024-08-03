@@ -5,13 +5,12 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Image from "next/image";
 import Link from "next/link";
 import { logoPurple } from "@/app/lib/utils/svg";
-import login from "@/app/lib/service/endpoint/auth/login";
 import { useRouter } from "next/navigation";
+import loginMentor from "@/app/lib/service/endpoint/auth/login-mentor";
 
-function LoginForm() {
-  const [email, setEmail] = useState("");
+function LoginMentor() {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,35 +20,22 @@ function LoginForm() {
     setShowPassword(!showPassword);
   };
 
-  const isEmailValid = (email) => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  };
-
+  
   const handleLogin = async () => {
-    if (!email || !password) {
+    if (!username || !password) {
       alert("Semua input harus diisi!");
       return;
-    }
-
-    if (!isEmailValid(email)) {
-      setEmailError("Format email tidak valid!");
-      return;
-    } else {
-      setEmailError("");
     }
 
     setIsLoading(true);
 
     try {
-      const response = await login({ email, password });
+      const response = await loginMentor({ username, password });
 
       if (response.status === 422) {
         if (response.message === "Invalid credential") {
           setPasswordError("Terjadi kesalahan pada saat login.");
-          setEmailError("");
         } else {
-          setEmailError("Terjadi kesalahan, silakan coba lagi.");
           setPasswordError("");
         }
       } else {
@@ -58,12 +44,11 @@ function LoginForm() {
         localStorage.setItem("authToken", response.token);
         
         setTimeout(() => {
-          router.push("/dashboard");
+          router.push("/dashboard-mentor");
         });
       }
     } catch (error) {
       console.error("Terjadi kesalahan saat login:", error);
-      setEmailError("Terjadi kesalahan pada server, silakan coba lagi.");
       setPasswordError("");
     }
 
@@ -83,13 +68,11 @@ function LoginForm() {
           <input
             className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
             type="text"
-            value={email}
+            value={username}
             onChange={(e) => {
-              setEmail(e.target.value);
-              setEmailError("");
+              setUsername(e.target.value);
             }}
           />
-          {emailError && <div className="text-red-500">{emailError}</div>}
         </div>
         <div className="flex flex-col font-montserrat w-full mt-10">
           <h2 className="text-[#252525] text-sm mb-2">Password</h2>
@@ -143,4 +126,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default LoginMentor;
