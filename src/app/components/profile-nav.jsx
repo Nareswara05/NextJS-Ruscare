@@ -10,6 +10,7 @@ import logout from '../lib/service/endpoint/auth/logout';
 import swal from 'sweetalert';
 import Swal from 'sweetalert2';
 import getUser from '../lib/service/endpoint/user/get-user';
+import Logout from '../lib/service/endpoint/auth/logout';
 
 const ProfileMenuNav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,8 +46,7 @@ const ProfileMenuNav = () => {
 
     const handleLogout = async () => {
         try {
-            await logout();
-            localStorage.removeItem('token');
+            await Logout();
             window.location.href = '/';
         } catch (error) {
             console.error('Gagal logout:', error);

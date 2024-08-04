@@ -6,12 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { logoPurple } from "@/app/lib/utils/svg";
 import { useRouter } from "next/navigation";
-import loginMentor from "@/app/lib/service/endpoint/auth/login-mentor";
+import loginStudent from "@/app/lib/service/endpoint/auth/login-student";
 
-function LoginMentor() {
-  const [username, setUsername] = useState("");
+function LoginStudent() {
+  const [nis_or_email, setNis_or_email] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [nisOrEmailError, setNisOrEmailError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -20,59 +21,76 @@ function LoginMentor() {
     setShowPassword(!showPassword);
   };
 
-  
+  const validateNisOrEmail = (value) => {
+    const nisPattern = /^\d+$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (nisPattern.test(value) || emailPattern.test(value)) {
+      setNisOrEmailError("");
+      return true;
+    } else {
+      setNisOrEmailError("Masukkan NIS yang valid atau email yang benar.");
+      return false;
+    }
+  };
+
   const handleLogin = async () => {
-    if (!username || !password) {
-      alert("Semua input harus diisi!");
+    if (!nis_or_email || !password) {
+      if (!nis_or_email) {
+        setNisOrEmailError("NIS atau Email harus diisi.");
+      }
+      if (!password) {
+        setPasswordError("Password harus diisi.");
+      }
+      return;
+    }
+
+    if (!validateNisOrEmail(nis_or_email)) {
       return;
     }
 
     setIsLoading(true);
 
     try {
-      const response = await loginMentor({ username, password });
+      const response = await loginStudent({ nis_or_email, password });
 
       if (response.status === 422) {
-        if (response.message === "Invalid credential") {
+        if (response.message === "Email atau password salah") {
           setPasswordError("Terjadi kesalahan pada saat login.");
         } else {
-          setPasswordError("");
+          setPasswordError( "Terjadi kesalahan pada saat login.");
         }
-      } else {
-        console.log("Respons dari login:", response);
-        
-        localStorage.setItem("authToken", response.token);
-        
+      } else if (response.token) {
+        document.cookie = `token=${response.token}; path=/;`;
         setTimeout(() => {
-          router.push("/dashboard-mentor");
+          router.push("/dashboard");
         });
       }
     } catch (error) {
       console.error("Terjadi kesalahan saat login:", error);
-      setPasswordError("");
+      setPasswordError("Terjadi kesalahan saat login. Silakan coba lagi.");
     }
 
     setIsLoading(false);
   };
 
   return (
-    <div className="w-full px-5 lg:px-12 flex flex-row">
+    <div className="w-full px-5 lg:px-12">
       <div className="w-full flex flex-col">
         <Image src={logoPurple} width={115} height={50} alt="Logo" />
         <div className="mt-6 font-montserrat text-textPrimary">
-          <div className="font-bold text-3xl ">Masuk sebagai mentor</div>
-          <div className="mt-4">Masukkan email dan password Anda untuk masuk</div>
+          <div className="font-semibold text-3xl">Masuk sebagai siswa</div>
+          <div className="mt-4">Masukkan NIS dan password Anda untuk masuk</div>
         </div>
         <div className="flex flex-col font-montserrat w-full mt-16">
-          <h2 className="text-[#252525] text-sm mb-2">Username</h2>
+          <h2 className="text-[#252525] text-sm mb-2">NIS / Email</h2>
           <input
             className="w-[95%] border-b border-black focus:outline-none text-textPrimary"
             type="text"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
+            value={nis_or_email}
+            onChange={(e) => setNis_or_email(e.target.value)}
           />
+          {nisOrEmailError && <div className="text-red-500">{nisOrEmailError}</div>}
         </div>
         <div className="flex flex-col font-montserrat w-full mt-10">
           <h2 className="text-[#252525] text-sm mb-2">Password</h2>
@@ -112,12 +130,12 @@ function LoginMentor() {
             {!isLoading && "Masuk"}
           </button>
           <h4 className="text-black text-xs sm:text-[16px] flex justify-center gap-3">
-            Kamu adalah siswa?
+            Belum mempunyai akun?{" "}
             <Link
               href="/register"
               className="text-primary text-xs sm:text-[16px] font-semibold"
             >
-              Masuk
+              Daftar
             </Link>
           </h4>
         </div>
@@ -126,4 +144,4 @@ function LoginMentor() {
   );
 }
 
-export default LoginMentor;
+export default LoginStudent;

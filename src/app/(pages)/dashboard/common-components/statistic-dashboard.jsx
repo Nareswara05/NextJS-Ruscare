@@ -9,8 +9,9 @@ import data from './data';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { IoCalendarClearOutline, IoCheckmarkDone } from 'react-icons/io5';
 import { TbCalendarClock } from "react-icons/tb";
-import { MdHourglassEmpty } from 'react-icons/md';
-import { RiCalendarScheduleLine } from 'react-icons/ri';
+import { MdEvent, MdHourglassEmpty } from 'react-icons/md';
+import { RiCalendarScheduleLine, RiServiceLine } from 'react-icons/ri';
+import Link from 'next/link';
 
 
 const getCountByStatus = (status) => {
@@ -69,7 +70,15 @@ const DashboardStats = () => {
 
   return (
     <div>
-      <h1 className='text-[24px] text-textPrimary font-bold'>Statistik Mentor</h1>
+      <div className='flex justify-between items-center'>
+        <h1 className='text-[24px] text-textPrimary font-bold'>Statistik Konsultasi</h1>
+        <Link href="dashboard-student/consultation">
+          <button className=" text-lg font-medium flex gap-2 bg-primary py-3 px-4 rounded-lg items-center justify-center hover:bg-purple-600">
+            <RiServiceLine />
+            Konsultasi baru
+          </button>
+        </Link>
+      </div>
       <div className='flex flex-row gap-3 pt-8'>
         {statsData.map((stat) => (
           <div
