@@ -58,7 +58,7 @@ export default function MainSideBar() {
             <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
               <RiServiceLine  className="mr-4" size={25} />
               <Link
-                href="/dashboard-student/consultation"
+                href="/dashboard/consultation"
                 className="text-base font-normal"
               >
                 Konsultasi
@@ -66,7 +66,7 @@ export default function MainSideBar() {
             </li>
             <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
               <VscHistory className="mr-4" size={25} />
-              <Link href="/dashboard-student/history" className="text-base font-normal">
+              <Link href="/dashboard/history" className="text-base font-normal">
                 Riwayat
               </Link>
             </li>

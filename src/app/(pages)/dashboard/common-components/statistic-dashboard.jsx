@@ -72,7 +72,7 @@ const DashboardStats = () => {
     <div>
       <div className='flex justify-between items-center'>
         <h1 className='text-[24px] text-textPrimary font-bold'>Statistik Konsultasi</h1>
-        <Link href="dashboard-student/consultation">
+        <Link href="dashboard/consultation">
           <button className=" text-lg font-medium flex gap-2 bg-primary py-3 px-4 rounded-lg items-center justify-center hover:bg-purple-600">
             <RiServiceLine />
             Konsultasi baru
