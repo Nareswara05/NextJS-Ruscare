@@ -19,8 +19,7 @@ const MenuProfileDashboard = () => {
     const handleLogout = async () => {
         try {
             await Logout();
-            localStorage.removeItem('token'); 
-            window.location.href = '/'; 
+            window.location.href = '/';
         } catch (error) {
             console.error('Gagal logout:', error);
         }

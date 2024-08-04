@@ -17,7 +17,6 @@ const TableConsultation = ({ status, title }) => {
     const filteredData = data.filter(item => item.status === status);
 
     const tableHead = [
-        { title: "Nama" },
         { title: "Layanan" },
         { title: "Kategori" },
         { title: "Tanggal" },
@@ -39,7 +38,7 @@ const TableConsultation = ({ status, title }) => {
         <div className="pt-12">
             <div className="flex justify-between">
                 <h1 className="font-semibold text-2xl text-textPrimary mb-4">{title}</h1>
-                <Link href="/dashboard-teacher/history" className="text-primary underline">Lihat Selengkapnya</Link>
+                <Link href="/dashboard/history" className="text-primary underline">Lihat Selengkapnya</Link>
             </div>
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white">
@@ -55,7 +54,6 @@ const TableConsultation = ({ status, title }) => {
                     <tbody>
                         {filteredData.map((item, index) => (
                             <tr key={index} className="border-b border-gray-200 text-textPrimary">
-                                <td className="py-4 px-4">{item.name}</td>
                                 <td className="py-4 px-4">{item.service}</td>
                                 <td className="py-4 px-4">{item.category}</td>
                                 <td className="py-4 px-4">{item.date}</td>
@@ -64,43 +62,15 @@ const TableConsultation = ({ status, title }) => {
                                     <button
                                         className="text-secondary hover:text-yellow-500 bg-yellow-500 bg-opacity-20 hover:bg-yellow-700 hover:bg-opacity-20 p-2 rounded-lg"
                                         onClick={() => openModal(item)}
-                                        title="View Details"
+                                        title="View Detail"
                                     >
                                         <IoMdEye size={24} />
                                     </button>
-                                    {item.status === 'pending' && (
-                                        <>
-                                            <button
-                                                className="text-green-500 bg-green-500 bg-opacity-20 rounded-lg p-2 hover:bg-green-700 hover:bg-opacity-20 hover:text-green-700"
-                                                title="Accept"
-                                            >
-                                                <IoMdCheckmark size={24} />
-                                            </button>
-                                            <button
-                                                className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg"
-                                                title="Reject"
-                                            >
-                                                <RxCross2 size={24} />
-                                            </button>
-                                        </>
-                                    )}
-                                    {(item.status === 'pending' || item.status === 'done' || item.status === 'akanDatang' || item.status === 'reschedule') && (
-                                        <button
-                                            className="text-blue-500 p-2 bg-blue-500 bg-opacity-20 rounded-lg hover:bg-blue-700 hover:bg-opacity-20 hover:text-blue-700"
-                                            title="Send Email"
-                                        >
-                                            <IoMdMail size={24} />
+                                    {(status === 'pending' || status === 'diterima' || status === 'akanDatang' || status==='reschedule') && (
+                                        <button title='Cancel' className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg">
+                                            <RxCross2 size={24} />
                                         </button>
                                     )}
-                                    {(item.status === 'done' || item.status === 'akanDatang' || item.status === 'reschedule') && (
-                                        <button
-                                            className="text-purple-500 bg-purple-500 rounded-lg hover:text-purple-700 hover:bg-purple-700 hover:bg-opacity-20 p-2 bg-opacity-20"
-                                            title="Schedule"
-                                        >
-                                            <HiCalendarDays size={24} />
-                                        </button>
-                                    )}
-
                                 </td>
                             </tr>
                         ))}

@@ -1,11 +1,14 @@
-import instance from "../../instance/instance";
+import instance from '../../instance/instance';
 
 export default async function Logout() {
-  try {
-    const response = await instance.post('/auth/logout');
-    return response.data; 
-  } catch (error) {
-    throw new Error('Gagal logout'); 
-  }
-};
+    try {
+        await instance.post('auth/logout');
 
+        document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+
+        localStorage.removeItem('token');
+    } catch (error) {
+        console.error('Failed to logout:', error);
+        throw error;
+    }
+}
