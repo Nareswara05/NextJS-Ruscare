@@ -96,7 +96,7 @@ function NavbarDesktop() {
           <div className='text-lg justify-end flex'>
             {isLoggedIn ? <ProfileMenuNav /> : 
             <Link href="auth/login">
-                <button className={`px-8 py-3 hover:bg-primary  duration-300 ease-in transition-all hover:gap-4 hover:scale-110  border-primary rounded-xl border-2 ${isScrolled || isSpecialRoute ? 'bg-white  text-primary hover:text-white' : 'bg-transparent border-white hover:bg-white hover:text-primary  text-white' } flex items-center gap-2`}>
+                <button className={`px-8 py-3 hover:bg-primary  duration-300 ease-in transition-all hover:gap-6   border-primary rounded-xl border-2 ${isScrolled || isSpecialRoute ? 'bg-white  text-primary hover:text-white' : 'bg-transparent border-white hover:bg-white hover:text-primary  text-white' } flex items-center gap-2`}>
                     <FiLogIn />
                     Login
                 </button>
