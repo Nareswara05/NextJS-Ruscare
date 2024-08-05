@@ -10,6 +10,7 @@ import students from '../assets/image/student.png'
 import teacher from '../assets/image/teacher.png'
 import mentalPoblems from '../assets/image/mentalProblems.png'
 import goodmental from '../assets/image/goodmental.png'
+import emails from '../assets/image/email.png'
 
 
 export {
@@ -24,5 +25,6 @@ export {
     students,
     teacher,
     mentalPoblems,
-    goodmental
+    goodmental,
+    emails
 }
