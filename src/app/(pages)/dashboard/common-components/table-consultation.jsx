@@ -1,14 +1,15 @@
-"use client"
+"use client";
 
 import React, { useState } from 'react';
 import { PiClockCountdownLight } from "react-icons/pi";
 import { BsCalendar2Week } from "react-icons/bs";
 import { VscLocation } from "react-icons/vsc";
-import { IoMdCheckmark, IoMdMail, IoMdEye } from 'react-icons/io';
+import { IoMdEye } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import Link from "next/link";
 import { HiCalendarDays } from "react-icons/hi2";
 import data from './data';
+import Swal from 'sweetalert2';
 
 const TableConsultation = ({ status, title }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,13 +17,7 @@ const TableConsultation = ({ status, title }) => {
 
     const filteredData = data.filter(item => item.status === status);
 
-    const tableHead = [
-        { title: "Layanan" },
-        { title: "Kategori" },
-        { title: "Tanggal" },
-        { title: "Waktu" },
-        { title: "Aksi" },
-    ];
+    const tableHead = ["Layanan", "Kategori", "Tanggal", "Waktu", "Aksi"];
 
     const openModal = (item) => {
         setSelectedData(item);
@@ -32,6 +27,23 @@ const TableConsultation = ({ status, title }) => {
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedData(null);
+    };
+
+    const handleCancel = (item) => {
+        Swal.fire({
+            title: 'Apakah kamu yakin ingin membatalkan konsultasi ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, batalkan',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Handle the cancel action here (e.g., update the state or call an API)
+                console.log('Konsultasi dibatalkan:', item);
+            }
+        });
     };
 
     return (
@@ -44,9 +56,9 @@ const TableConsultation = ({ status, title }) => {
                 <table className="min-w-full bg-white">
                     <thead>
                         <tr>
-                            {tableHead.map((item, index) => (
+                            {tableHead.map((title, index) => (
                                 <th key={index} className="py-2 px-4 text-textPrimary text-left border-b border-gray-300">
-                                    {item.title}
+                                    {title}
                                 </th>
                             ))}
                         </tr>
@@ -66,8 +78,12 @@ const TableConsultation = ({ status, title }) => {
                                     >
                                         <IoMdEye size={24} />
                                     </button>
-                                    {(status === 'pending' || status === 'diterima' || status === 'akanDatang' || status==='reschedule') && (
-                                        <button title='Cancel' className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg">
+                                    {(status === 'pending' || status === 'diterima' || status === 'akanDatang' || status === 'reschedule') && (
+                                        <button
+                                            title="Cancel"
+                                            className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg"
+                                            onClick={() => handleCancel(item)}
+                                        >
                                             <RxCross2 size={24} />
                                         </button>
                                     )}
@@ -82,34 +98,34 @@ const TableConsultation = ({ status, title }) => {
                 <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black bg-opacity-50 text-textPrimary">
                     <div className="bg-white p-8 rounded-lg w-fit">
                         <h2 className="text-2xl font-semibold mb-4">Detail Konsultasi</h2>
-                        <div className="flex flex-row gap-6 items-center ">
+                        <div className="flex flex-row gap-6 items-center">
                             <div className="flex gap-2 text-textPrimary">
                                 <div className="text-2xl">
                                     <PiClockCountdownLight />
                                 </div>
-                                <h2 className="font-semibold text-[16px] ">{selectedData.time}</h2>
+                                <h2 className="font-semibold text-[16px]">{selectedData.time}</h2>
                             </div>
                             <hr className="border-textPrimary border-1 w-4 rotate-90" />
                             <div className="flex gap-2 text-textPrimary">
                                 <div className="text-2xl">
                                     <BsCalendar2Week />
                                 </div>
-                                <h2 className="font-semibold text-[16px] ">{selectedData.date}</h2>
+                                <h2 className="font-semibold text-[16px]">{selectedData.date}</h2>
                             </div>
                             <hr className="border-textPrimary border-1 w-4 rotate-90" />
                             <div className="flex gap-2 text-textPrimary">
                                 <div className="text-3xl">
                                     <VscLocation />
                                 </div>
-                                <h2 className="font-semibold text-[16px] ">{selectedData.location}</h2>
+                                <h2 className="font-semibold text-[16px]">{selectedData.location}</h2>
                             </div>
                         </div>
                         <div className="flex flex-col gap-2 pt-4">
                             <p><strong>Nama :</strong> {selectedData.name}</p>
-                            <p><strong>Jurusan : </strong> {selectedData.jurusan}</p>
-                            <p><strong>Layanan : </strong> {selectedData.service}</p>
-                            <p><strong>Kategori : </strong> {selectedData.category}</p>
-                            <p><strong>Mentor : </strong> {selectedData.mentor}</p>
+                            <p><strong>Jurusan :</strong> {selectedData.jurusan}</p>
+                            <p><strong>Layanan :</strong> {selectedData.service}</p>
+                            <p><strong>Kategori :</strong> {selectedData.category}</p>
+                            <p><strong>Mentor :</strong> {selectedData.mentor}</p>
                         </div>
                         <button
                             className="mt-8 w-full py-4 font-bold bg-primary text-white rounded-lg hover:bg-purple-600"

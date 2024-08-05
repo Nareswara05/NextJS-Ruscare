@@ -24,8 +24,8 @@ export default function MailDetailPopup({ data, onClose }) {
                     </div>
                 </div>
                 <button onClick={onClose} className='w-full py-4 bg-primary font-semibold text-white rounded-xl hover:bg-purple-700 flex gap-2 items-center justify-center'>
-                    Tutup
                     <FaTimes/>
+                    Tutup
                 </button>
             </div>
         </div>
