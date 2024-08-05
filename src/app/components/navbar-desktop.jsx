@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'; // Import the usePathname hook
 import { logoPurple, logowhite } from '../lib/utils/svg';
 import NavAuth from './nav-auth';
 import ProfileMenuNav from './profile-nav';
+import { FiLogIn } from 'react-icons/fi';
 
 function NavbarDesktop() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -64,6 +65,7 @@ function NavbarDesktop() {
     /^\/psychological-test\/detail/,
     /^\/mailbox/,
     /^\/profile\/edit-profile/,
+    /^\/consultant\//,
   ];
 
   const isSpecialRoute = specialRoutes.some(route => route.test(pathname));
@@ -71,7 +73,7 @@ function NavbarDesktop() {
   return (
     <>
       <div ref={markerRef}></div>
-      <nav className={`w-screen px-20 py-[30px] flex items-center fixed z-50 transition-colors duration-300 ${isScrolled || isSpecialRoute ? 'bg-white shadow-sm text-primary' : 'bg-transparent text-white' }`}>
+      <nav className={`w-screen px-20 py-[30px] flex items-center fixed z-50 transition-colors duration-300 ${isScrolled || isSpecialRoute ? 'bg-white shadow-sm text-black' : 'bg-transparent text-white' }`}>
         <div className='grid grid-cols-3 w-full items-center'>
           <Link href="/">
             <Image
@@ -92,7 +94,13 @@ function NavbarDesktop() {
             ))}
           </ul>
           <div className='text-lg justify-end flex'>
-            {isLoggedIn ? <ProfileMenuNav /> : <NavAuth />}
+            {isLoggedIn ? <ProfileMenuNav /> : 
+            <Link href="auth/login">
+                <button className={`px-8 py-3 hover:bg-primary  duration-300 ease-in transition-all hover:gap-4 hover:scale-110  border-primary rounded-xl border-2 ${isScrolled || isSpecialRoute ? 'bg-white  text-primary hover:text-white' : 'bg-transparent border-white hover:bg-white hover:text-primary  text-white' } flex items-center gap-2`}>
+                    <FiLogIn />
+                    Login
+                </button>
+            </Link>}
           </div>
         </div>
       </nav>

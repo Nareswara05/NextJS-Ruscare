@@ -70,22 +70,22 @@ export default async function CardProfileConsultant({ dataConsultant }) {
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Sosmed</h1>
                     <div className='flex'>
                         <div className='flex gap-1'>
-                            <Link href="" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href={dataConsultant.instagram} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaInstagram />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href="" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href={dataConsultant.facebook} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaFacebook />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href="" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href={dataConsultant.twitter} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaTwitter />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href="" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href={dataConsultant.linkedin} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaLinkedin />
                             </Link>
                         </div>
