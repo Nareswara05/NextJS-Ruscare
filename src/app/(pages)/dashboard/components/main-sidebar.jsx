@@ -8,8 +8,6 @@ import { RiServiceLine } from "react-icons/ri";
 import { VscHistory } from "react-icons/vsc";
 import { RxDashboard } from "react-icons/rx";
 
-
-
 export default function MainSideBar() {
   const [isSideBarOpen, setIsSideBarOpen] = useSidebar(); 
 
@@ -17,64 +15,47 @@ export default function MainSideBar() {
     setIsSideBarOpen(!isSideBarOpen);
   };
 
-  
-
   return (
     <>
       <div
-      className={`lg:w-[30%] sticky top-0 h-screen bg-white flex flex-col border-r-2  ${
-        isSideBarOpen ? "flex" : "hidden"
-      }`}
-    >
-      <div className="w-full h-[13%] flex flex-row px-8 justify-between items-center">
-        <div className="flex-row h-auto items-center justify-start flex ">
-        <Link href="/">
-          <Image src={logoPurple} 
-          alt="" 
-          width={120}
-          />
-          </Link>
+        className={`lg:w-[30%] sticky top-0 h-screen bg-white flex flex-col border-r-2 ${
+          isSideBarOpen ? "flex" : "hidden"
+        }`}
+      >
+        <div className="w-full h-[13%] flex flex-row px-8 justify-between items-center">
+          <div className="flex-row h-auto items-center justify-start flex">
+            <Link href="/">
+              <Image src={logoPurple} alt="" width={120} />
+            </Link>
+          </div>
         </div>
 
-        
-      </div>
-
-      <div className="w-full flex flex-col px-8 mt-5">
-        <div className="w-full flex flex-col">
-          <h2 className="text-sm font-medium text-textPrimary">MENU UTAMA</h2>
-          <ul className="w-full mt-3">
-
-            
-            <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
-              <RxDashboard className="mr-4" size={25} />
-              <Link
-                href="/dashboard-student"
-                className="text-base font-normal"
-              >
-                Dashboard
+        <div className="w-full flex flex-col px-8 mt-5">
+          <div className="w-full flex flex-col">
+            <h2 className="text-sm font-medium text-textPrimary">MENU UTAMA</h2>
+            <ul className="w-full mt-3">
+              <Link href="/dashboard">
+                <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
+                  <RxDashboard className="mr-4" size={25} />
+                  <span className="text-base font-normal">Dashboard</span>
+                </li>
               </Link>
-            </li>
-
-            <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
-              <RiServiceLine  className="mr-4" size={25} />
-              <Link
-                href="/dashboard/consultation"
-                className="text-base font-normal"
-              >
-                Konsultasi
+              <Link href="/dashboard/consultation">
+                <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
+                  <RiServiceLine className="mr-4" size={25} />
+                  <span className="text-base font-normal">Konsultasi</span>
+                </li>
               </Link>
-            </li>
-            <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
-              <VscHistory className="mr-4" size={25} />
-              <Link href="/dashboard/history" className="text-base font-normal">
-                Riwayat
+              <Link href="/dashboard/history">
+                <li className="flex justify-start items-center text-textPrimary hover:bg-primary hover:text-white rounded-xl p-4 cursor-pointer">
+                  <VscHistory className="mr-4" size={25} />
+                  <span className="text-base font-normal">Riwayat</span>
+                </li>
               </Link>
-            </li>
-            
-          </ul>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }

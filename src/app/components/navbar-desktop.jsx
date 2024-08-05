@@ -71,7 +71,7 @@ function NavbarDesktop() {
   return (
     <>
       <div ref={markerRef}></div>
-      <nav className={`w-screen px-20 py-[30px] flex items-center fixed z-50 transition-colors duration-300 ${isScrolled || isSpecialRoute ? 'bg-white shadow-sm text-black' : 'bg-transparent text-white'}`}>
+      <nav className={`w-screen px-20 py-[30px] flex items-center fixed z-50 transition-colors duration-300 ${isScrolled || isSpecialRoute ? 'bg-white shadow-sm text-primary' : 'bg-transparent text-white' }`}>
         <div className='grid grid-cols-3 w-full items-center'>
           <Link href="/">
             <Image
