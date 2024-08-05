@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Image from "next/image";
 import Link from "next/link";
 import { logoPurple } from "@/app/lib/utils/svg";
 import { useRouter } from "next/navigation";
 import loginStudent from "@/app/lib/service/endpoint/auth/login-student";
+import EmailPopup from "../../dashboard/components/popup-email";
 
 function LoginStudent() {
   const [nis_or_email, setNis_or_email] = useState("");
@@ -15,6 +16,8 @@ function LoginStudent() {
   const [nisOrEmailError, setNisOrEmailError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [user, setUser] = useState(null);
   const router = useRouter();
 
   const togglePasswordVisibility = () => {
@@ -55,13 +58,17 @@ function LoginStudent() {
       const response = await loginStudent({ nis_or_email, password });
 
       if (response.status === 422) {
-        if (response.message === "Email atau password salah") {
-          setPasswordError("Terjadi kesalahan pada saat login.");
-        } else {
-          setPasswordError( "Terjadi kesalahan pada saat login.");
-        }
+        setPasswordError("Terjadi kesalahan pada saat login.");
       } else if (response.token) {
         document.cookie = `token=${response.token}; path=/;`;
+
+        if (response.user) {
+          setUser(response.user);
+          if (response.user.email === null) {
+            setShowPopup(true);
+          }
+        }
+
         setTimeout(() => {
           router.push("/dashboard");
         });
@@ -73,6 +80,12 @@ function LoginStudent() {
 
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    if (user && user.email === null) {
+      setShowPopup(true);
+    }
+  }, [user]);
 
   return (
     <div className="w-full px-5 lg:px-12">
@@ -139,6 +152,9 @@ function LoginStudent() {
             </Link>
           </h4>
         </div>
+        {showPopup && user && user.email === null && (
+          <EmailPopup userId={user.id} closePopup={() => setShowPopup(false)} />
+        )}
       </div>
     </div>
   );
