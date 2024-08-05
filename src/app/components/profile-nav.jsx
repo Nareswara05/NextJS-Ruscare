@@ -70,15 +70,18 @@ const ProfileMenuNav = () => {
         });
     };
 
+    const imageUrl = `https://api.ruscarestudent.com/${userData.image}`;
+
     return (
         <div className='relative'>
             <div className='flex gap-1 items-center cursor-pointer' onClick={toggleMenu}>
-                {/* <Image
-                    src={AvatarTes}
+                <Image
+                    src={imageUrl}
                     width={100}
-                    className='w-[44px] rounded-full'
-                /> */}
-                <button className='capitalize font-medium text-md'>Hai, {userData.name}</button>
+                    height={100}
+                    className='w-[44px] rounded-full bg-white'
+                />
+                {/* <button className='capitalize font-medium text-md'>Hai, {userData.name}</button> */}
                 <IoIosArrowDown className={`text-gray-400 text-2xl transition duration-200 ease-in-out ${isMenuOpen ? 'rotate-180' : ''}`} />
             </div>
 

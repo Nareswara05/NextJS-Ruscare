@@ -25,7 +25,7 @@ const HeroCard = () => {
                         src={student}
                         className='rounded-2xl w-full h-[250px] border-[10px] border-white object-cover'
                     />
-                    <Link href="auth/login" className='absolute -bottom-9'>
+                    <Link href="/dashboard" className='absolute -bottom-9'>
                         <button className=' px-8 py-3 max-w-56 bg-primary border-[6px] rounded-xl border-white text-white hover:bg-purple-700 font-semibold'>Masuk sebagai peserta didik</button>
                     </Link>
                 </div>
