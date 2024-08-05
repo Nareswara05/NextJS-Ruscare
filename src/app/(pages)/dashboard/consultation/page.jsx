@@ -8,8 +8,7 @@ const ConsultationPage = () => {
   return (
     <div className='px-12 py-8 bg-white'>
       <h1 className='text-[28px] font-bold text-textPrimary '>Pengajuan Konsultasi</h1>
-      <div className='flex flex-col gap-6'>
-        <InputName />
+      <div className='flex flex-col gap-6 pt-12'>
         <InputDate />
         <RadioButtonService />
         <RadioButtonCategory />

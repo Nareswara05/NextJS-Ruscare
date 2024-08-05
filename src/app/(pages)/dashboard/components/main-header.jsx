@@ -20,11 +20,11 @@ export default function MainHeader() {
   const pathname = usePathname();
   const getPageTitle = () => {
     switch (pathname) {
-      case "/dashboard-student":
+      case "/dashboard":
         return "Dashboard";
-      case "/dashboard-student/consultation":
+      case "/dashboard/consultation":
         return "Pengajuan Konsultasi";
-      case "/dashboard-student/history":
+      case "/dashboard/history":
         return "Riwayat Konsultasi";
       default:
         return "";
@@ -32,10 +32,10 @@ export default function MainHeader() {
   };
 
   return (
-      <div className="w-full py-6 bg-white flex flex-row justify-between items-center border-b-2 px-8 sticky top-0">
+      <div className="w-full py-6 bg-white flex flex-row justify-between items-center border-b-2 px-2 sticky top-0">
         <div className="w-full flex flex-row items-center">
           <div
-            className={`flex ml-8 cursor-pointer text-textPrimary`}
+            className={`flex ml-8 cursor-pointer text-textPrimary p-2 rounded-lg hover:bg-textPrimary hover:bg-opacity-5  transition-all duration-300 ease-in`}
             onClick={handleMenuClick}
           >
             {isSideBarOpen ? <MdArrowBackIosNew size={30} /> : <FiMenu size={30} />}
