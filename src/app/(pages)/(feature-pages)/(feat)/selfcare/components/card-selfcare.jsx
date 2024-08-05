@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import { IoIosArrowForward } from 'react-icons/io';
 import Link from 'next/link';
-import { AvatarTes } from '@/app/lib/utils/image';
 
 const CardSelfcare = ({ data }) => {
     const imageUrl = `https://api.ruscarestudent.com/${data.image}`;
