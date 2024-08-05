@@ -19,13 +19,13 @@ const CardService = ({ title, description }) => {
 
     return (
         <div>
-            <div className='group bg-white px-7 py-10 relative w-[350px] rounded-xl transition-colors duration-300 hover:bg-secondary overflow-hidden'>
+            <div className='group bg-white px-7 py-10 relative w-[350px] rounded-xl transition-colors duration-300 hover:bg-secondary overflow-hidden cursor-pointer' onClick={handleClick}>
                 <div className='flex justify-between'>
                     <div className='flex flex-col gap-2'>
                         <h1 className='text-primary text-[20px] font-bold transition-colors duration-300 group-hover:text-white'>{title}</h1>
                         <hr className='border-2 border-primary w-24 transition-colors duration-300 group-hover:border-white' />
                     </div>
-                    <button onClick={handleClick} className='p-2 bg-white bg-opacity-20 rounded-full w-fit h-fit text-2xl group-hover:animate-bounce'>
+                    <button  className='p-2 bg-white bg-opacity-20 rounded-full w-fit h-fit text-2xl group-hover:animate-bounce'>
                         <BsArrowRight />
                     </button>
                 </div>

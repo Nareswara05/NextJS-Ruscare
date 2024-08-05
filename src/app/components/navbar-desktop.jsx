@@ -65,6 +65,7 @@ function NavbarDesktop() {
     /^\/psychological-test\/detail/,
     /^\/mailbox/,
     /^\/profile\/edit-profile/,
+    /^\/consultant\//,
   ];
 
   const isSpecialRoute = specialRoutes.some(route => route.test(pathname));
