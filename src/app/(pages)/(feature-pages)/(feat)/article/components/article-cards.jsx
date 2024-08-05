@@ -18,6 +18,8 @@ export default function ArticleCards({ data, categories }) {
         return category ? category.category_name : "Unknown Category";
     };
 
+    const imageUrl = `https://api.ruscarestudent.com/${data.featured_image}`;
+
     return (
         <Link
           href={{
@@ -41,7 +43,7 @@ export default function ArticleCards({ data, categories }) {
             </div>
             <Image
               className='h-[210px] w-[300px] object-cover rounded-md'
-              src={data.featured_image}
+              src={imageUrl}
               alt={data.title}
               width={300}
               height={210}
