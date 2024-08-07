@@ -4,9 +4,16 @@ export function middleware(request) {
   const token = request.cookies.get('token');
   const url = request.nextUrl.clone();
 
-  const protectedRoutes = ['/profile', '/dashboard', '/mailbox'];
+  const protectedRoutes = [
+    /^\/profile\/.*$/,
+    /^\/dashboard\/.*$/,
+    /^\/mailbox\/.*$/,
+    /^\/auth\/login\/.*$/,
+  ];
 
-  if (!token && protectedRoutes.includes(url.pathname)) {
+  const isProtectedRoute = protectedRoutes.some((pattern) => pattern.test(url.pathname));
+
+  if (!token && isProtectedRoute) {
     url.pathname = '/auth/login';
     return NextResponse.redirect(url);
   }
@@ -20,5 +27,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/profile', '/dashboard', '/mailbox', '/auth/login'],
+  matcher: ['/profile/:path*', '/dashboard/:path*', '/mailbox/:path*', '/auth/login/:path*'],
 };
