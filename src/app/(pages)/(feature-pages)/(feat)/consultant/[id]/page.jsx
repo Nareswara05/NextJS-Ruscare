@@ -10,6 +10,9 @@ export default async function ConsultantDetail({ params }) {
     const { id } = params;
     const consultant = consultants.find((consultant) => consultant.id.toString() === id);
 
+    console.log("CHECK DETAIL");
+    console.log(consultant);
+
     if (!consultant) {
         return <div>Consultant not found</div>;
     }
