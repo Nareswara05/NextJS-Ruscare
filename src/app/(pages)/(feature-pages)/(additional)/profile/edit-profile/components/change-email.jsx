@@ -43,19 +43,41 @@ const ChangeEmail = () => {
         }
 
         if (oldEmail !== storedEmail) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Email lama tidak sesuai!',
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+
+            Toast.fire({
+                icon: "error",
+                title: "Email lama tidak sesuai!"
             });
             return;
         }
 
         if (oldEmail === newEmail) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Email baru tidak boleh sama dengan email lama!',
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+
+            Toast.fire({
+                icon: "error",
+                title: "Email lama dan email baru tidak boleh sama!"
             });
             return;
         }
@@ -63,21 +85,43 @@ const ChangeEmail = () => {
         try {
             const response = await changeEmail({ id: userId, email: newEmail });
             console.log("Response from registration:", response);
-            if (response && response.message === 'Email has been updated') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: 'Email berhasil di ubah!',
+            if (response && response.message === 'Email berhasil diubah') {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+
+                Toast.fire({
+                    icon: "success",
+                    title: "Email berhasil diubah!"
                 });
                 const updatedUser = { ...response.data, email: newEmail }; // gunakan data dari respons server
                 localStorage.setItem('user', JSON.stringify(updatedUser));
             }
         } catch (error) {
             console.error("Error during registration:", error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Gagal mengubah email!, silahkan coba lagi!',
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+
+            Toast.fire({
+                icon: "error",
+                title: "Email gagal diubah, silahkan coba lagi"
             });
         }
     };
