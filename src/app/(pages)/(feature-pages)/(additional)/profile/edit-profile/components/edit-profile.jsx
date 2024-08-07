@@ -7,34 +7,29 @@ import ButtonSubmit from './button-submit';
 import Swal from 'sweetalert2';
 import editUsername from '@/app/lib/service/endpoint/user/edit-username';
 import getUser from '@/app/lib/service/endpoint/user/get-user';
+import changeProfilePicture from '@/app/lib/service/endpoint/user/change-profile-picture';
 
 const EditProfile = () => {
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState(null);
-
-  // useEffect(() => {
-  //   const storedUser = JSON.parse(localStorage.getItem('user'));
-  //   console.log("Stored user:", storedUser);
-  //   if (storedUser) {
-  //     setUserId(storedUser.id);
-  //   }
-  // }, []);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
-        try {
-            const user = await getUser();
-            console.log("Fetched user:", user);
-            if (user) {
-                setUserId(user.id);
-            }
-        } catch (error) {
-            console.error("Failed to fetch user data:", error);
+      try {
+        const user = await getUser();
+        console.log("Fetched user:", user);
+        if (user) {
+          setUserId(user.id);
+          setImage(user.image);
         }
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
     };
 
     fetchUserData();
-}, []);
+  }, []);
 
   const handleEdit = async () => {
     console.log("handleEdit called");
@@ -56,15 +51,15 @@ const EditProfile = () => {
           timer: 3000,
           timerProgressBar: true,
           didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
           }
-      });
+        });
 
-      Toast.fire({
+        Toast.fire({
           icon: "success",
           title: "Username berhasil diubah"
-      });
+        });
       }
     } catch (error) {
       console.error("Error during registration:", error);
@@ -76,16 +71,58 @@ const EditProfile = () => {
     }
   };
 
+  const handleImageChange = async (file) => {
+    if (!userId) return;
+
+    const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to update your profile picture?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, update it!',
+        cancelButtonText: 'Cancel'
+    });
+
+    if (result.isConfirmed) {
+        try {
+            const response = await changeProfilePicture({ id: userId, file });
+            console.log("Response from image update:", response);
+
+            if (response && response.message === 'Image berhasil diubah') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Profile picture updated successfully!',
+                });
+                const updatedUser = await getUser();
+                setImage(updatedUser.image);
+            } else {
+                throw new Error(response.message || 'Image update failed');
+            }
+        } catch (error) {
+            console.error("Error during image update:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.message || 'Failed to update profile picture. Please try again.',
+            });
+        }
+    }
+};
+
+
   return (
     <div className='flex gap-20'>
-      <ChangeProfilePicture />
+      <ChangeProfilePicture image={image} onImageChange={handleImageChange} />
       <div className='flex flex-col w-full items-end'>
         <EditForm
           placeholder="Masukkan Nama Baru Anda"
           label="Ganti Username"
           onChange={(e) => setUsername(e.target.value)}
         />
-        <ButtonSubmit onClick={handleEdit} title="Ganti Username" />
+        <ButtonSubmit onClick={handleEdit} title="Update Profile" />
       </div>
     </div>
   );
