@@ -38,7 +38,7 @@ const AnimationText = () => {
     return (
         <>
             {textData.length > 0 && (
-                <h1 className='text-white text-[24px] font-semibold'>{textData[currentIndex].text}</h1>
+                <h1 className='text-white text-[24px] font-semibold max-w-[667px] text-center'>{textData[currentIndex].text}</h1>
             )}
         </>
     );

@@ -36,10 +36,12 @@ const ConsultantCard = ({ consultant }) => {
         }
     };
 
+    const imageUrl = `https://api.ruscarestudent.com/${consultant.image}`;
+
     let pronouns = "";
-    if (consultant.gender === "perempuan") {
+    if (consultant.gender === "female") {
         pronouns = "She/Her";
-    } else if (consultant.gender === "laki-laki") {
+    } else if (consultant.gender === "male") {
         pronouns = "He/Him";
     } else {
         pronouns = "Unknown";
@@ -48,11 +50,11 @@ const ConsultantCard = ({ consultant }) => {
     return (
         <div className='p-8 bg-white rounded-lg shadow-custom flex flex-col w-[400px] justify-between'>
             <Image
-                src={consultant.avatar}
+                src={imageUrl}
                 alt={consultant.name}
-                className='w-[114px] rounded-full object-cover'
-                width={114}
-                height={114}
+                className='w-[114px] h-[114px] rounded-full object-cover'
+                width={1000}
+                height={1000}
             />
             <div className='flex flex-col gap-[10px]'>
                 <div className='flex flex-wrap items-center gap-2'>
@@ -70,12 +72,14 @@ const ConsultantCard = ({ consultant }) => {
                     </h2>
                 </div>
             </div>
-            <Link className='flex group text-primary font-semibold text-lg items-center gap-2 pt-8' href={`/consultant/${consultant.id}`}>
-                <span>Detail Profil</span>
-                <div className='transform transition-transform duration-300 group-hover:translate-x-2'>
-                    <IoIosArrowForward />
-                </div>
-            </Link>
+            {consultant.id && (
+                <Link className='flex group text-primary font-semibold text-lg items-center gap-2 pt-8' href={`/consultant/${consultant.id}`}>
+                    <span>Detail Profil</span>
+                    <div className='transform transition-transform duration-300 group-hover:translate-x-2'>
+                        <IoIosArrowForward />
+                    </div>
+                </Link>
+            )}
         </div>
     );
 };

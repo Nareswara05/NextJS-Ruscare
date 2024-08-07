@@ -29,6 +29,8 @@ export default async function CardProfileConsultant({ dataConsultant }) {
         LastEdu = "(Doktor)";
     }
 
+    const imageUrl = `https://api.ruscarestudent.com/${dataConsultant.image}`;
+
 
 
 
@@ -36,7 +38,7 @@ export default async function CardProfileConsultant({ dataConsultant }) {
         <div className=' flex flex-col justify-center items-center w-[300px]'>
             <div className='flex flex-col items-center justify-center gap-3'>
                 <Image
-                    src={dataConsultant.avatar}
+                    src={imageUrl}
                     className="w-[150px] rounded-full bg-black"
                     width={100}
                     height={100}
