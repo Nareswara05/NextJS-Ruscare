@@ -36,19 +36,41 @@ const ChangePassword = () => {
 
     const handleChangePassword = async () => {
         if (newPassword !== confirmNewPassword) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Kata sandi baru dan konfirmasi kata sandi tidak cocok!',
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+
+            Toast.fire({
+                icon: "error",
+                title: "Kata sandi baru dan konfirmasi kata sandi tidak cocok!"
             });
             return;
         }
 
         if (!userId || !oldPassword || !newPassword) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Kata sandi lama, dan kata sandi baru harus diisi!',
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+
+            Toast.fire({
+                icon: "error",
+                title: "Kata sandi lama, dan kata sandi baru harus diisi!"
             });
             return;
         }
@@ -56,24 +78,57 @@ const ChangePassword = () => {
         try {
             const response = await changePassword({ id: userId, password: newPassword });
             console.log("Response from changePassword:", response);
-            if (response && response.message === 'Password has been updated') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: 'Kata sandi berhasil diubah!',
+            if (response && response.message === 'Password berhasil diubah') {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+    
+                Toast.fire({
+                    icon: "success",
+                    title: "Berhasil mengubah kata sandi"
                 });
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: response.message || 'Gagal mengubah kata sandi!',
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+    
+                Toast.fire({
+                    icon: "error",
+                    title:  response.message || "Gagal mengubah kata sandi!"
                 });
             }
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Gagal mengubah kata sandi! Silakan coba lagi.',
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+
+            Toast.fire({
+                icon: "error",
+                title: "Gagal mengubah kata sandi!, silahkan coba lagi"
             });
         }
     };

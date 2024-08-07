@@ -75,13 +75,13 @@ const ProfileMenuNav = () => {
     return (
         <div className='relative'>
             <div className='flex gap-1 items-center cursor-pointer' onClick={toggleMenu}>
-                <Image
+                {/* <Image
                     src={imageUrl}
                     width={100}
                     height={100}
                     className='w-[44px] rounded-full bg-white'
-                />
-                {/* <button className='capitalize font-medium text-md'>Hai, {userData.name}</button> */}
+                /> */}
+                <button className='capitalize font-medium text-md'>Hai, {userData.username}</button>
                 <IoIosArrowDown className={`text-gray-400 text-2xl transition duration-200 ease-in-out ${isMenuOpen ? 'rotate-180' : ''}`} />
             </div>
 
