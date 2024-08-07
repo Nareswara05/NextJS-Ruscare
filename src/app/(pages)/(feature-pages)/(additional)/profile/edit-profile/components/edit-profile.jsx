@@ -6,18 +6,35 @@ import ChangeProfilePicture from './change-profile-picture';
 import ButtonSubmit from './button-submit';
 import Swal from 'sweetalert2';
 import editUsername from '@/app/lib/service/endpoint/user/edit-username';
+import getUser from '@/app/lib/service/endpoint/user/get-user';
 
 const EditProfile = () => {
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState(null);
 
+  // useEffect(() => {
+  //   const storedUser = JSON.parse(localStorage.getItem('user'));
+  //   console.log("Stored user:", storedUser);
+  //   if (storedUser) {
+  //     setUserId(storedUser.id);
+  //   }
+  // }, []);
+
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    console.log("Stored user:", storedUser);
-    if (storedUser) {
-      setUserId(storedUser.id);
-    }
-  }, []);
+    const fetchUserData = async () => {
+        try {
+            const user = await getUser();
+            console.log("Fetched user:", user);
+            if (user) {
+                setUserId(user.id);
+            }
+        } catch (error) {
+            console.error("Failed to fetch user data:", error);
+        }
+    };
+
+    fetchUserData();
+}, []);
 
   const handleEdit = async () => {
     console.log("handleEdit called");
@@ -29,14 +46,25 @@ const EditProfile = () => {
     }
 
     try {
-      const response = await editUsername({ id: userId, name: username });
+      const response = await editUsername({ id: userId, username: username });
       console.log("Response from registration:", response);
-      if (response && response.message === 'Username has been updated') {
-        Swal.fire({
-          icon: 'success',
-          title: 'Berhasil',
-          text: 'Username berhasil di ubah!',
-        });
+      if (response && response.message === 'Username berhasil diubah') {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+          }
+      });
+
+      Toast.fire({
+          icon: "success",
+          title: "Username berhasil diubah"
+      });
       }
     } catch (error) {
       console.error("Error during registration:", error);
