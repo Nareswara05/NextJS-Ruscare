@@ -22,7 +22,7 @@ export default async function DetailHeroArticle({articleData, categories}) {
 
     return (
         <div className='flex flex-col gap-3 '>
-            <Image className='w-full rounded-lg h-[500px] object-cover bg-primary' width={500} height={500} src={imageUrl} alt={articleData.title} />
+            <Image className='w-full rounded-lg h-[500px] object-cover bg-primary' width={2000} height={2000} src={imageUrl} alt={articleData.title} />
             <div className='w-full flex justify-between items-center'>
                 <h1 className='py-2 px-3 bg-primary rounded-lg text-white'>{getCategoryName(articleData.category_id)}</h1>
                 <h2 className='text-textPrimary font-semibold'>{formatDate(articleData.created_at)}</h2>
