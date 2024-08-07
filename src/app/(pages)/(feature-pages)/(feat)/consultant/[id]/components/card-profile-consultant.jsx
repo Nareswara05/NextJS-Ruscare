@@ -39,9 +39,9 @@ export default async function CardProfileConsultant({ dataConsultant }) {
             <div className='flex flex-col items-center justify-center gap-3'>
                 <Image
                     src={imageUrl}
-                    className="w-[150px] rounded-full bg-black"
-                    width={100}
-                    height={100}
+                    className="w-[150px] h-[150px] object-cover rounded-full bg-black"
+                    width={1000}
+                    height={1000}
                     alt={dataConsultant.name}
                 />
                 <h1 className='font-bold text-[20px] text-center text-textPrimary'>{dataConsultant.name}</h1>
@@ -72,22 +72,22 @@ export default async function CardProfileConsultant({ dataConsultant }) {
                     <h1 className='font-semibold text-[16px] text-textPrimary'>Sosmed</h1>
                     <div className='flex'>
                         <div className='flex gap-1'>
-                            <Link href={dataConsultant.instagram} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="www.instagram.com" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaInstagram />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href={dataConsultant.facebook} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="www.facebook.com" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaFacebook />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href={dataConsultant.twitter} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="www.twitter.com" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaTwitter />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href={dataConsultant.linkedin} className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="www.linkedin.com" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaLinkedin />
                             </Link>
                         </div>

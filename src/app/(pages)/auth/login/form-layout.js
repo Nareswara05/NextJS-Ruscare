@@ -8,6 +8,7 @@ import { logoPurple } from "@/app/lib/utils/svg";
 import { useRouter } from "next/navigation";
 import loginStudent from "@/app/lib/service/endpoint/auth/login-student";
 import EmailPopup from "../../dashboard/components/popup-email";
+import Swal from "sweetalert2";
 
 function LoginStudent() {
   const [nis_or_email, setNis_or_email] = useState("");
@@ -61,7 +62,22 @@ function LoginStudent() {
         setPasswordError("Terjadi kesalahan pada saat login.");
       } else if (response.token) {
         document.cookie = `token=${response.token}; path=/;`;
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+          }
+      });
 
+      Toast.fire({
+          icon: "success",
+          title: "Login berhasil"
+      });
         if (response.user) {
           setUser(response.user);
           if (response.user.email === null) {
@@ -143,12 +159,12 @@ function LoginStudent() {
             {!isLoading && "Masuk"}
           </button>
           <h4 className="text-black text-xs sm:text-[16px] flex justify-center gap-3">
-            Belum mempunyai akun?{" "}
+            Kamu adalah mentor?{" "}
             <Link
-              href="/register"
+              href="http://localhost:3001"
               className="text-primary text-xs sm:text-[16px] font-semibold"
             >
-              Daftar
+              Masuk
             </Link>
           </h4>
         </div>
