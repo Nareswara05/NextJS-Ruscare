@@ -45,17 +45,26 @@ const Profile = () => {
   }
 
   let major = "";
-  if (userData.grade_id === "1") {
+switch (userData.grade_id) {
+  case 1:
     major = "PPLG";
-  } else if (userData.grade_id === "2") {
+    break;
+  case 2:
     major = "Animasi 3D";
-  } else if (userData.grade_id === "3") {
+    break;
+  case 3:
     major = "Animasi 2D";
-  } else if (userData.grade_id === "4") {
+    break;
+  case 4:
     major = "Design Grafis";
-  } else if (userData.grade_id === "5") {
+    break;
+  case 5:
     major = "Teknik Grafika";
-  }
+    break;
+  default:
+    major = "Unknown";
+}
+
 
 
   const imageUrl = `https://api.ruscarestudent.com/${userData.image}`;
