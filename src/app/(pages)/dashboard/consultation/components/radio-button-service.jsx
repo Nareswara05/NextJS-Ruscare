@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RadioButtonService = () => {
+const RadioButtonService = ({value, onChange}) => {
     const data = [
         {
             service: "Konseling individual"
@@ -31,6 +31,8 @@ const RadioButtonService = () => {
                         name="service"
                         value={item.service}
                         className='mr-2'
+                        required
+                        onChange={onChange}
                     />
                     {item.service}
                 </label>

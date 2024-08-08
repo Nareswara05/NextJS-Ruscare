@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from 'react';
 import Select from 'react-select';
@@ -42,7 +42,7 @@ const customStyles = {
     }),
 };
 
-const InputDate = () => {
+const InputDate = ({ dateValue, timeValue, onDateChange, onTimeChange }) => {
     const data = [
         { time: "08.00 - 09.00" },
         { time: "10.00 - 11.00" },
@@ -62,6 +62,8 @@ const InputDate = () => {
                 <input
                     type="date"
                     className="w-full p-[12px] text-[16px] bg-[#F6F8FA] border-[1px] border-[#E5E5E5] outline-none rounded-lg text-textPrimary"
+                    value={dateValue}
+                    onChange={onDateChange}
                 />
             </div>
             <div>
@@ -71,6 +73,8 @@ const InputDate = () => {
                     styles={customStyles}
                     className="w-full"
                     placeholder="Pilih Waktu"
+                    value={options.find(option => option.value === timeValue)}
+                    onChange={onTimeChange}
                 />
             </div>
         </div>
