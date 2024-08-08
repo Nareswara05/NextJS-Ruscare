@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RadioButtonCategory = () => {
+const RadioButtonCategory = ({onChange, value}) => {
     const data = [
         {
             category: "Pribadi"
@@ -27,6 +27,8 @@ const RadioButtonCategory = () => {
                         name="category"
                         value={item.category}
                         className='mr-2'
+                        required
+                        onChange={onChange}
                     />
                     {item.category}
                 </label>
