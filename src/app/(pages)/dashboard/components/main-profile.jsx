@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { GoPerson } from "react-icons/go";
 import { AvatarTes } from '@/app/lib/utils/image'
@@ -9,9 +9,13 @@ import Link from 'next/link';
 import Logout from '@/app/lib/service/endpoint/auth/logout';
 import Swal from 'sweetalert2';
 import { CiLogout } from 'react-icons/ci';
+import getUser from '@/app/lib/service/endpoint/user/get-user';
 
 const MenuProfileDashboard = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -41,13 +45,41 @@ const MenuProfileDashboard = () => {
         });
     };
 
+   
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const data = await getUser();
+                setUserData(data);
+            } catch (error) {
+                console.error("Failed to fetch user data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+      }
+    
+      if (!userData) {
+        return <div>Error loading user data</div>;
+      }
+
+      const imageUrl = `https://api.ruscarestudent.com/${userData.image}`;
+
     return (
         <div className='relative'>
             <div className='flex gap-1 items-center cursor-pointer' onClick={toggleMenu}>
                 <Image
-                    src={AvatarTes}
-                    width={100}
-                    className='w-[44px] rounded-full'
+                    src={imageUrl}
+                    width={1000}
+                    height={1000}
+                    className='w-[44px] h-[44px] object-cover rounded-full'
                 />
                 <IoIosArrowDown className={`text-gray-400 text-2xl transition duration-200 ease-in-out ${isMenuOpen ? 'rotate-180' : ''}`} />
             </div>
