@@ -13,7 +13,7 @@ export const listHistory = [
     },
     {
         service: "Konseling Individual",
-        status: "Dibatalkan",
+        status: "Kadaluarsa",
         category: "Karir",
         dateTime: "2024-05-09 14:00"
     },

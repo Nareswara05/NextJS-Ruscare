@@ -96,7 +96,7 @@ const TableConsultation = ({ status, title }) => {
                                     >
                                         <IoMdEye size={24} />
                                     </button>
-                                    {(status === 'pending' || status === 'diterima' || status === 'akanDatang' || status === 'reschedule') && (
+                                    {(status === 'pending' ||  status === 'upcoming' || status === 'reschedule') && (
                                         <button
                                             title="Cancel"
                                             className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg"
