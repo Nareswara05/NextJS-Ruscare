@@ -18,6 +18,8 @@ const TableHistory = () => {
                 return 'bg-green-100 text-green-800 font-medium';
             case 'Dibatalkan':
                 return 'bg-red-100 text-red-800 font-medium';
+            case 'Kadaluarsa':
+                return 'bg-gray-100 text-gray-500 font-medium';
             default:
                 return '';
         }

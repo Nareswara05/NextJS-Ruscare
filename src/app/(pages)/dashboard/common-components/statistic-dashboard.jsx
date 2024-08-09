@@ -12,6 +12,7 @@ import { TbCalendarClock } from "react-icons/tb";
 import { MdEvent, MdHourglassEmpty } from 'react-icons/md';
 import { RiCalendarScheduleLine, RiServiceLine } from 'react-icons/ri';
 import Link from 'next/link';
+import { BsCalendarX } from "react-icons/bs";
 
 
 const getCountByStatus = (status) => {
@@ -45,19 +46,27 @@ const statsData = [
   },
   {
     id: 4,
-    title: 'Telah Ditolak',
-    count: getCountByStatus('rejected'),
-    color: '#FF3797',
-    icon: <RxCross2 />,
-    status: 'rejected',
-  },
-  {
-    id: 5,
     title: 'Jadwal Ulang',
     count: getCountByStatus('reschedule'),
     color: '#9F41EA',
     icon: <RiCalendarScheduleLine />,
     status: 'reschedule',
+  },
+  {
+    id: 5,
+    title: 'Dibatalkan',
+    count: getCountByStatus('canceled'),
+    color: '#FF3797',
+    icon: <RxCross2 />,
+    status: 'canceled',
+  },
+  {
+    id: 6,
+    title: 'Kadaluarsa',
+    count: getCountByStatus('expired'),
+    color: '#808080',
+    icon: <BsCalendarX />,
+    status: 'expired',
   },
 ];
 
@@ -79,7 +88,7 @@ const DashboardStats = () => {
           </button>
         </Link>
       </div>
-      <div className='flex flex-row gap-3 pt-8'>
+      <div className='grid grid-cols-3 gap-3 pt-8'>
         {statsData.map((stat) => (
           <div
             key={stat.id}
