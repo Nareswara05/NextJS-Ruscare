@@ -58,10 +58,12 @@ export default async function CategoryLanding() {
             <Image
             src={dotsYellow}
             className='absolute right-0 top-20'
+            alt=''
             />
             <Image
             src={dotsYellow}
             className='absolute left-0 top-96'
+            alt=''
             />
         </div>
     );

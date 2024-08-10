@@ -31,6 +31,7 @@ const CardService = ({ title, description }) => {
                 </div>
                 <Image
                     src={dotsPurplesmall}
+                    alt=''
                     className='absolute top-0 right-0 transition-opacity duration-300 group-hover:opacity-0  '
                 />
             </div>

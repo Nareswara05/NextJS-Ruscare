@@ -13,6 +13,7 @@ const AboutLanding = () => {
         </div>
         <Image
         src={about}
+        alt='About Image'
         />
     </div>
   )

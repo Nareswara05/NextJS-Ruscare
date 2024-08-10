@@ -13,6 +13,7 @@ export default function CardPsychological({ data }) {
                     width={200}
                     height={200}
                     className='object-cover'
+                    alt={data.title}
                 />
                 <div className="flex flex-col gap-2">
                     <h1 className='text-[20px] text-textPrimary font-semibold '>{data.title}</h1>

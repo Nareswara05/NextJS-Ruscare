@@ -44,6 +44,7 @@ const EmailPopup = ({ userId, closePopup }) => {
                 src={emails}
                 width={500}
                 height={500}
+                alt="Email"
                 className='mx-auto mb-1 w-52'
                 />
                 <h2 className="text-xl font-bold text-textPrimary">Masukkan email kamu</h2>

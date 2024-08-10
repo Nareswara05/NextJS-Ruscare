@@ -78,6 +78,7 @@ const MenuProfileDashboard = () => {
                 <Image
                     src={imageUrl}
                     width={1000}
+                    alt='profile-picture'
                     height={1000}
                     className='w-[44px] h-[44px] object-cover rounded-full'
                 />

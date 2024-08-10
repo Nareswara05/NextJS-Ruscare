@@ -23,6 +23,7 @@ const PsychologicalHeader = () => {
             width={500}
             height={500}
             className="object-cover"
+            alt=''
             />
             <div className='w-[167px] h-[167px] rounded-full bg-[#913BD7] absolute -top-12 -right-10'></div>
             <div className='w-[167px] h-[167px] rounded-full bg-[#913BD7] absolute -bottom-16 -left-16'></div>
@@ -32,6 +33,7 @@ const PsychologicalHeader = () => {
             width={100}
             height={100}
             className='absolute right-0 bottom-0 object-cover'
+            alt=''
             />
 
         </div>

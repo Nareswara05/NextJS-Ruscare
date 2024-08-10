@@ -10,6 +10,7 @@ const DisclaimerTes = () => {
             src={warningIcon}
             width={30}
             height={30}
+            alt=''
             />
             <h1 className='text-[24px] font-semibold'>Disclaimer</h1>
         </div>

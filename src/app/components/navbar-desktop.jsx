@@ -22,17 +22,20 @@ function NavbarDesktop() {
       },
       { threshold: 0.1 }
     );
-
-    if (markerRef.current) {
-      observer.observe(markerRef.current);
+  
+    const currentMarkerRef = markerRef.current; // Store the current value of markerRef.current
+  
+    if (currentMarkerRef) {
+      observer.observe(currentMarkerRef);
     }
-
+  
     return () => {
-      if (markerRef.current) {
-        observer.unobserve(markerRef.current);
+      if (currentMarkerRef) { // Use the stored value in the cleanup function
+        observer.unobserve(currentMarkerRef);
       }
     };
   }, []);
+  
 
   useEffect(() => {
     const token = localStorage.getItem('token');

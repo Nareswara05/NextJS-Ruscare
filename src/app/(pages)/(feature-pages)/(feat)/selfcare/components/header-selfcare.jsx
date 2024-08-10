@@ -7,6 +7,7 @@ const HeaderSelfcare = () => {
         <div className='w-screen h-[444px] bg-primary flex justify-center items-center relative'>
             <Image
                 src={waveSelfcare}
+                alt=''
                 className='w-full absolute bottom-0'
             />
             <div className='w-fit flex flex-col relative'>
