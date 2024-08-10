@@ -9,11 +9,13 @@ const DecorationTes = () => {
         src={decorationTes}
         className="object-fill absolute -top-10 -right-10"
         width={300}
+        alt=''
         />
         <Image
         src={decorationTes}
         className="object-fill absolute -top-10 -left-10"
         width={300}
+        alt=''
         />
     </div>
   )

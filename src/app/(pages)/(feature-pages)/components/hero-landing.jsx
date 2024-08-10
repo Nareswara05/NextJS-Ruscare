@@ -22,6 +22,7 @@ const HeroLanding = () => {
                         <div className='flex w-full justify-start'>
                             <Image
                                 src={starYellow}
+                                alt=''
                             />
                         </div>
                         <h1 className='text-white text-[52px] text-center font-bold'>Memiliki <span className='text-secondary'>Masalah</span> di sekolah?
@@ -29,6 +30,7 @@ const HeroLanding = () => {
                         <div className='flex w-full justify-end'>
                             <Image
                                 src={starYellow}
+                                alt=''
                             />
                         </div>
                         <h1 className='text-[20px] text-white font-normal text-center'>Mari kita dapatkan solusi dari semua masalahmu bersama mentor terbaik</h1>
@@ -61,10 +63,12 @@ const HeroLanding = () => {
                     <Image
                         src={dotsPurple}
                         width={300}
+                        alt=''
                     />
                     <Image
                         src={dotsPurple}
                         width={300}
+                        alt=''
                     />
                 </div>
             </div>

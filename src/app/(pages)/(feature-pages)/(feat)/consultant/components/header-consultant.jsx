@@ -10,11 +10,13 @@ const HeaderConsultant = () => {
             <Image
             src={starYellow}
             className="absolute -top-16 -left-16"
+            alt=''
             />
             <h1 className='font-bold text-[48px]'>Konsultan Profesional RusCare</h1>
             <Image
             src={starYellow}
             className='absolute -right-16 -bottom-16'
+            alt=''
             />
         </div>
         <div className='flex justify-between absolute w-full'>

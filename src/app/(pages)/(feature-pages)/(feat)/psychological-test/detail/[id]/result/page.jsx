@@ -23,6 +23,7 @@ const ConclusionPage = () => {
                     <Image 
                     src={isSevereCase ? mentalPoblems : goodmental}
                     className='w-80'
+                    alt=''
                     />
                     <div>
                         <h1 className='text-[28px] text-textPrimary font-bold'>

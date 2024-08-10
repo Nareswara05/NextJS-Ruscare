@@ -19,6 +19,7 @@ export default async function ServiceLanding ()  {
             <Image
                 src={halfcircle}
                 className='absolute left-20 top-20'
+                alt=''
             />
             <div className='text-center'>
                 <h1 className='font-bold text-[36px]'>LAYANAN KONSULTASI</h1>

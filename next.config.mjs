@@ -2,7 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['api.ruscarestudent.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'api.ruscarestudent.com',
+        port: '',
+      },
+    ]
   },
   webpack: (config) => {
     config.module.rules.push({
