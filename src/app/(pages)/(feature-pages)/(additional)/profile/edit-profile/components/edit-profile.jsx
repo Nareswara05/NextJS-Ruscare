@@ -60,6 +60,7 @@ const EditProfile = () => {
           icon: "success",
           title: "Username berhasil diubah"
         });
+        window.location.reload();
       }
     } catch (error) {
       console.error("Error during registration:", error);
