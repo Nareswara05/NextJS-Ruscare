@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { AvatarTes, bgProfil } from '@/app/lib/utils/image';
 import Link from 'next/link';
 import getUser from '@/app/lib/service/endpoint/user/get-user';
+import { ClipLoader } from 'react-spinners';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -26,7 +27,11 @@ const Profile = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-screen bg-white flex justify-center items-center">
+        <ClipLoader size={50} color={"#123abc"} loading={loading} />
+      </div>
+    );
   }
 
   if (!userData) {
@@ -45,27 +50,25 @@ const Profile = () => {
   }
 
   let major = "";
-switch (userData.grade_id) {
-  case 1:
-    major = "PPLG";
-    break;
-  case 2:
-    major = "Animasi 3D";
-    break;
-  case 3:
-    major = "Animasi 2D";
-    break;
-  case 4:
-    major = "Design Grafis";
-    break;
-  case 5:
-    major = "Teknik Grafika";
-    break;
-  default:
-    major = "Unknown";
-}
-
-
+  switch (userData.grade_id) {
+    case 1:
+      major = "PPLG";
+      break;
+    case 2:
+      major = "Animasi 3D";
+      break;
+    case 3:
+      major = "Animasi 2D";
+      break;
+    case 4:
+      major = "Design Grafis";
+      break;
+    case 5:
+      major = "Teknik Grafika";
+      break;
+    default:
+      major = "Unknown";
+  }
 
   const imageUrl = `https://api.ruscarestudent.com/${userData.image}`;
 
@@ -78,12 +81,12 @@ switch (userData.grade_id) {
           alt="Background"
         />
       </div>
-      <div className='absolute items-center top-32 pb-8 px-[75px] max-w-[500px]  justify-center flex flex-col w-[500px] bg-white shadow-custom rounded-xl'>
+      <div className='absolute items-center top-32 pb-8 px-[75px] max-w-[500px] justify-center flex flex-col w-[500px] bg-white shadow-custom rounded-xl'>
         <div className='relative -top-16 flex flex-col items-center justify-center'>
           <Image
             src={imageUrl}
-            width={500}
-            height={500}
+            width={145}
+            height={145}
             className="w-[145px] border-white bg-primary border-8 object-cover h-full rounded-full"
             alt="Avatar"
           />
