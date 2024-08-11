@@ -10,6 +10,7 @@ import Logout from '@/app/lib/service/endpoint/auth/logout';
 import Swal from 'sweetalert2';
 import { CiLogout } from 'react-icons/ci';
 import getUser from '@/app/lib/service/endpoint/user/get-user';
+import { ClipLoader } from 'react-spinners';
 
 const MenuProfileDashboard = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,7 +64,7 @@ const MenuProfileDashboard = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <ClipLoader size={30} color={"#123abc"} loading={loading} />
       }
     
       if (!userData) {

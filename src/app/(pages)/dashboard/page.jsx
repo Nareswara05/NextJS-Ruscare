@@ -17,7 +17,7 @@ const Dashboard = () => {
       setShowPopup(true);
       intervalId = setInterval(() => {
         setShowPopup(true);
-      }, 5 * 60 * 1000); // 5 minutes
+      }, 5 * 60 * 1000);
     }
 
     return () => {

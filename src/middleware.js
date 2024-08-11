@@ -9,9 +9,17 @@ export function middleware(request) {
     /^\/dashboard\/.*$/,
     /^\/mailbox\/.*$/,
     /^\/auth\/login\/.*$/,
+    '/dashboard',
+    '/profile',
+    '/mailbox',
   ];
 
-  const isProtectedRoute = protectedRoutes.some((pattern) => pattern.test(url.pathname));
+  const isProtectedRoute = protectedRoutes.some((pattern) => {
+    if (typeof pattern === 'string') {
+      return url.pathname.startsWith(pattern);
+    }
+    return pattern.test(url.pathname);
+  });
 
   if (!token && isProtectedRoute) {
     url.pathname = '/auth/login';
@@ -27,5 +35,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/profile/:path*', '/dashboard/:path*', '/mailbox/:path*', '/auth/login/:path*'],
+  matcher: ['/profile/:path*', '/dashboard/:path*', '/mailbox/:path*', '/auth/login/:path*', '/dashboard', '/profile', '/mailbox'],
 };
