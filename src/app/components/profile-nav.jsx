@@ -11,6 +11,8 @@ import swal from 'sweetalert';
 import Swal from 'sweetalert2';
 import getUser from '../lib/service/endpoint/user/get-user';
 import Logout from '../lib/service/endpoint/auth/logout';
+import { ClipLoader } from "react-spinners";
+
 
 const ProfileMenuNav = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,7 +35,8 @@ const ProfileMenuNav = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <ClipLoader size={30} color={"#123abc"} loading={loading} />
+        ;
       }
     
       if (!userData) {
