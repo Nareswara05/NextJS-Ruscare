@@ -34,6 +34,22 @@ const ChangePassword = () => {
         setShowPassword(!showPassword);
     };
 
+    const handlePopup = () => {
+        Swal.fire({
+            title: "Apakah kamu yakin ingin mengganti kata sandi ?",
+            text: "Pastikan kata sandi yang kamu isi sudah benar",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Iya, ganti kata sandi!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleChangePassword();
+            };
+        })
+    }
+
     const handleChangePassword = async () => {
         if (newPassword !== confirmNewPassword) {
             const Toast = Swal.mixin({
@@ -90,7 +106,7 @@ const ChangePassword = () => {
                         toast.onmouseleave = Swal.resumeTimer;
                     }
                 });
-    
+
                 Toast.fire({
                     icon: "success",
                     title: "Berhasil mengubah kata sandi"
@@ -107,10 +123,10 @@ const ChangePassword = () => {
                         toast.onmouseleave = Swal.resumeTimer;
                     }
                 });
-    
+
                 Toast.fire({
                     icon: "error",
-                    title:  response.message || "Gagal mengubah kata sandi!"
+                    title: response.message || "Gagal mengubah kata sandi!"
                 });
             }
         } catch (error) {
@@ -170,7 +186,7 @@ const ChangePassword = () => {
                     </div>
                     <ButtonSubmit
                         title="Ganti Kata Sandi"
-                        onClick={handleChangePassword}
+                        onClick={handlePopup}
                     />
                 </div>
             </div>

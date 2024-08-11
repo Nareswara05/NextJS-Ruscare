@@ -31,19 +31,27 @@ const EditProfile = () => {
     fetchUserData();
   }, []);
 
-  const handleEdit = async () => {
-    console.log("handleEdit called");
-    console.log("Username:", username);
-    console.log("User ID:", userId);
-    if (!userId || !username) {
-      alert("User ID and Username are required");
-      return;
-    }
+  const handlePopup = () => {
+    Swal.fire({
+      title: "Apakah kamu yakin ingin mengganti username ?",
+      text: "Pastikan username yang kamu isi sudah benar",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Iya, ganti username!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleEdit();
+      }
+    });
+  };
 
-    try {
-      const response = await editUsername({ id: userId, username: username });
-      console.log("Response from registration:", response);
-      if (response && response.message === 'Username berhasil diubah') {
+    const handleEdit = async () => {
+      console.log("handleEdit called");
+      console.log("Username:", username);
+      console.log("User ID:", userId);
+      if (!userId || !username) {
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",
@@ -57,25 +65,48 @@ const EditProfile = () => {
         });
 
         Toast.fire({
-          icon: "success",
-          title: "Username berhasil diubah"
+          icon: "error",
+          title: "Username tidak boleh kosong"
         });
-        window.location.reload();
+        return;
       }
-    } catch (error) {
-      console.error("Error during registration:", error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Gagal mengubah username!, silahkan coba lagi!',
-      });
-    }
-  };
 
-  const handleImageChange = async (file) => {
-    if (!userId) return;
+      try {
+        const response = await editUsername({ id: userId, username: username });
+        console.log("Response from registration:", response);
+        if (response && response.message === 'Username berhasil diubah') {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
 
-    const result = await Swal.fire({
+          Toast.fire({
+            icon: "success",
+            title: "Username berhasil diubah"
+          });
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Error during registration:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Gagal mengubah username!, silahkan coba lagi!',
+        });
+      }
+    };
+
+    const handleImageChange = async (file) => {
+      if (!userId) return;
+
+      const result = await Swal.fire({
         title: 'Are you sure?',
         text: 'Do you want to update your profile picture?',
         icon: 'warning',
@@ -84,49 +115,49 @@ const EditProfile = () => {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, update it!',
         cancelButtonText: 'Cancel'
-    });
+      });
 
-    if (result.isConfirmed) {
+      if (result.isConfirmed) {
         try {
-            const response = await changeProfilePicture({ id: userId, file });
-            console.log("Response from image update:", response);
+          const response = await changeProfilePicture({ id: userId, file });
+          console.log("Response from image update:", response);
 
-            if (response && response.message === 'Image berhasil diubah') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Profile picture updated successfully!',
-                });
-                const updatedUser = await getUser();
-                setImage(updatedUser.image);
-            } else {
-                throw new Error(response.message || 'Image update failed');
-            }
-        } catch (error) {
-            console.error("Error during image update:", error);
+          if (response && response.message === 'Image berhasil diubah') {
             Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: error.message || 'Failed to update profile picture. Please try again.',
+              icon: 'success',
+              title: 'Success',
+              text: 'Profile picture updated successfully!',
             });
+            const updatedUser = await getUser();
+            setImage(updatedUser.image);
+          } else {
+            throw new Error(response.message || 'Image update failed');
+          }
+        } catch (error) {
+          console.error("Error during image update:", error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.message || 'Failed to update profile picture. Please try again.',
+          });
         }
-    }
-};
+      }
+    };
 
 
-  return (
-    <div className='flex gap-20'>
-      <ChangeProfilePicture image={image} onImageChange={handleImageChange} />
-      <div className='flex flex-col w-full items-end'>
-        <EditForm
-          placeholder="Masukkan Nama Baru Anda"
-          label="Ganti Username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <ButtonSubmit onClick={handleEdit} title="Update Profile" />
+    return (
+      <div className='flex gap-20'>
+        <ChangeProfilePicture image={image} onImageChange={handleImageChange} />
+        <div className='flex flex-col w-full items-end'>
+          <EditForm
+            placeholder="Masukkan Nama Baru Anda"
+            label="Ganti Username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <ButtonSubmit onClick={handlePopup} title="Update Profile" />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
-export default EditProfile;
+  export default EditProfile;
