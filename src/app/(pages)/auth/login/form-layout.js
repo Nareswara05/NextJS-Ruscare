@@ -84,9 +84,9 @@ function LoginStudent() {
             setShowPopup(true);
           }
         }
-
         setTimeout(() => {
           router.push("/dashboard");
+          window.location.reload(); 
         });
       }
     } catch (error) {
