@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,18 +10,16 @@ const formatDate = (dateString) => {
   return new Intl.DateTimeFormat('id-ID', options).format(date);
 };
 
-export default function ArticleCards({ data, categories }) {
-
+export default function ArticleCards({ data, categories = [] }) {
 
   const getCategoryName = (id) => {
     const category = categories.find(category => category.id === id);
     return category ? category.category_name : "Unknown Category";
-  };
+};
 
   const imageUrl = `https://api.ruscarestudent.com/${data.featured_image}`;
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
       <Link
         href={{
           pathname: `/article/${data.id}`,
@@ -51,6 +49,5 @@ export default function ArticleCards({ data, categories }) {
           />
         </div>
       </Link>
-    </Suspense>
   );
 }
