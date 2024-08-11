@@ -30,7 +30,7 @@ const ChangeProfilePicture = ({ image, onImageChange }) => {
                     height={500}
                 />
             </div>
-            <label className='p-3 text-xl bg-primary text-white absolute right-0 bottom-0 rounded-full cursor-pointer'>
+            <label className='p-3 text-xl hover:bg-purple-700 bg-primary text-white absolute right-0 bottom-0 rounded-full cursor-pointer'>
                 <TbEdit />
                 <input
                     type='file'

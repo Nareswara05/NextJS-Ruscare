@@ -9,6 +9,7 @@ function EditForm({label, value, onChange, placeholder, type, error}) {
                 onChange={onChange}
                 placeholder={placeholder}
                 type={type}
+                required
             />
             {error && <p className="error text-red-600">{error}</p>}
         </div>

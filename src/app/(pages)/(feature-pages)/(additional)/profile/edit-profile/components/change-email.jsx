@@ -17,10 +17,9 @@ const ChangeEmail = () => {
         const fetchUserData = async () => {
             try {
                 const user = await getUser();
-                console.log("Fetched user:", user);
                 if (user) {
                     setUserId(user.id);
-                    setStoredEmail(user.email); 
+                    setStoredEmail(user.email);
                 }
             } catch (error) {
                 console.error("Failed to fetch user data:", error);
@@ -30,17 +29,48 @@ const ChangeEmail = () => {
         fetchUserData();
     }, []);
 
+    const handlePopup = () => {
+        Swal.fire({
+            title: "Apakah kamu yakin ingin mengganti email ?",
+            text: "Pastikan email yang kamu isi sudah benar",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Iya, ganti email!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleEdit();
+            }
+        });
+    }
+
     const handleEdit = async () => {
         console.log("handleEdit called");
         console.log("Old Email:", oldEmail);
         console.log("New Email:", newEmail);
         console.log("Stored Email:", storedEmail);
         console.log("User ID:", userId);
-        
+
         if (!userId || !oldEmail || !newEmail) {
-            alert("User ID, Old Email, and New Email are required");
-            return;
-        }
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+
+            Toast.fire({
+                icon: "error",
+                title: "Email lama, dan email baru wajib diisi!"
+            });
+            }
+        
 
         if (oldEmail !== storedEmail) {
             const Toast = Swal.mixin({
@@ -102,7 +132,7 @@ const ChangeEmail = () => {
                     icon: "success",
                     title: "Email berhasil diubah!"
                 });
-                const updatedUser = { ...response.data, email: newEmail }; // gunakan data dari respons server
+                const updatedUser = { ...response.data, email: newEmail };
                 localStorage.setItem('user', JSON.stringify(updatedUser));
             }
         } catch (error) {
@@ -146,7 +176,7 @@ const ChangeEmail = () => {
             <div className='flex items-end justify-end'>
                 <ButtonSubmit
                     title="Ganti Email"
-                    onClick={handleEdit}
+                    onClick={handlePopup}
                 />
             </div>
         </div>
