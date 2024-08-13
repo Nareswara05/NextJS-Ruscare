@@ -92,6 +92,23 @@ const EditProfile = () => {
             title: "Username berhasil diubah"
           });
           window.location.reload();
+        } if(response && response.message === 'Username sudah digunakan') {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+
+          Toast.fire({
+            icon: "error",
+            title: "Username sudah digunakan"
+          });
         }
       } catch (error) {
         console.error("Error during registration:", error);
