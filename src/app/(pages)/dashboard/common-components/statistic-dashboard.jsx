@@ -10,7 +10,7 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { IoCalendarClearOutline, IoCheckmarkDone } from 'react-icons/io5';
 import { TbCalendarClock } from "react-icons/tb";
 import { MdEvent, MdHourglassEmpty } from 'react-icons/md';
-import { RiCalendarScheduleLine, RiServiceLine } from 'react-icons/ri';
+import { RiCalendarScheduleLine, RiProgress2Line, RiServiceLine } from 'react-icons/ri';
 import Link from 'next/link';
 import { BsCalendarX } from "react-icons/bs";
 
@@ -46,6 +46,14 @@ const statsData = [
   },
   {
     id: 4,
+    title: 'Sedang Berlangsung',
+    count: getCountByStatus('ongoing'),
+    color: '#FF6827',
+    icon: <RiProgress2Line  />,
+    status: 'ongoing',
+  },
+  {
+    id: 5,
     title: 'Jadwal Ulang',
     count: getCountByStatus('reschedule'),
     color: '#9F41EA',
@@ -53,7 +61,7 @@ const statsData = [
     status: 'reschedule',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Dibatalkan',
     count: getCountByStatus('canceled'),
     color: '#FF3797',
@@ -61,7 +69,7 @@ const statsData = [
     status: 'canceled',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Kadaluarsa',
     count: getCountByStatus('expired'),
     color: '#808080',
