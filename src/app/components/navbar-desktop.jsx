@@ -13,7 +13,7 @@ function NavbarDesktop() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const markerRef = useRef(null);
-  const pathname = usePathname(); // Get the current pathname
+  const pathname = usePathname(); 
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,14 +23,14 @@ function NavbarDesktop() {
       { threshold: 0.1 }
     );
   
-    const currentMarkerRef = markerRef.current; // Store the current value of markerRef.current
+    const currentMarkerRef = markerRef.current; 
   
     if (currentMarkerRef) {
       observer.observe(currentMarkerRef);
     }
   
     return () => {
-      if (currentMarkerRef) { // Use the stored value in the cleanup function
+      if (currentMarkerRef) { 
         observer.unobserve(currentMarkerRef);
       }
     };
