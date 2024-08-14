@@ -93,7 +93,7 @@ const data = [
         "location": "Lab PPLG",
         "mentor": "Ibu Siti",
         "detail": "Thank oil choose system.",
-        "status": "pending"
+        "status": "ongoing"
     },
     {
         "name": "Grant",
