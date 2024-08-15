@@ -161,7 +161,7 @@ function LoginStudent() {
           <h4 className="text-black text-xs sm:text-[16px] flex justify-center gap-3">
             Kamu adalah mentor?{" "}
             <Link
-              href="http://localhost:3001"
+              href="https://ruscare-mentor.vercel.app/"
               className="text-primary text-xs sm:text-[16px] font-semibold"
             >
               Masuk
