@@ -1,5 +1,4 @@
 import { student, students } from "@/app/lib/utils/image";
-import { logoPurple } from "@/app/lib/utils/svg";
 import Image from "next/image";
 import LoginForm from './form-layout';
 
