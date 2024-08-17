@@ -87,7 +87,7 @@ const Profile = () => {
             src={imageUrl}
             width={145}
             height={145}
-            className="w-[145px] border-white bg-primary border-8 object-cover h-full rounded-full"
+            className="w-[145px] h-[145px] border-white bg-primary border-8 object-cover  rounded-full"
             alt="Avatar"
           />
           <h1 className='text-[22px] font-bold text-center text-textPrimary'>{userData.name}</h1>
