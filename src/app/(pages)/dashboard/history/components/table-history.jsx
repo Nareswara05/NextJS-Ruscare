@@ -12,14 +12,18 @@ const TableHistory = () => {
 
     const getStatusStyles = (status) => {
         switch (status) {
-            case 'Akan Datang':
-                return 'bg-blue-100 text-blue-800 font-medium';
-            case 'Selesai':
-                return 'bg-green-100 text-green-800 font-medium';
-            case 'Dibatalkan':
-                return 'bg-red-100 text-red-800 font-medium';
-            case 'Kadaluarsa':
-                return 'bg-gray-100 text-gray-500 font-medium';
+            case 'upcoming':
+                return 'bg-[#F4C918] text-center text-[#F4C918] bg-opacity-30 font-medium';
+            case 'rejected':
+                return 'bg-[#FF3797] text-center text-[#FF3797] bg-opacity-30 font-medium';
+            case 'done':
+                return 'bg-[#3AAC75] text-center text-[#3AAC75] bg-opacity-30 font-medium';
+            case 'pending':
+                return 'bg-[#8280FF] text-center text-[#8280FF] bg-opacity-30 font-medium';
+            case 'reschedule':
+                return 'bg-[#9F41EA] text-center text-[#9F41EA] bg-opacity-30 font-medium';
+            case 'ongoing':
+                return 'bg-[#FF6827] text-center text-[#FF6827] bg-opacity-30 font-medium';
             default:
                 return '';
         }

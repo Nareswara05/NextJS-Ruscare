@@ -38,9 +38,14 @@ function NavbarDesktop() {
   
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsLoggedIn(true);
+    const cookies = document.cookie.split('; ');
+    const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));
+
+    if (tokenCookie) {
+      const token = tokenCookie.split('=')[1];
+      if (token) {
+        setIsLoggedIn(true);
+      }
     }
   }, []);
 
