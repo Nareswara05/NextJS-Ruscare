@@ -14,9 +14,7 @@ import Swal from 'sweetalert2';
 const TableConsultation = ({ status, title }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
-
     const filteredData = data.filter(item => item.status === status);
-
     const tableHead = ["Layanan", "Kategori", "Tanggal", "Waktu", "Aksi"];
 
     const openModal = (item) => {
@@ -62,7 +60,7 @@ const TableConsultation = ({ status, title }) => {
         });
     };
 
-    
+
 
     return (
         <div className="pt-12">
@@ -96,7 +94,7 @@ const TableConsultation = ({ status, title }) => {
                                     >
                                         <IoMdEye size={24} />
                                     </button>
-                                    {(status === 'pending' ||  status === 'upcoming' || status === 'reschedule') && (
+                                    {(status === 'pending' || status === 'upcoming' || status === 'reschedule') && (
                                         <button
                                             title="Cancel"
                                             className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg"

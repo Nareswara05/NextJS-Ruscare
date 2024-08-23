@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import loginStudent from "@/app/lib/service/endpoint/auth/login-student";
 import EmailPopup from "../../dashboard/components/popup-email";
 import Swal from "sweetalert2";
+import { windows } from "fontawesome";
 
 function LoginStudent() {
   const [nis_or_email, setNis_or_email] = useState("");
@@ -85,7 +86,8 @@ function LoginStudent() {
           }
         }
         setTimeout(() => {
-          router.push("/");
+          router.push("/dashboard");
+          window.location.reload();
         });
       }
     } catch (error) {
