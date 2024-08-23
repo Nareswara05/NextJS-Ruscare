@@ -14,7 +14,7 @@ const TableHistory = () => {
         switch (status) {
             case 'upcoming':
                 return 'bg-[#F4C918] text-center text-[#F4C918] bg-opacity-30 font-medium';
-            case 'rejected':
+            case 'canceled':
                 return 'bg-[#FF3797] text-center text-[#FF3797] bg-opacity-30 font-medium';
             case 'done':
                 return 'bg-[#3AAC75] text-center text-[#3AAC75] bg-opacity-30 font-medium';
@@ -22,8 +22,8 @@ const TableHistory = () => {
                 return 'bg-[#8280FF] text-center text-[#8280FF] bg-opacity-30 font-medium';
             case 'reschedule':
                 return 'bg-[#9F41EA] text-center text-[#9F41EA] bg-opacity-30 font-medium';
-            case 'ongoing':
-                return 'bg-[#FF6827] text-center text-[#FF6827] bg-opacity-30 font-medium';
+            case 'expired':
+                return 'bg-[#808080] text-center text-[#808080] bg-opacity-30 font-medium';
             default:
                 return '';
         }
@@ -59,7 +59,7 @@ const TableHistory = () => {
                         <tr key={index} className="border-b border-gray-200 hover:bg-gray-50 transition text-textPrimary">
                             <td className="py-3 px-4">{item.service}</td>
                             <td className="py-3 px-4">{item.category}</td>
-                            <td className={`py-3 px-4 font-semibold ${getStatusStyles(item.status)}`}>{item.status}</td>
+                            <td className={`px-4 py-4 font-semibold rounded-xl ${getStatusStyles(item.status)}`}>{item.status}</td>
                             <td className="py-3 px-4">{item.dateTime}</td>
                         </tr>
                     ))}

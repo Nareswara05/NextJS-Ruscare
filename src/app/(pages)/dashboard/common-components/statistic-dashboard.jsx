@@ -46,14 +46,6 @@ const statsData = [
   },
   {
     id: 4,
-    title: 'Sedang Berlangsung',
-    count: getCountByStatus('ongoing'),
-    color: '#FF6827',
-    icon: <RiProgress2Line  />,
-    status: 'ongoing',
-  },
-  {
-    id: 5,
     title: 'Jadwal Ulang',
     count: getCountByStatus('reschedule'),
     color: '#9F41EA',
@@ -61,7 +53,7 @@ const statsData = [
     status: 'reschedule',
   },
   {
-    id: 6,
+    id: 5,
     title: 'Dibatalkan',
     count: getCountByStatus('canceled'),
     color: '#FF3797',
@@ -69,7 +61,7 @@ const statsData = [
     status: 'canceled',
   },
   {
-    id: 7,
+    id: 6,
     title: 'Kadaluarsa',
     count: getCountByStatus('expired'),
     color: '#808080',
