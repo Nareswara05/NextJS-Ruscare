@@ -1,10 +1,10 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import DashboardStats from './common-components/statistic-dashboard'
 import TableConsultation from './common-components/table-consultation'
 import { useUser } from '@/app/lib/hooks/use-user';
 import EmailPopup from './components/popup-email';
+import ConsultationDashboard from './common-components/consultation-dashboard';
 
 const Dashboard = () => {
   const { user, loading } = useUser();
@@ -33,7 +33,7 @@ const Dashboard = () => {
       {showPopup && user && user.email === null && (
         <EmailPopup userId={user.id} closePopup={() => setShowPopup(false)} />
       )}
-      <DashboardStats />
+      <ConsultationDashboard />
     </div>
   )
 }
