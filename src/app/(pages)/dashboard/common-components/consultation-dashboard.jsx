@@ -12,6 +12,8 @@ import Link from 'next/link';
 import { RiServiceLine } from 'react-icons/ri';
 import instance from '@/app/lib/service/instance/instance';
 import getCountDashboard from '@/app/lib/service/endpoint/dashboard/count-dashboard';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const statusIcons = {
     'Menunggu Konfirmasi': <MdHourglassEmpty color='#8280FF' />,
@@ -36,6 +38,7 @@ const ConsultationDashboard = () => {
     const [statusCounts, setStatusCounts] = useState({});
     const [selectedStatus, setSelectedStatus] = useState(null);
     const [consultations, setConsultations] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchStatusList = async () => {
@@ -72,6 +75,8 @@ const ConsultationDashboard = () => {
                 } catch (error) {
                     console.error("Failed to fetch consultations:", error);
                     setConsultations([]); 
+                } finally {
+                    setLoading(false);
                 }
             };
 
@@ -91,30 +96,39 @@ const ConsultationDashboard = () => {
                 </Link>
             </div>
             <div className='grid grid-cols-3 gap-3 pt-8'>
-                {statusList.map(status => {
-                    const statusKey = statusKeyMapping[status.status];
-                    const count = statusCounts[statusKey] || 0; 
-                    const iconColor = statusIcons[status.status].props.color; 
-                    const bgColor = `${iconColor}33`;
-
-                    return (
-                        <div
-                            key={status.id}
-                            className={`flex w-full justify-between hover:scale-110 transition-transform duration-400 p-4 bg-white shadow-custom rounded-lg cursor-pointer ${selectedStatus === status.id ? 'ring-2 ring-primary' : ''}`}
-                            onClick={() => setSelectedStatus(status.id)}
-                        >
-                            <div className='flex flex-col gap-4'>
-                                <h2 className='text-[16px] text-textPrimary font-semibold'>{status.status}</h2>
-                                <h1 className='text-textPrimary text-[32px] font-bold'>{count}</h1>
-                            </div>
-                            <div className={`p-4 text-3xl h-fit rounded-2xl`} style={{ color: iconColor, backgroundColor: bgColor }}>
-                                {statusIcons[status.status]}
-                            </div>
+                {statusList.length === 0 ? (
+                    Array.from({ length: 3 }).map((_, index) => (
+                        <div key={index} className="flex flex-col gap-4 p-4 bg-white shadow-custom rounded-lg">
+                            <Skeleton width="100%" height="20px" />
+                            <Skeleton width="60%" height="32px" />
                         </div>
-                    );
-                })}
+                    ))
+                ) : (
+                    statusList.map(status => {
+                        const statusKey = statusKeyMapping[status.status];
+                        const count = statusCounts[statusKey] || 0; 
+                        const iconColor = statusIcons[status.status].props.color; 
+                        const bgColor = `${iconColor}33`;
+
+                        return (
+                            <div
+                                key={status.id}
+                                className={`flex w-full justify-between hover:scale-110 transition-transform duration-400 p-4 bg-white shadow-custom rounded-lg cursor-pointer ${selectedStatus === status.id ? 'ring-2 ring-primary' : ''}`}
+                                onClick={() => setSelectedStatus(status.id)}
+                            >
+                                <div className='flex flex-col gap-4'>
+                                    <h2 className='text-[16px] text-textPrimary font-semibold'>{status.status}</h2>
+                                    <h1 className='text-textPrimary text-[32px] font-bold'>{count}</h1>
+                                </div>
+                                <div className={`p-4 text-3xl h-fit rounded-2xl`} style={{ color: iconColor, backgroundColor: bgColor }}>
+                                    {statusIcons[status.status]}
+                                </div>
+                            </div>
+                        );
+                    })
+                )}
             </div>
-            {selectedStatus && <TableConsultation status={selectedStatus} title={statusList.find(s => s.id === selectedStatus)?.status || 'Konsultasi'} consultations={consultations} />}
+            {selectedStatus && <TableConsultation status={selectedStatus} title={statusList.find(s => s.id === selectedStatus)?.status || 'Konsultasi'} consultations={consultations} loading={loading} />}
         </div>
     );
 };

@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoMdEye } from 'react-icons/io';
 import { RxCross2 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
 import Link from 'next/link';
+import getUser from '@/app/lib/service/endpoint/user/get-user';
+import { VscLocation } from 'react-icons/vsc';
+import { PiClockCountdownLight } from "react-icons/pi";
+import { BsCalendar2Week } from 'react-icons/bs';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-const TableConsultation = ({ consultations = [], title }) => {
+const TableConsultation = ({ consultations = [], title, loading }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
+    const [userData, setUserData] = useState(null);
     const tableHead = ["Layanan", "Kategori", "Tanggal", "Waktu", "Aksi"];
 
     const openModal = (item) => {
@@ -52,6 +59,40 @@ const TableConsultation = ({ consultations = [], title }) => {
         });
     };
 
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const data = await getUser();
+                setUserData(data);
+            } catch (error) {
+                console.error("Failed to fetch user data:", error);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    let major = "";
+    switch (userData?.grade_id) {
+        case 1:
+            major = "PPLG";
+            break;
+        case 2:
+            major = "Animasi 3D";
+            break;
+        case 3:
+            major = "Animasi 2D";
+            break;
+        case 4:
+            major = "Design Grafis";
+            break;
+        case 5:
+            major = "Teknik Grafika";
+            break;
+        default:
+            major = "Unknown";
+    }
+
     return (
         <div className="pt-12">
             <div className="flex justify-between">
@@ -70,7 +111,17 @@ const TableConsultation = ({ consultations = [], title }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {consultations.length > 0 ? (
+                        {loading ? (
+                            Array.from({ length: 5 }).map((_, index) => (
+                                <tr key={index} className="border-b border-gray-200">
+                                    {tableHead.map((_, i) => (
+                                        <td key={i} className="py-4 px-4">
+                                            <Skeleton width="100%" height="20px" />
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))
+                        ) : consultations.length > 0 ? (
                             consultations.map((item, index) => (
                                 <tr key={index} className="border-b border-gray-200 text-textPrimary">
                                     <td className="py-4 px-4">{item.service}</td>
@@ -114,23 +165,32 @@ const TableConsultation = ({ consultations = [], title }) => {
                         <h2 className="text-2xl font-semibold mb-4">Detail Konsultasi</h2>
                         <div className="flex flex-row gap-6 items-center">
                             <div className="flex gap-2 text-textPrimary">
+                                <div className="text-2xl">
+                                    <PiClockCountdownLight />
+                                </div>
                                 <h2 className="font-semibold text-[16px]">{selectedData.time}</h2>
                             </div>
                             <hr className="border-textPrimary border-1 w-4 rotate-90" />
                             <div className="flex gap-2 text-textPrimary">
-                                <h2 className="font-semibold text-[16px]">{selectedData.date}</h2>
+                                <div className="text-2xl">
+                                    <BsCalendar2Week />
+                                </div>
+                                <h2 className="font-semibold text-[16px]">{selectedData.counseling_date}</h2>
                             </div>
                             <hr className="border-textPrimary border-1 w-4 rotate-90" />
                             <div className="flex gap-2 text-textPrimary">
-                                <h2 className="font-semibold text-[16px]">{selectedData.location}</h2>
+                                <div className="text-3xl">
+                                    <VscLocation />
+                                </div>
+                                <h2 className="font-semibold text-[16px]">{selectedData.place ?? 'belum ditentukan'}</h2>
                             </div>
                         </div>
                         <div className="flex flex-col gap-2 pt-4">
-                            <p><strong>Nama :</strong> {selectedData.name}</p>
-                            <p><strong>Jurusan :</strong> {selectedData.jurusan}</p>
+                            <p><strong>Nama :</strong> {userData?.name ?? 'Belum tersedia'}</p>
+                            <p><strong>Jurusan :</strong> {major ?? 'Belum tersedia'}</p>
                             <p><strong>Layanan :</strong> {selectedData.service}</p>
-                            <p><strong>Kategori :</strong> {selectedData.category}</p>
-                            <p><strong>Mentor :</strong> {selectedData.mentor}</p>
+                            <p><strong>Kategori :</strong> {selectedData.subject}</p>
+                            <p><strong>Mentor :</strong> {userData?.grade_id ?? 'Belum tersedia'}</p>
                         </div>
                         <button
                             className="mt-8 w-full py-4 font-bold bg-primary text-white rounded-lg hover:bg-purple-600"
