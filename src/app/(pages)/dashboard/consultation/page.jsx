@@ -25,7 +25,6 @@ const ConsultationPage = () => {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      // Display confirmation dialog
       const result = await Swal.fire({
         title: 'Konfirmasi',
         text: `Tanggal: ${date}\nWaktu: ${time}\nLayanan: ${service}\nKategori: ${category}`,
