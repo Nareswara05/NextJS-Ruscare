@@ -41,7 +41,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
         if (text) {
             try {
                 const response = await CancelCounseling({ counselingId: item.id, message: text });
-                if (response.message == "Status Counseling berhasil diubah") {
+                if (response.message == "Data Counseling berhasil diubah") {
                     Swal.fire({
                         title: "Konsultasi berhasil dibatalkan",
                         icon: "success",

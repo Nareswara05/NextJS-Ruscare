@@ -1,39 +1,25 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ActionMailbox from './components/action-mailbox';
 import MailList from './components/mail-list';
 import SearchMailbox from './components/search-mailbox';
 import MailDetailPopup from './components/detail-mail-popup';
-const Page = () => {
-    const [selectedMail, setSelectedMail] = useState(null);
+import getMailboxUser from '@/app/lib/service/endpoint/user/mailbox-user';
 
-    const dataMail = [
-        {
-            id: 1,
-            title: 'Mailbox 1',
-            date: '12/12/2021',
-            mentor_name: "Devyta",
-            student_name: "Rizky",
-            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, consequat nibh. Lorem ipsum...'
-        },
-        {
-            id: 2,
-            title: 'Mailbox 2',
-            date: '12/12/2021',
-            mentor_name: "Devyta",
-            student_name: "Rizky",
-            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, consequat nibh. Lorem ipsum...'
-        },
-        {
-            id: 3,
-            title: 'Mailbox 3',
-            date: '12/12/2021',
-            mentor_name: "Devyta",
-            student_name: "Rizky",
-            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, consequat nibh. Lorem ipsum...'
-        },
-    ];
+const Page = () => {
+    const [mails, setMails] = useState([]);
+    const [selectedMail, setSelectedMail] = useState(null);
+    const [loading, setLoading] = useState(true); 
+    useEffect(() => {
+        const fetchMails = async () => {
+            const data = await getMailboxUser();  
+            setMails(data);  
+            setLoading(false);  
+        };
+
+        fetchMails();
+    }, []);
 
     const handleMailClick = (mail) => {
         setSelectedMail(mail);
@@ -49,13 +35,17 @@ const Page = () => {
                 <SearchMailbox />
                 <ActionMailbox />
             </div>
-            {dataMail.map((data) => (
-                <MailList
-                    key={data.id}
-                    data={data}
-                    onClick={() => handleMailClick(data)}
-                />
-            ))}
+            {loading ? (
+                <p>Loading...</p> 
+            ) : (
+                mails.map((mail) => (
+                    <MailList
+                        key={mail.id}
+                        data={mail}
+                        onClick={() => handleMailClick(mail)}
+                    />
+                ))
+            )}
             <MailDetailPopup data={selectedMail} onClose={handleClosePopup} />
         </div>
     );

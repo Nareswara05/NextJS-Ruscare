@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 
 export default function MailList({ data, onClick }) {
@@ -20,11 +19,11 @@ export default function MailList({ data, onClick }) {
                                 {data.title}
                             </h1>
                             <h1 className="text-[10px] text-textPrimary font-normal truncate w-28">
-                                {data.desc}
+                                {data.message}
                             </h1>
                         </div>
                     </div>
-                    <h1 className="text-[14px] text-textPrimary font-normal">{data.date}</h1>
+                    <h1 className="text-[14px] text-textPrimary font-normal">{data.created_at}</h1>
                 </div>
             </div>
         </div>
