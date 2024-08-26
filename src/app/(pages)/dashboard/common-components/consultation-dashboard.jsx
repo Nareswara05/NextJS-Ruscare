@@ -5,7 +5,7 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import { RiCalendarScheduleLine } from 'react-icons/ri';
 import { RxCross2 } from 'react-icons/rx';
 import { BsCalendarX } from "react-icons/bs";
-import getStatusCounseling from '@/app/lib/service/endpoint/api/status-counseling';
+import getStatusCounseling from '@/app/lib/service/endpoint/dashboard/status-counseling';
 import { getConsultationByStatus } from '@/app/lib/service/endpoint/dashboard/counseling-by-status';
 import TableConsultation from './table-consultation';
 import Link from 'next/link';

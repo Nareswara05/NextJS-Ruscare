@@ -1,8 +1,8 @@
 import instance from "../../instance/instance";
 
-export default async function changePassword({ id, password }) {
+export default async function changePassword({ password }) {
     try {
-        const response = await instance.post(`/student/edit-password/${id}`, {
+        const response = await instance.post('/student/edit-password', {
         password: password,
         });
         return response.data;

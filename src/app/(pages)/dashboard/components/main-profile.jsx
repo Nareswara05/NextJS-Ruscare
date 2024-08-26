@@ -87,7 +87,7 @@ const MenuProfileDashboard = () => {
             </div>
 
             {isMenuOpen && (
-                <div className='absolute top-20 right-0 bg-white py-[20px] w-[226px] shadow-lg px-[10px] rounded-xl'>
+                <div className='absolute z-50 top-20 right-0 bg-white py-[20px] w-[226px] shadow-lg px-[10px] rounded-xl'>
                     <ul>
                     <li className= 'cursor-pointer flex text-textPrimary gap-3 w-full hover:bg-gray-100 p-[10px] rounded-lg'>
                             <Link href="/profile" className='flex gap-3 items-center'>
