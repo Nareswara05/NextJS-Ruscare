@@ -9,6 +9,7 @@ import { PiClockCountdownLight } from "react-icons/pi";
 import { BsCalendar2Week } from 'react-icons/bs';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import CancelCounseling from '@/app/lib/service/endpoint/dashboard/cancel-counseling';
 
 const TableConsultation = ({ consultations = [], title, loading }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,38 +27,47 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
         setSelectedData(null);
     };
 
-    const handleCancel = (item) => {
-        Swal.fire({
-            title: 'Apakah kamu yakin ingin membatalkan konsultasi ini?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Ya, batalkan',
-            cancelButtonText: 'Tidak'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log('Konsultasi dibatalkan:', item);
-
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-
-                Toast.fire({
-                    icon: "success",
-                    title: "Konsultasi berhasil dibatalkan"
-                });
-            }
+    const handleCancel = async (item) => {
+        const { value: text } = await Swal.fire({
+            input: "textarea",
+            inputLabel: "Apa alasan kamu membatalkan konsultasi?",
+            inputPlaceholder: "Masukkan alasan pembatalan konsultasi disini...",
+            inputAttributes: {
+                "aria-label": "Type your message here"
+            },
+            showCancelButton: true
         });
+    
+        if (text) {
+            try {
+                const response = await CancelCounseling({ counselingId: item.id, message: text });
+                if (response.message == "Status Counseling berhasil diubah") {
+                    Swal.fire({
+                        title: "Konsultasi berhasil dibatalkan",
+                        icon: "success",
+                        willClose: () => {
+                            window.location.reload(); 
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Gagal membatalkan konsultasi",
+                        text: response.message || "Terjadi kesalahan saat membatalkan konsultasi.",
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Gagal membatalkan konsultasi",
+                    text: "Terjadi kesalahan saat menghubungi server.",
+                });
+                console.error('Error cancelling consultation:', error);
+            }
+        }
     };
+    
+    
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -187,11 +197,13 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                         </div>
                         <div className="flex flex-col gap-2 pt-4">
                             <p><strong>Nama :</strong> {userData?.name ?? 'Belum tersedia'}</p>
-                            <p><strong>Jurusan :</strong> {major ?? 'Belum tersedia'}</p>
+                            <p><strong>Jurusan :</strong> {userData?.grade_id ?? 'Belum tersedia'}</p>
                             <p><strong>Layanan :</strong> {selectedData.service}</p>
                             <p><strong>Kategori :</strong> {selectedData.subject}</p>
-                            <p><strong>Mentor :</strong> {userData?.grade_id ?? 'Belum tersedia'}</p>
+                            <p><strong>Mentor :</strong> {selectedData.mentor ?? 'Belum tersedia'}</p>
                         </div>
+                        <h1 className='text-xl font-bold text-textPrimary pt-4'>Catatan </h1>
+                        <p className='text-sm'>{selectedData.note ?? 'Tidak ada catatan'}</p>
                         <button
                             className="mt-8 w-full py-4 font-bold bg-primary text-white rounded-lg hover:bg-purple-600"
                             onClick={closeModal}

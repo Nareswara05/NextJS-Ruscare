@@ -6,9 +6,10 @@ import { PiClockCountdownLight } from 'react-icons/pi'; // Make sure to install 
 import { BsCalendar2Week } from 'react-icons/bs';
 import { VscLocation } from 'react-icons/vsc';
 import getHistoryStudent from '@/app/lib/service/endpoint/dashboard/history-student';
-import getStatusCounseling from '@/app/lib/service/endpoint/api/status-counseling';
 import getUser from '@/app/lib/service/endpoint/user/get-user';
 import { IoMdEye } from 'react-icons/io';
+import getStatusCounseling from '@/app/lib/service/endpoint/api/list-status';
+import Skeleton from 'react-loading-skeleton';
 
 const TableHistory = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -69,20 +70,20 @@ const TableHistory = () => {
 
     const getStatusStyles = (statusName) => {
         switch (statusName) {
-            case 'Upcoming':
+            case 'Akan Datang':
                 return 'bg-[#F4C918] text-[#F4C918] bg-opacity-30 font-medium';
-            case 'Canceled':
+            case 'Dibatalkan':
                 return 'bg-[#FF3797] text-[#FF3797] bg-opacity-30 font-medium';
-            case 'Done':
+            case 'Selesai':
                 return 'bg-[#3AAC75] text-[#3AAC75] bg-opacity-30 font-medium';
-            case 'Pending':
+            case 'Menunggu Konfirmasi':
                 return 'bg-[#8280FF] text-[#8280FF] bg-opacity-30 font-medium';
-            case 'Rescheduled':
+            case 'Jadwal Ulang':
                 return 'bg-[#9F41EA] text-[#9F41EA] bg-opacity-30 font-medium';
-            case 'Expired':
+            case 'Tidak Hadir':
                 return 'bg-[#808080] text-[#808080] bg-opacity-30 font-medium';
             default:
-                return 'bg-gray-200 text-gray-500'; // Fallback style
+                return 'bg-gray-200 text-gray-500';
         }
     };
 
@@ -107,7 +108,35 @@ const TableHistory = () => {
     };
 
     if (loading) {
-        return <div className="p-4 bg-gray-50 min-h-[520px] rounded-lg shadow-md flex items-center justify-center">Loading...</div>;
+        return (
+            <div className="p-4 min-h-[520px] rounded-lg ">
+                <table className="min-w-full bg-white rounded-lg overflow-hidden">
+                    <thead className="bg-gray-100">
+                        <tr>
+                            {tableHead.map((item, index) => (
+                                <th
+                                    key={index}
+                                    className="py-3 px-4 text-gray-700 font-semibold text-left"
+                                >
+                                    {item}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Array.from({ length: pageSize }).map((_, index) => (
+                            <tr key={index} className="border-b border-gray-200">
+                                {tableHead.map((_, i) => (
+                                    <td key={i} className="py-3 px-4 bg-transparent">
+                                        <Skeleton width="100%" height="20px" />
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        );
     }
 
     if (error) {
@@ -134,7 +163,7 @@ const TableHistory = () => {
                         <tr key={index} className="border-b border-gray-200 hover:bg-gray-50 transition text-textPrimary">
                             <td className="py-3 px-4">{item.service}</td>
                             <td className="py-3 px-4">{item.subject}</td>
-                            <td className={`px-4 py-4 font-semibold rounded-xl ${getStatusStyles(getStatusName(item.counseling_status_id))}`}>
+                            <td className={`px-4 py-4 font-semibold rounded-xl text-center ${getStatusStyles(getStatusName(item.counseling_status_id))}`}>
                                 {getStatusName(item.counseling_status_id)}
                             </td>
                             <td className="py-3 px-4">{item.counseling_date}</td>
@@ -204,8 +233,8 @@ const TableHistory = () => {
                             <p><strong>Kategori :</strong> {selectedData.subject}</p>
                             <p><strong>Mentor :</strong> {selectedData.mentor ?? 'Belum tersedia'}</p>
                         </div>
-                        <h1 className='text-xl font-bold text-textPrimary pt-4'>Catatan dari Guru BK</h1>
-                        <p className='text-sm'>{selectedData.note ?? 'Guru BK tidak meninggalkan catatan'}</p>
+                        <h1 className='text-xl font-bold text-textPrimary pt-4'>Catatan </h1>
+                        <p className='text-sm'>{selectedData.note ?? 'Tidak ada catatan'}</p>
                         <button
                             className="mt-8 w-full py-4 font-bold bg-primary text-white rounded-lg hover:bg-purple-600"
                             onClick={closeModal}
