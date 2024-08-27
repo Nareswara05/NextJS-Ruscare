@@ -30,7 +30,7 @@ const statusKeyMapping = {
     'Akan Datang': 'coming_soon',
     'Jadwal Ulang': 'reschedule',
     'Dibatalkan': 'cancel',
-    'Tidak Hadir': 'not_attending',
+    'Kadaluarsa': 'not_attending',
 };
 
 const ConsultationDashboard = () => {

@@ -1,11 +1,11 @@
 import instance from "../../instance/instance";
 
-export default async function changeProfilePicture({ id, file }) {
+export default async function changeProfilePicture({ file }) {
     try {
         const formData = new FormData();
         formData.append('image', file);
 
-        const response = await instance.post(`/student/edit-image/${id}`, formData, {
+        const response = await instance.post(`/student/edit-image`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
