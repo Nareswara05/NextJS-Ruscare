@@ -17,7 +17,7 @@ const ChangeProfilePicture = ({ image, onImageChange }) => {
         }
     };
 
-    const imageUrl = selectedImage || `https://api.ruscarestudent.com/${image}`;
+    const imageUrl = `https://api.ruscarestudent.com/${image}`;
 
     return (
         <div className='relative w-fit h-fit'>
