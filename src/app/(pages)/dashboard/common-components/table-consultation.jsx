@@ -10,6 +10,8 @@ import { BsCalendar2Week } from 'react-icons/bs';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import CancelCounseling from '@/app/lib/service/endpoint/dashboard/cancel-counseling';
+import acceptReschedule from '@/app/lib/service/endpoint/dashboard/accept-reschedule';
+import { FaCalendarCheck } from 'react-icons/fa';
 
 const TableConsultation = ({ consultations = [], title, loading }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +43,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
         if (text) {
             try {
                 const response = await CancelCounseling({ counselingId: item.id, message: text });
-                if (response.message == "Data Counseling berhasil diubah") {
+                if (response.message == "Status Counseling berhasil diubah") {
                     Swal.fire({
                         title: "Konsultasi berhasil dibatalkan",
                         icon: "success",
@@ -66,6 +68,47 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
             }
         }
     };
+
+    const handleAcceptReschedule = async (item) => {
+        try {
+            const { isConfirmed } = await Swal.fire({
+                title: "Konfirmasi Jadwal Ulang",
+                text: "Apakah Anda yakin ingin menerima jadwal ulang ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Terima",
+                cancelButtonText: "Batal"
+            });
+    
+            if (isConfirmed) {
+                const response = await acceptReschedule({ counselingId: item.id });
+                if (response.message === "Status Counseling berhasil diubah") {
+                    Swal.fire({
+                        title: "Konsultasi berhasil dijadwalkan ulang",
+                        icon: "success",
+                        willClose: () => {
+                            window.location.reload();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Gagal menerima jadwal ulang",
+                        text: response.message || "Terjadi kesalahan saat menerima jadwal ulang.",
+                    });
+                }
+            } else {
+                Swal.fire("Penjadwalan ulang dibatalkan", "", "info");
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Gagal menerima jadwal ulang",
+                text: "Terjadi kesalahan saat menghubungi server.",
+            });
+            console.error('Error accepting reschedule:', error);
+        }
+    };
     
     
 
@@ -83,7 +126,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
     }, []);
 
     let major = "";
-    switch (userData?.grade_id) {
+    switch (selectedData?.grade_id) {
         case 1:
             major = "PPLG";
             break;
@@ -146,13 +189,22 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                                         >
                                             <IoMdEye size={24} />
                                         </button>
-                                        {(item.counseling_status_id === 1 || item.status === 2 || item.status === 3) && (
+                                        {(item.counseling_status_id === 1 || item.counseling_status_id === 2 || item.counseling_status_id    === 3) && (
                                             <button
                                                 title="Cancel"
                                                 className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg"
                                                 onClick={() => handleCancel(item)}
                                             >
                                                 <RxCross2 size={24} />
+                                            </button>
+                                        )}
+                                        {item.counseling_status_id === 3 && (
+                                            <button
+                                                title="Accept Reschedule"
+                                                className="text-orange-500 p-2 bg-orange-500 bg-opacity-20 hover:bg-orange-700 hover:bg-opacity-20 hover:text-orange-700 rounded-lg"
+                                                onClick={() => handleAcceptReschedule(item)}
+                                            >
+                                                <FaCalendarCheck  size={24} />
                                             </button>
                                         )}
                                     </td>
@@ -197,7 +249,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                         </div>
                         <div className="flex flex-col gap-2 pt-4">
                             <p><strong>Nama :</strong> {userData?.name ?? 'Belum tersedia'}</p>
-                            <p><strong>Jurusan :</strong> {userData?.grade_id ?? 'Belum tersedia'}</p>
+                            <p><strong>Jurusan :</strong> {major}</p>
                             <p><strong>Layanan :</strong> {selectedData.service}</p>
                             <p><strong>Kategori :</strong> {selectedData.subject}</p>
                             <p><strong>Mentor :</strong> {selectedData.mentor ?? 'Belum tersedia'}</p>

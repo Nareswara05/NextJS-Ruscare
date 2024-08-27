@@ -166,7 +166,7 @@ const TableHistory = () => {
                             <td className={`px-4 py-4 font-semibold rounded-xl text-center ${getStatusStyles(getStatusName(item.counseling_status_id))}`}>
                                 {getStatusName(item.counseling_status_id)}
                             </td>
-                            <td className="py-3 px-4">{item.counseling_date}</td>
+                            <td className="py-3 px-4">{item.counseling_date} pukul {item.time}</td>
                             <td className="py-3 px-4">
                                 <button
                                     className="text-secondary hover:text-yellow-500 bg-yellow-500 bg-opacity-20 hover:bg-yellow-700 hover:bg-opacity-20 p-2 rounded-lg"
@@ -184,7 +184,7 @@ const TableHistory = () => {
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="bg-primary text-white py-2 px-4 rounded-l-lg hover:bg-primary-dark transition"
+                    className="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition"
                 >
                     <FaChevronLeft />
                 </button>
@@ -194,7 +194,7 @@ const TableHistory = () => {
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === Math.ceil(historyData.length / pageSize)}
-                    className="bg-primary text-white py-2 px-4 rounded-r-lg hover:bg-primary-dark transition"
+                    className="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition"
                 >
                     <FaChevronRight />
                 </button>

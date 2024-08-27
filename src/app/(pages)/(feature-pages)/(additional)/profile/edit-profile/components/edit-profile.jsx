@@ -121,7 +121,6 @@ const EditProfile = () => {
     };
 
     const handleImageChange = async (file) => {
-      if (!userId) return;
 
       const result = await Swal.fire({
         title: 'Are you sure?',
@@ -136,7 +135,7 @@ const EditProfile = () => {
 
       if (result.isConfirmed) {
         try {
-          const response = await changeProfilePicture({ id: userId, file });
+          const response = await changeProfilePicture({  file  });
           console.log("Response from image update:", response);
 
           if (response && response.message === 'Image berhasil diubah') {
