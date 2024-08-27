@@ -138,7 +138,7 @@ const EditProfile = () => {
           const response = await changeProfilePicture({  file  });
           console.log("Response from image update:", response);
 
-          if (response && response.message === 'Image berhasil diubah') {
+          if (response && response.message === 'Image Mentor berhasil diubah') {
             Swal.fire({
               icon: 'success',
               title: 'Success',
