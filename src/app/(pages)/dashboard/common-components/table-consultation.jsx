@@ -12,21 +12,45 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import CancelCounseling from '@/app/lib/service/endpoint/dashboard/cancel-counseling';
 import acceptReschedule from '@/app/lib/service/endpoint/dashboard/accept-reschedule';
 import { FaCalendarCheck } from 'react-icons/fa';
+import listConsultant from '@/app/lib/service/endpoint/api/list-consultant';
 
 const TableConsultation = ({ consultations = [], title, loading }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
     const [userData, setUserData] = useState(null);
+    const [mentorList, setMentorList] = useState([]);
     const tableHead = ["Layanan", "Kategori", "Tanggal", "Waktu", "Aksi"];
 
     const openModal = (item) => {
-        setSelectedData(item);
-        setIsModalOpen(true);
+        const mentors = mentorList.find(mentors => mentors.grade_id === item.grade_id);
+        setSelectedData({
+            ...item,
+            mentorName: mentors ? mentors.name : 'Unknown'
+        }); setIsModalOpen(true);
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedData(null);
+    };
+
+    useEffect(() => {
+        const fetchMentor = async () => {
+            try {
+                const mentor = await listConsultant();
+                setMentorList(mentor);
+            } catch (error) {
+                console.error("Failed to fetch user data:", error);
+            }
+        };
+
+        fetchMentor();
+    },
+    [])
+
+    const getMentorName = (grade_id) => {
+        const mentors = mentorList.find(mentors => mentors.grade_id === grade_id);
+        return mentors ? mentors.name : 'Unknown';
     };
 
     const handleCancel = async (item) => {
@@ -39,7 +63,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
             },
             showCancelButton: true
         });
-    
+
         if (text) {
             try {
                 const response = await CancelCounseling({ counselingId: item.id, message: text });
@@ -48,7 +72,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                         title: "Konsultasi berhasil dibatalkan",
                         icon: "success",
                         willClose: () => {
-                            window.location.reload(); 
+                            window.location.reload();
                         }
                     });
                 } else {
@@ -79,7 +103,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                 confirmButtonText: "Terima",
                 cancelButtonText: "Batal"
             });
-    
+
             if (isConfirmed) {
                 const response = await acceptReschedule({ counselingId: item.id });
                 if (response.message === "Status Counseling berhasil diubah") {
@@ -109,8 +133,8 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
             console.error('Error accepting reschedule:', error);
         }
     };
-    
-    
+
+
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -189,7 +213,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                                         >
                                             <IoMdEye size={24} />
                                         </button>
-                                        {(item.counseling_status_id === 1 || item.counseling_status_id === 2 || item.counseling_status_id    === 3) && (
+                                        {(item.counseling_status_id === 1 || item.counseling_status_id === 2 || item.counseling_status_id === 3) && (
                                             <button
                                                 title="Cancel"
                                                 className="text-red-500 p-2 bg-red-500 bg-opacity-20 hover:bg-red-700 hover:bg-opacity-20 hover:text-red-700 rounded-lg"
@@ -204,7 +228,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                                                 className="text-orange-500 p-2 bg-orange-500 bg-opacity-20 hover:bg-orange-700 hover:bg-opacity-20 hover:text-orange-700 rounded-lg"
                                                 onClick={() => handleAcceptReschedule(item)}
                                             >
-                                                <FaCalendarCheck  size={24} />
+                                                <FaCalendarCheck size={24} />
                                             </button>
                                         )}
                                     </td>
@@ -252,7 +276,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                             <p><strong>Jurusan :</strong> {major}</p>
                             <p><strong>Layanan :</strong> {selectedData.service}</p>
                             <p><strong>Kategori :</strong> {selectedData.subject}</p>
-                            <p><strong>Mentor :</strong> {selectedData.mentor ?? 'Belum tersedia'}</p>
+                            <p><strong>Mentor :</strong> {selectedData.mentorName ?? 'Belum tersedia'}</p>
                         </div>
                         <h1 className='text-xl font-bold text-textPrimary pt-4'>Catatan </h1>
                         <p className='text-sm'>{selectedData.note ?? 'Tidak ada catatan'}</p>
