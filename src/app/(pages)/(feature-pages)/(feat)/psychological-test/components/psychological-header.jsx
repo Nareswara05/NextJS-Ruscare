@@ -10,8 +10,8 @@ const PsychologicalHeader = () => {
         <div className='h-[600px] bg-primary w-full flex justify-center items-center px-32 gap-9 relative overflow-hidden'>
             <div className='flex flex-col gap-8'>
                 <div className='flex flex-col gap-1'>
-                    <h1 className='font-bold text-[48px]'>Pertumbuhan Pribadi Dimulai Di Sini</h1>
-                    <h1 className='text-[16px] font-normal'>Temukan Jalan Anda Menuju Kesejahteraan Emosional yang Berkelanjutan dan Keseimbangan Hidup yang Memuaskan, Dimulai dengan Langkah Pertama Menuju Pemahaman Diri dan Pengelolaan Emosi yang Sehat.</h1>
+                    <h1 className='font-bold text-[48px]'>Sudahkah Kamu Mengenali Diri Sendiri?</h1>
+                    <h1 className='text-[16px] font-normal'>Kenali diri dulu, baru tentukan yang terbaik untukmu.</h1>
                 </div>
                 <div className='text-secondary gap-2 font-bold flex items-center'>
                     Coba Sekarang
