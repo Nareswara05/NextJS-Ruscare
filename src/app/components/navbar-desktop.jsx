@@ -51,7 +51,7 @@ function NavbarDesktop() {
 
   const data = [
     {
-      menu: "Tes Psikologi",
+      menu: "Kenali Dirimu",
       href: "/psychological-test"
     },
     {
