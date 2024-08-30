@@ -122,12 +122,6 @@ const ChangeEmail = () => {
             <h1 className='text-[24px] font-bold text-textPrimary'>Ganti Email</h1>
             <div className='flex flex-col gap-4 pt-6'>
                 <EditForm
-                    placeholder="Masukkan Email Lama"
-                    label="Email Lama"
-                    type="email"
-                    onChange={(e) => setOldEmail(e.target.value)}
-                />
-                <EditForm
                     placeholder="Masukkan Email Baru"
                     label="Email Baru"
                     type="email"
