@@ -1,8 +1,7 @@
 "use client";
 
 import changeEmail from '@/app/lib/service/endpoint/user/change-email';
-import getUser from '@/app/lib/service/endpoint/user/get-user';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import ButtonSubmit from './button-submit';
 import EditForm from './edit-form';
@@ -13,21 +12,6 @@ const ChangeEmail = () => {
     const [userId, setUserId] = useState(null);
     const [storedEmail, setStoredEmail] = useState("");
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const user = await getUser();
-                if (user) {
-                    setUserId(user.id);
-                    setStoredEmail(user.email);
-                }
-            } catch (error) {
-                console.error("Failed to fetch user data:", error);
-            }
-        };
-
-        fetchUserData();
-    }, []);
 
     const handlePopup = () => {
         Swal.fire({
@@ -46,13 +30,8 @@ const ChangeEmail = () => {
     }
 
     const handleEdit = async () => {
-        console.log("handleEdit called");
-        console.log("Old Email:", oldEmail);
-        console.log("New Email:", newEmail);
-        console.log("Stored Email:", storedEmail);
-        console.log("User ID:", userId);
 
-        if (!userId || !oldEmail || !newEmail) {
+        if (!newEmail) {
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -67,32 +46,14 @@ const ChangeEmail = () => {
 
             Toast.fire({
                 icon: "error",
-                title: "Email lama, dan email baru wajib diisi!"
+                title: "Email baru tidak boleh kosong!"
             });
             }
         
 
-        if (oldEmail !== storedEmail) {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
+        
 
-            Toast.fire({
-                icon: "error",
-                title: "Email lama tidak sesuai!"
-            });
-            return;
-        }
-
-        if (oldEmail === newEmail) {
+        if (response.message === 'Email sama dengan sebelumnya') {
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -113,7 +74,7 @@ const ChangeEmail = () => {
         }
 
         try {
-            const response = await changeEmail({ id: userId, email: newEmail });
+            const response = await changeEmail({ email: newEmail });
             console.log("Response from registration:", response);
             if (response && response.message === 'Email berhasil diubah') {
                 const Toast = Swal.mixin({
