@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import ButtonSubmit from './button-submit';
 import EditForm from './edit-form';
+import { wind } from 'fontawesome';
 
 const ChangeEmail = () => {
     const [newEmail, setNewEmail] = useState("");
@@ -28,9 +29,12 @@ const ChangeEmail = () => {
     }
 
     const handleEdit = async () => {
-
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
         if (!newEmail) {
-            const Toast = Swal.mixin({
+            Swal.fire({
+                icon: "error",
+                title: "Email baru tidak boleh kosong!",
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
@@ -40,42 +44,34 @@ const ChangeEmail = () => {
                     toast.onmouseenter = Swal.stopTimer;
                     toast.onmouseleave = Swal.resumeTimer;
                 }
-            });
-
-            Toast.fire({
-                icon: "error",
-                title: "Email baru tidak boleh kosong!"
-            });
-            }
-        
-
-        
-
-        if (response.message === 'Email sama dengan sebelumnya') {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-
-            Toast.fire({
-                icon: "error",
-                title: "Email lama dan email baru tidak boleh sama!"
             });
             return;
         }
-
+    
+        if (!emailRegex.test(newEmail)) {
+            Swal.fire({
+                icon: "error",
+                title: "Format email tidak valid!",
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            return;
+        }
+    
         try {
             const response = await changeEmail({ email: newEmail });
             console.log("Response from registration:", response);
             if (response && response.message === 'Email berhasil diubah') {
-                const Toast = Swal.mixin({
+                Swal.fire({
+                    icon: "success",
+                    title: "Email berhasil diubah!",
                     toast: true,
                     position: "top-end",
                     showConfirmButton: false,
@@ -86,17 +82,31 @@ const ChangeEmail = () => {
                         toast.onmouseleave = Swal.resumeTimer;
                     }
                 });
-
-                Toast.fire({
-                    icon: "success",
-                    title: "Email berhasil diubah!"
-                });
+    
                 const updatedUser = { ...response.data, email: newEmail };
                 localStorage.setItem('user', JSON.stringify(updatedUser));
+                window.location.reload();
+            } else if (response && response.message === 'Email sama dengan sebelumnya') {
+                Swal.fire({
+                    icon: "error",
+                    title: "Email lama dan email baru tidak boleh sama!",
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                return;
             }
         } catch (error) {
             console.error("Error during registration:", error);
-            const Toast = Swal.mixin({
+            Swal.fire({
+                icon: "error",
+                title: "Email gagal diubah, silahkan coba lagi",
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
@@ -107,13 +117,9 @@ const ChangeEmail = () => {
                     toast.onmouseleave = Swal.resumeTimer;
                 }
             });
-
-            Toast.fire({
-                icon: "error",
-                title: "Email gagal diubah, silahkan coba lagi"
-            });
         }
     };
+        
 
     return (
         <div>
