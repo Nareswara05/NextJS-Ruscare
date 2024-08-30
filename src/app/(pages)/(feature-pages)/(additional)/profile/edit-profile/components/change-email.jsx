@@ -7,10 +7,8 @@ import ButtonSubmit from './button-submit';
 import EditForm from './edit-form';
 
 const ChangeEmail = () => {
-    const [oldEmail, setOldEmail] = useState("");
     const [newEmail, setNewEmail] = useState("");
-    const [userId, setUserId] = useState(null);
-    const [storedEmail, setStoredEmail] = useState("");
+   
 
 
     const handlePopup = () => {
