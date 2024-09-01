@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { AvatarTes, bgProfil } from '@/app/lib/utils/image';
+import { AvatarTes, bgProfil, unknownProfile } from '@/app/lib/utils/image';
 import Link from 'next/link';
 import getUser from '@/app/lib/service/endpoint/user/get-user';
 import { ClipLoader } from 'react-spinners';
@@ -70,7 +70,7 @@ const Profile = () => {
       major = "Unknown";
   }
 
-  const imageUrl = `https://api.ruscarestudent.com/${userData.image}`;
+  const imageUrl = userData.image ? `https://api.ruscarestudent.com/${userData.image}` : unknownProfile;
 
   return (
     <div className='h-screen bg-white flex justify-center pb-16'>
@@ -87,7 +87,7 @@ const Profile = () => {
             src={imageUrl}
             width={145}
             height={145}
-            className="w-[145px] h-[145px] border-white bg-primary border-8 object-cover  rounded-full"
+            className="w-[145px] h-[145px] border-white bg-primary border-8 object-cover rounded-full"
             alt="Avatar"
           />
           <h1 className='text-[22px] font-bold text-center text-textPrimary'>{userData.name}</h1>
