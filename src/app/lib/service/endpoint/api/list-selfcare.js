@@ -6,6 +6,7 @@ export default async function listSelfcare() {
         const response = await instance.get("/selfcare/list");
         return response.data.data;
     } catch (error) {
-        return error;
+        console.error("API error:", error);
+        return [];
     }
 }
