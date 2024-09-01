@@ -6,5 +6,6 @@ export default async function listCategory() {
         return response.data.data;
     } catch (error) {
         console.error(error);
+        return [];
     }
 }
