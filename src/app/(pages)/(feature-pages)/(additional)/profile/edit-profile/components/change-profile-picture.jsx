@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { TbEdit } from 'react-icons/tb';
+import { unknownProfile } from '@/app/lib/utils/image';
 
 const ChangeProfilePicture = ({ image, onImageChange }) => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -11,13 +12,13 @@ const ChangeProfilePicture = ({ image, onImageChange }) => {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setSelectedImage(reader.result);
-                onImageChange(file); // Pass the file to the parent component
+                onImageChange(file); 
             };
             reader.readAsDataURL(file);
         }
     };
 
-    const imageUrl = `https://api.ruscarestudent.com/${image}`;
+    const imageUrl =  image ? `https://api.ruscarestudent.com/${image}` : unknownProfile;
 
     return (
         <div className='relative w-fit h-fit'>

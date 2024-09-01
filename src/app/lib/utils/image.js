@@ -11,6 +11,7 @@ import teacher from '../assets/image/teacher.png'
 import mentalPoblems from '../assets/image/mentalProblems.png'
 import goodmental from '../assets/image/goodmental.png'
 import emails from '../assets/image/email.png'
+import unknownProfile from '../assets/image/unknown.jpg'
 
 
 export {
@@ -26,5 +27,6 @@ export {
     teacher,
     mentalPoblems,
     goodmental,
-    emails
+    emails,
+    unknownProfile
 }
