@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import { formatDate } from '@/app/lib/utils/formatDate'
+import { unknownProfile } from '@/app/lib/utils/image'
 
 export default async function CardProfileConsultant({ dataConsultant }) {
 
@@ -29,7 +30,7 @@ export default async function CardProfileConsultant({ dataConsultant }) {
         LastEdu = "(Doktor)";
     }
 
-    const imageUrl = `https://api.ruscarestudent.com/${dataConsultant.image}`;
+    const imageUrl = dataConsultant.image ? `https://api.ruscarestudent.com/${dataConsultant.image}` : unknownProfile;
 
 
 
@@ -39,7 +40,7 @@ export default async function CardProfileConsultant({ dataConsultant }) {
             <div className='flex flex-col items-center justify-center gap-3'>
                 <Image
                     src={imageUrl}
-                    className="w-[150px] h-[150px] object-cover rounded-full bg-black"
+                    className="w-[150px] h-[150px] object-cover rounded-full bg-black border"
                     width={1000}
                     height={1000}
                     alt={dataConsultant.name}
@@ -77,17 +78,17 @@ export default async function CardProfileConsultant({ dataConsultant }) {
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href="www.facebook.com" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="https:/www.facebook.com" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaFacebook />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href="www.twitter.com" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="https:/www.twitter.com" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaTwitter />
                             </Link>
                         </div>
                         <div className='flex gap-1'>
-                            <Link href="www.linkedin.com" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
+                            <Link href="https:/www.linkedin.com" className="p-2 text-textPrimary rounded-full hover:bg-primary hover:text-white">
                                 <FaLinkedin />
                             </Link>
                         </div>
