@@ -10,6 +10,7 @@ import getUser from '@/app/lib/service/endpoint/user/get-user';
 import { IoMdEye } from 'react-icons/io';
 import getStatusCounseling from '@/app/lib/service/endpoint/api/list-status';
 import Skeleton from 'react-loading-skeleton';
+import listConsultant from '@/app/lib/service/endpoint/api/list-consultant';
 
 const TableHistory = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -17,6 +18,7 @@ const TableHistory = () => {
     const [statusList, setStatusList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [mentorList, setMentorList] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
     const [userData, setUserData] = useState(null);
@@ -87,6 +89,27 @@ const TableHistory = () => {
         }
     };
 
+    let major = "";
+    switch (selectedData?.grade_id) {
+        case 1:
+            major = "PPLG";
+            break;
+        case 2:
+            major = "Animasi 3D";
+            break;
+        case 3:
+            major = "Animasi 2D";
+            break;
+        case 4:
+            major = "Design Grafis";
+            break;
+        case 5:
+            major = "Teknik Grafika";
+            break;
+        default:
+            major = "Unknown";
+    }
+
     const getPaginatedData = (data) => {
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
@@ -97,15 +120,32 @@ const TableHistory = () => {
         setCurrentPage(newPage);
     };
 
-    const openModal = (data) => {
-        setSelectedData(data);
-        setIsModalOpen(true);
+    const openModal = (item) => {
+        const mentors = mentorList.find(mentors => mentors.grade_id === item.grade_id);
+        setSelectedData({
+            ...item,
+            mentorName: mentors ? mentors.name : 'Unknown'
+        }); setIsModalOpen(true);
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedData(null);
     };
+
+    useEffect(() => {
+        const fetchMentor = async () => {
+            try {
+                const mentor = await listConsultant();
+                setMentorList(mentor);
+            } catch (error) {
+                console.error("Failed to fetch user data:", error);
+            }
+        };
+
+        fetchMentor();
+    },
+    [])
 
     if (loading) {
         return (
@@ -228,10 +268,10 @@ const TableHistory = () => {
                         </div>
                         <div className="flex flex-col gap-2 pt-4">
                             <p><strong>Nama :</strong> {userData?.name ?? 'Belum tersedia'}</p>
-                            <p><strong>Jurusan :</strong> {userData?.grade_id ?? 'Belum tersedia'}</p>
+                            <p><strong>Jurusan :</strong> {major ?? 'Belum tersedia'}</p>
                             <p><strong>Layanan :</strong> {selectedData.service}</p>
                             <p><strong>Kategori :</strong> {selectedData.subject}</p>
-                            <p><strong>Mentor :</strong> {selectedData.mentor ?? 'Belum tersedia'}</p>
+                            <p><strong>Mentor :</strong> {selectedData.mentorName ?? 'Belum tersedia'}</p>
                         </div>
                         <h1 className='text-xl font-bold text-textPrimary pt-4'>Catatan </h1>
                         <p className='text-sm'>{selectedData.note ?? 'Tidak ada catatan'}</p>
