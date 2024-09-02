@@ -75,7 +75,7 @@ const ArticlePage = () => {
                 <div className="flex flex-col gap-6">
                     <SearchArticle />
                     <div>
-                        <h1 className="text-xl font-semibold mb-3 text-textPrimary">Rekomendasi Topik</h1>
+                        <h1 className="text-xl font-semibold mb-3 text-textPrimary">Rekomendasi Kategori</h1>
                         <ChipCategoryArticle />
                     </div>
                 </div>

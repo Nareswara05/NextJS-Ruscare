@@ -8,16 +8,16 @@ const CircleResult = ({ text, triggerShrink }) => {
     if (triggerShrink) {
       const interval = setInterval(() => {
         setSize((prevSize) => {
-          const newSize = prevSize - 20; // decrease size by 20px
+          const newSize = prevSize - 20; 
           return newSize > 0 ? newSize : 0;
         });
-      }, 5000); // decrease size every 1 second
+      }, 5000); 
 
       return () => clearInterval(interval);
     }
   }, [triggerShrink]);
 
-  const fontSize = `${(size / initialSize) * 24}px`; // scale font size based on circle size
+  const fontSize = `${(size / initialSize) * 24}px`; 
 
   return (
     <div 
