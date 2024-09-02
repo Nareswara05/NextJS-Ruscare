@@ -85,7 +85,6 @@ const ChangeEmail = () => {
     
                 const updatedUser = { ...response.data, email: newEmail };
                 localStorage.setItem('user', JSON.stringify(updatedUser));
-                window.location.reload();
             } else if (response && response.message === 'Email sama dengan sebelumnya') {
                 Swal.fire({
                     icon: "error",
