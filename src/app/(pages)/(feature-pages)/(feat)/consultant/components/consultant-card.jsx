@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { FaGraduationCap } from 'react-icons/fa';
 import { IoIosArrowForward } from 'react-icons/io';
 import Link from 'next/link';
+import { unknownProfile } from '@/app/lib/utils/image';
+import { slugify } from '@/app/lib/utils/slugify';
 
 const ConsultantCard = ({ consultant }) => {
     let major = "";
@@ -36,7 +38,7 @@ const ConsultantCard = ({ consultant }) => {
         }
     };
 
-    const imageUrl = `https://api.ruscarestudent.com/${consultant.image}`;
+    const imageUrl = consultant.image ? `https://api.ruscarestudent.com/${consultant.image}` : unknownProfile;
 
     let pronouns = "";
     if (consultant.gender === "female") {
@@ -47,12 +49,14 @@ const ConsultantCard = ({ consultant }) => {
         pronouns = "Unknown";
     }
 
+    const slug = slugify(consultant.name); 
+
     return (
         <div className='p-8 bg-white rounded-lg shadow-custom flex flex-col w-[400px] justify-between'>
             <Image
                 src={imageUrl}
                 alt={consultant.name}
-                className='w-[114px] h-[114px] rounded-full object-cover'
+                className='w-[114px] h-[114px] rounded-full object-cover border'
                 width={1000}
                 height={1000}
             />
@@ -73,7 +77,7 @@ const ConsultantCard = ({ consultant }) => {
                 </div>
             </div>
             {consultant.id && (
-                <Link className='flex group text-primary font-semibold text-lg items-center gap-2 pt-8' href={`/consultant/${consultant.id}`}>
+                <Link className='flex group text-primary font-semibold text-lg items-center gap-2 pt-8'  href={`/consultant/${slug}`}>
                     <span>Detail Profil</span>
                     <div className='transform transition-transform duration-300 group-hover:translate-x-2'>
                         <IoIosArrowForward />
