@@ -12,7 +12,7 @@ const HeaderConsultant = () => {
             className="absolute -top-16 -left-16"
             alt=''
             />
-            <h1 className='font-bold text-[48px]'>Konsultan Profesional RusCare</h1>
+            <h1 className='font-bold text-[48px]'>Konselor Profesional RusCare</h1>
             <Image
             src={starYellow}
             className='absolute -right-16 -bottom-16'
