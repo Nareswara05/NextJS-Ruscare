@@ -13,6 +13,7 @@ import CancelCounseling from '@/app/lib/service/endpoint/dashboard/cancel-counse
 import acceptReschedule from '@/app/lib/service/endpoint/dashboard/accept-reschedule';
 import { FaCalendarCheck } from 'react-icons/fa';
 import listConsultant from '@/app/lib/service/endpoint/api/list-consultant';
+import { formatDateDashboard } from '@/app/lib/utils/dateFormatDashboard';
 
 const TableConsultation = ({ consultations = [], title, loading }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -203,7 +204,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                                 <tr key={index} className="border-b border-gray-200 text-textPrimary">
                                     <td className="py-4 px-4">{item.service}</td>
                                     <td className="py-4 px-4">{item.subject}</td>
-                                    <td className="py-4 px-4">{item.counseling_date}</td>
+                                    <td className="py-4 px-4">{formatDateDashboard(item.counseling_date)}</td>
                                     <td className="py-4 px-4">{item.time}</td>
                                     <td className="py-4 px-4 flex gap-2">
                                         <button
@@ -261,7 +262,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                                 <div className="text-2xl">
                                     <BsCalendar2Week />
                                 </div>
-                                <h2 className="font-semibold text-[16px]">{selectedData.counseling_date}</h2>
+                                <h2 className="font-semibold text-[16px]">{formatDateDashboard(selectedData.counseling_date)}</h2>
                             </div>
                             <hr className="border-textPrimary border-1 w-4 rotate-90" />
                             <div className="flex gap-2 text-textPrimary">
