@@ -6,12 +6,13 @@ import ServiceLanding from './components/service-landing'
 
 const page = () => {
   return (
-    <div className='overflow-x-hidden bg-white flex flex-col gap-24'>
-      <HeroLanding/>
-      <AboutLanding/>
-      <ServiceLanding/>
-      <CategoryLanding/>
-    </div>
+    
+      <div className='overflow-x-hidden bg-white flex flex-col gap-24'>
+        <HeroLanding />
+        <AboutLanding />
+        <ServiceLanding />
+        <CategoryLanding />
+      </div>
   )
 }
 

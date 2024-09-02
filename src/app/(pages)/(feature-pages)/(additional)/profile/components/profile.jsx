@@ -81,7 +81,7 @@ const Profile = () => {
           alt="Background"
         />
       </div>
-      <div className='absolute items-center top-32 pb-8 px-[75px] max-w-[500px] justify-center flex flex-col w-[500px] bg-white shadow-custom rounded-xl'>
+      <div className='absolute items-center top-40 pb-8 px-[75px] max-w-[500px] justify-center flex flex-col w-[500px] bg-white shadow-custom rounded-xl'>
         <div className='relative -top-16 flex flex-col items-center justify-center'>
           <Image
             src={imageUrl}
@@ -90,13 +90,13 @@ const Profile = () => {
             className="w-[145px] h-[145px] border-white bg-primary border-8 object-cover rounded-full"
             alt="Avatar"
           />
-          <h1 className='text-[22px] font-bold text-center text-textPrimary'>{userData.name}</h1>
+          <h1 className='text-[22px] font-bold text-center  text-textPrimary'>{userData.name}</h1>
           <h1 className='text-[16px] font-medium text-center text-textPrimary'>{userData.email}</h1>
         </div>
         <div className='w-full flex flex-col gap-4'>
           <div className='flex justify-between'>
             <h1 className='font-semibold text-[16px] text-textPrimary'>Username</h1>
-            <h1 className='font-bold text-[16px] text-textPrimary'>{userData.username}</h1>
+            <h1 className='font-bold text-[16px] capitalize text-textPrimary'>{userData.username}</h1>
           </div>
           <div className='flex justify-between'>
             <h1 className='font-semibold text-[16px] text-textPrimary'>Status</h1>

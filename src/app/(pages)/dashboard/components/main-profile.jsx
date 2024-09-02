@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { GoPerson } from "react-icons/go";
-import { AvatarTes } from '@/app/lib/utils/image'
+import { AvatarTes, unknownProfile } from '@/app/lib/utils/image'
 import { IoIosArrowDown } from "react-icons/io";
 import { IoMailOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
@@ -71,7 +71,7 @@ const MenuProfileDashboard = () => {
         return <div>Error loading user data</div>;
       }
 
-      const imageUrl = `https://api.ruscarestudent.com/${userData.image}`;
+      const imageUrl = userData.image ? `https://api.ruscarestudent.com/${userData.image}` : unknownProfile;
 
     return (
         <div className='relative'>
