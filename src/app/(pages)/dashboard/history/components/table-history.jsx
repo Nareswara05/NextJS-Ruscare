@@ -11,6 +11,7 @@ import { IoMdEye } from 'react-icons/io';
 import getStatusCounseling from '@/app/lib/service/endpoint/api/list-status';
 import Skeleton from 'react-loading-skeleton';
 import listConsultant from '@/app/lib/service/endpoint/api/list-consultant';
+import { formatDateDashboard } from '@/app/lib/utils/dateFormatDashboard';
 
 const TableHistory = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +25,7 @@ const TableHistory = () => {
     const [userData, setUserData] = useState(null);
     const pageSize = 8;
 
-    const tableHead = ['Layanan', 'Kategori', 'Status', 'Tanggal dan Waktu', 'Detail'];
+    const tableHead = ['Layanan', 'Kategori', 'Status', 'Tanggal', 'Waktu', 'Detail'];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -203,10 +204,11 @@ const TableHistory = () => {
                         <tr key={index} className="border-b border-gray-200 hover:bg-gray-50 transition text-textPrimary">
                             <td className="py-3 px-4">{item.service}</td>
                             <td className="py-3 px-4">{item.subject}</td>
-                            <td className={`px-4 py-4 font-semibold rounded-xl text-center ${getStatusStyles(getStatusName(item.counseling_status_id))}`}>
+                            <td className={`px-6 py-4 font-semibold rounded-xl text-center ${getStatusStyles(getStatusName(item.counseling_status_id))}`}>
                                 {getStatusName(item.counseling_status_id)}
                             </td>
-                            <td className="py-3 px-4">{item.counseling_date} pukul {item.time}</td>
+                            <td className="py-3 px-4">{formatDateDashboard(item.counseling_date)} </td>
+                            <td className="py-3 px-4">pukul {item.time}</td>
                             <td className="py-3 px-4">
                                 <button
                                     className="text-secondary hover:text-yellow-500 bg-yellow-500 bg-opacity-20 hover:bg-yellow-700 hover:bg-opacity-20 p-2 rounded-lg"
@@ -256,7 +258,7 @@ const TableHistory = () => {
                                 <div className="text-2xl">
                                     <BsCalendar2Week />
                                 </div>
-                                <h2 className="font-semibold text-[16px]">{selectedData.counseling_date}</h2>
+                                <h2 className="font-semibold text-[16px]">{formatDateDashboard(selectedData.counseling_date)}</h2>
                             </div>
                             <hr className="border-textPrimary border-1 w-4 rotate-90" />
                             <div className="flex gap-2 text-textPrimary">
