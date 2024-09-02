@@ -59,7 +59,7 @@ function NavbarDesktop() {
       href: "/article"
     },
     {
-      menu: "Konsultan",
+      menu: "Konselor",
       href: "/consultant"
     },
     {

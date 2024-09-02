@@ -30,11 +30,8 @@ const Page = () => {
     };
 
     return (
-        <div className='p-40 bg-white'>
-            <div className='flex justify-between'>
-                <SearchMailbox />
-                <ActionMailbox />
-            </div>
+        <div className='p-32 bg-white'>
+            <h1 className='text-textPrimary text-2xl font-bold pb-8'>Mailbox Murid</h1>
             {loading ? (
                 <p>Loading...</p> 
             ) : (
