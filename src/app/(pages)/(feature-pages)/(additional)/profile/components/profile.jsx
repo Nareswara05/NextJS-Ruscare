@@ -6,6 +6,7 @@ import { AvatarTes, bgProfil, unknownProfile } from '@/app/lib/utils/image';
 import Link from 'next/link';
 import getUser from '@/app/lib/service/endpoint/user/get-user';
 import { ClipLoader } from 'react-spinners';
+import { formatDateDashboard } from '@/app/lib/utils/dateFormatDashboard';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -104,7 +105,7 @@ const Profile = () => {
           </div>
           <div className='flex justify-between'>
             <h1 className='font-semibold text-[16px] text-textPrimary'>Tanggal Lahir</h1>
-            <h1 className='font-bold text-[16px] text-textPrimary'>{userData.birth_date}</h1>
+            <h1 className='font-bold text-[16px] text-textPrimary'>{formatDateDashboard(userData.birth_date)}</h1>
           </div>
           <div className='flex justify-between'>
             <h1 className='font-semibold text-[16px] text-textPrimary'>Jurusan</h1>
