@@ -37,7 +37,7 @@ const HeroCard = () => {
                         className='rounded-2xl w-full h-[250px] border-[10px] border-white object-cover'
                         alt=''
                     />
-                    <Link href="http://localhost:3000/" className='absolute -bottom-9'>
+                    <Link href="https://ruscare-mentor.vercel.app" className='absolute -bottom-9'>
                         <button className=' px-8 py-3 max-w-56 bg-secondary border-[6px] rounded-xl border-white text-white hover:bg-yellow-500 font-semibold '>Masuk sebagai mentor</button>
                     </Link>
                 </div>
