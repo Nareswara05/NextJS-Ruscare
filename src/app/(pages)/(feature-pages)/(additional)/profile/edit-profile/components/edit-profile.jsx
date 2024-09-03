@@ -109,6 +109,23 @@ const EditProfile = () => {
             icon: "error",
             title: "Username sudah digunakan"
           });
+        }if(response.message === "Username sama dengan sebelumnya"){
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+
+          Toast.fire({
+            icon: "error",
+            title: "Username sama dengan sebelumnya"
+          });
         }
       } catch (error) {
         console.error("Error during registration:", error);
