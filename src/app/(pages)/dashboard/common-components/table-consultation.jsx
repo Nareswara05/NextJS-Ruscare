@@ -14,12 +14,14 @@ import acceptReschedule from '@/app/lib/service/endpoint/dashboard/accept-resche
 import { FaCalendarCheck } from 'react-icons/fa';
 import listConsultant from '@/app/lib/service/endpoint/api/list-consultant';
 import { formatDateDashboard } from '@/app/lib/utils/dateFormatDashboard';
+import fetchSessions from '@/app/lib/service/endpoint/api/list-session';
 
 const TableConsultation = ({ consultations = [], title, loading }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedData, setSelectedData] = useState(null);
     const [userData, setUserData] = useState(null);
     const [mentorList, setMentorList] = useState([]);
+    const [sessions, setSessions] = useState([]);
     const tableHead = ["Layanan", "Kategori", "Tanggal", "Waktu", "Aksi"];
 
     const openModal = (item) => {
@@ -45,7 +47,13 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
             }
         };
 
+        const fetchSessionData = async () => {
+            const sessionData = await fetchSessions();
+            setSessions(sessionData);
+        };
+
         fetchMentor();
+        fetchSessionData(); 
     },
     [])
 
@@ -135,6 +143,22 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
         }
     };
 
+    const getFormattedTimeRange = (session_id) => {
+        const session = sessions.find(session => session.id === session_id);
+        if (!session) {
+            return 'Not Found';
+        }
+    
+        const formatTime = (time) => {
+            const [hour, minute] = time.split(':');
+            return `${hour}.${minute}`;
+        };
+    
+        const startTimeFormatted = formatTime(session.start_time); 
+        const endTimeFormatted = formatTime(session.end_time);    
+    
+        return `${startTimeFormatted}-${endTimeFormatted}`;        
+    };
 
 
     useEffect(() => {
@@ -205,7 +229,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                                     <td className="py-4 px-4">{item.service}</td>
                                     <td className="py-4 px-4">{item.subject}</td>
                                     <td className="py-4 px-4">{formatDateDashboard(item.counseling_date)}</td>
-                                    <td className="py-4 px-4">{item.time}</td>
+                                    <td className="py-4 px-4">{getFormattedTimeRange(item.session_id)}</td>
                                     <td className="py-4 px-4 flex gap-2">
                                         <button
                                             className="text-secondary hover:text-yellow-500 bg-yellow-500 bg-opacity-20 hover:bg-yellow-700 hover:bg-opacity-20 p-2 rounded-lg"
@@ -255,7 +279,7 @@ const TableConsultation = ({ consultations = [], title, loading }) => {
                                 <div className="text-2xl">
                                     <PiClockCountdownLight />
                                 </div>
-                                <h2 className="font-semibold text-[16px]">{selectedData.time}</h2>
+                                <h2 className="font-semibold text-[16px]">{getFormattedTimeRange(selectedData.session_id)}</h2>
                             </div>
                             <hr className="border-textPrimary border-1 w-4 rotate-90" />
                             <div className="flex gap-2 text-textPrimary">
