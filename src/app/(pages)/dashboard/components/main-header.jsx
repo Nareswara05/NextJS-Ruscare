@@ -32,7 +32,7 @@ export default function MainHeader() {
   };
 
   return (
-      <div className="w-full py-6 bg-white flex flex-row justify-between items-center border-b-2 pr-8 sticky top-0">
+      <div className="w-full py-6 bg-white flex flex-row justify-between items-center border-b-2 pr-8 sticky z-50 top-0">
         <div className="w-full flex flex-row items-center">
           <div
             className={`flex ml-8 cursor-pointer text-textPrimary p-2 rounded-lg hover:bg-primary  hover:text-white  transition-all duration-300 ease-in`}
