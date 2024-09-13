@@ -120,7 +120,7 @@ const ConsultationPage = () => {
           {errors.category && <p className="text-red-500">{errors.category}</p>}
         </div>
         <div className='flex justify-end'>
-          <button className='bg-primary hover:bg-purple-700 text-white px-12 w-fit py-2 text-sm rounded-lg font-semibold' onClick={handleClick}>Ajukan</button>
+          <button className='bg-primary  hover:bg-purple-700 text-white px-12 w-fit py-3 text-md rounded-lg font-semibold' onClick={handleClick}>Ajukan</button>
         </div>
       </div>
     </div>
