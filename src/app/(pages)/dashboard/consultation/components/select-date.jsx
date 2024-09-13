@@ -113,11 +113,11 @@ const BookingAppointment = ({ onTimeSelect }) => {
                   {day.sessions.map((session, idx) => (
                     <button
                       key={idx}
-                      className={`py-2 px-4 rounded-xl text-sm font-medium border text-center ${session.status
+                      className={`py-2 px-4 rounded-xl text-sm font-medium border text-center hover:bg-gray-100 ${session.status
                         ? selectedSession?.date === day.originalDate && selectedSession?.session_id === session.id
-                          ? 'bg-primary text-white border-primary hover:bg-purple-700'
-                          : 'bg-white border-primary text-primary font-semibold'
-                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                          ? 'bg-primary text-white border-primary hover:bg-primary'
+                          : 'bg-white border-primary text-primary hover:bg-none font-semibold'
+                        : 'bg-gray-300 text-gray-500 hover:bg-gray-300 cursor-not-allowed'
                         }`}
                       disabled={!session.status}
                       onClick={() => handleTimeSelect({ date: day.originalDate, time: session.time, session_id: session.id })}

@@ -4,11 +4,10 @@ import { SidebarProvider } from "./components/SidebarContext";
 import MainSideBar from "./components/main-sidebar";
 import MainHeader from "./components/main-header";
 
-const montserrat = Montserrat({ subsets: ["latin"] });
 
 export default function DashboardLayout({ children }) {
   return (
-    <main className={montserrat.className}>
+    <main>
       <div className="w-full h-full  flex flex-row">
         <SidebarProvider>
           <MainSideBar />
